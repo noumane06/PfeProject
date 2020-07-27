@@ -204,7 +204,9 @@ exports.user_signin = (req, res, next) => {
         })
 };
 
-/*exports.user_delete = (req, res, next) => {
+
+// deleting user with the use of userid
+exports.user_delete = (req, res, next) => {
     const id = req.params.userId;
     User.deleteOne({ _id: id })
         .exec()
@@ -220,4 +222,4 @@ exports.user_signin = (req, res, next) => {
             });
             console.log(err);
         });
-};*/
+};
