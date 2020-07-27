@@ -206,6 +206,7 @@ exports.user_signin = (req, res, next) => {
 
 
 // deleting user with the use of userid
+// Still need auth check (checking usrid in the token is the same).
 exports.user_delete = (req, res, next) => {
     const id = req.params.userId;
     User.deleteOne({ _id: id })
