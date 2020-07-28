@@ -1,0 +1,90 @@
+:global(body) {
+  font-family: glacial indifference, -apple-system, BlinkMacSystemFont,
+    Avenir Next, Avenir, Helvetica, sans-serif;
+}
+body
+{
+    .Header_Container
+    {
+        .Header_Logo
+        {
+            padding-top: 10px;
+        }
+        margin-left: 5%;
+        margin-right: 5%;
+        margin-top: 30px;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        ul {
+            list-style-type: none;
+            margin: 0;
+            padding-top: 10px;
+            overflow: hidden;
+            .link
+            {
+                padding: 0px 16px;
+                text-decoration: none; 
+                text-align: center;
+                color: #2a2a2a;
+                opacity: 1;
+                transition: opacity 200ms ease-in-out;
+                cursor: pointer;
+            }
+            .active
+            {
+                font-weight: bolder;
+                color: #318CE7;
+                text-shadow: 2px 2px 5px #6EBBFF ;
+            }
+            .link:hover
+            {
+                opacity: 0.7;
+            }
+        }
+        li {
+        float: left;
+        }
+        .Header_Buttons
+        {
+            
+            .Header_subscribe
+            {
+                font-family: "glacial indifference";
+                font-size: 16px;
+                border: none;
+                background-color: transparent;
+                padding: 10px 30px;
+                margin-right: 20px;
+                color: #2a2a2a;
+                font-weight: bolder;
+                cursor: pointer;
+                border-radius: 10px;
+                transition: background-color 200ms ease-in-out;
+            }
+            .Header_subscribe:hover
+            {
+                background-color: #f6f6f6;
+            }
+            .Header_signin
+            {
+                font-family: "glacial indifference";
+                font-size: 16px;
+                border: none;
+                background-color: #318CE7;
+                padding: 10px 30px;
+                color: #ffffff;
+                box-shadow: 2px 2px 5px #318ce73f;
+                font-weight: bolder;
+                cursor: pointer;
+                border-radius: 10px;
+                transition: box-shadow 200ms ease-in-out;
+                
+            }
+            .Header_signin:hover{
+                
+                box-shadow: 2px 2px 15px #318ce78c;
+            }
+        }
+    }
+}
