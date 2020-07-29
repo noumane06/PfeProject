@@ -17,5 +17,8 @@
     "node-sass": "^4.14.1",
     "react": "^16.13.1",
     "react-dom": "^16.13.1"
+  },
+  "devDependencies": {
+    "url-loader": "^4.1.0"
   }
 }

@@ -1,0 +1,30 @@
+body
+{
+    overflow-x: hidden;
+    .topRight
+    {
+        position: absolute;
+        z-index: -1;
+        top: 0;
+        right: 0;
+        margin-top: -60px;
+        margin-right: -40px;
+    }
+    .middleLeft
+    {
+        position: absolute;
+        z-index: -1;
+        left: 0;
+        margin-left: -150px;
+    }
+    .BottomLeft
+    {
+        position: absolute;
+        z-index: -1;
+        left: 0;
+        bottom: 0;
+        top: 170%;
+        margin-left: -150px;
+        margin-bottom: -150px;
+    }
+}

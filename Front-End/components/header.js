@@ -4,13 +4,15 @@ const Header = ()=>
 {
     return(
         <div className="Header_Container">
-            <div className="Header_Logo">Logo</div>
+            <div className="Header_Logo">
+                <img src="../static/Icons/fire_logo.png" height="40" width="40"/>
+            </div>
             <ul>
-                <li className="link active">Acceuil</li>
-                <li className="link">A propos</li>
-                <li className="link">Temoignages</li>
-                <li className="link">Contact</li>
-                <li className="link">Questions</li>
+                <li className="active"><Link href="/">Acceuil</Link></li>
+                <li className="link"><Link href="/propos">A propos</Link></li>
+                <li className="link"><Link href="/temoignages">Temoignages</Link></li>
+                <li className="link"><Link href="/contact">Contact</Link></li>
+                <li className="link"><Link href="/questions">Questions</Link></li>
             </ul>
             <div className="Header_Buttons">
                 <input className="Header_subscribe" type="button" value="S'inscrire"/>
