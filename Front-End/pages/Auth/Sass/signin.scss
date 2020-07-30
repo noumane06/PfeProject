@@ -1,0 +1,141 @@
+body
+{
+    font-family: 'GlacialRegular';
+    .Split {
+        height: 100%;
+        position: fixed;
+        z-index: 1;
+        top: 0;
+        overflow-x: hidden;
+        padding-top: 40px;
+    }
+    .LeftSide {
+        left: 0;
+        background: url('/static/Assets/Lancher_image.png');
+        background-position: center;
+        width: 40%;
+        background-size: cover;
+        color: white;
+        img 
+        {
+            margin-left: 10%;
+            cursor: pointer;
+        }
+    }
+    .ContentContainer
+    {
+        margin: 0 auto ;
+        width: 80%;
+        .HeaderContainer
+        {
+            display: flex;
+            justify-content: space-between;
+            .ButtonContainer
+            {
+                font-family: 'GlacialBold';
+                background-color: transparent;
+                padding: 10px 15px;
+                cursor: pointer;
+                border-radius: 10px;
+                transition: background-color 200ms ease-in-out;
+                .backButton
+                {
+                    cursor: pointer;
+                }
+            }
+            .ButtonContainer:hover
+            {
+                background-color: #ceecff4b;
+            }
+            .icon
+            {
+                padding-top: 2px;
+                margin-right: 10px;
+                color:#2a2a2a ;
+                float : left ;
+            }
+            .Help
+            {
+                margin-top: 10px;
+                font-family: 'GlacialBold';
+                color: #797979;
+                cursor: pointer;
+                transition: color 0.2s ease-in-out;
+            }
+            .Help:hover
+            {
+                color: #2a2a2a;
+            }
+        }
+        .FormContainer
+        {
+            margin-top: 15%;
+            h1 
+            {
+                font-family: 'HelvaticaNeu';
+            }
+            form 
+            {
+                margin-top: 10%;
+                label 
+                {
+                    font-family: 'GlacialBold';
+                }
+                .input
+                {
+                    margin-top: 20px;
+                    width: 60%;
+                    padding: 10px 15px;
+                    background-color: #e9f1fa;
+                    border: 2px solid transparent;
+                    box-shadow: 0px 0px 0px #318ce73f;
+                    border-radius: 10px;
+                    transition: all 200ms ease-in-out;
+                    outline: none;
+                }
+                .input:hover
+                {
+                    border: 2px solid #c5e2ffd8;
+                }
+                .input:focus
+                {
+                    border: 2px solid #318CE7;
+                }
+                .SignButton
+                {
+                    font-family: 'GlacialBold';
+                    font-size: 16px;
+                    border: none;
+                    background-color: #318CE7;
+                    padding: 10px 30px;
+                    color: #ffffff;
+                    box-shadow: 2px 2px 5px #318ce73f;
+                    cursor: pointer;
+                    border-radius: 10px;
+                    transition: box-shadow 200ms ease-in-out;
+                    margin-bottom: 30px;
+                }
+                .SignButton:hover
+                {
+                    box-shadow: 2px 2px 15px #318ce78c;
+                }
+            }
+            a 
+            {
+                text-decoration: none;
+                color:  #318CE7;
+                font-family: 'GlacialBold';
+                margin-left: 5px;
+                transition: color 200ms ease-in-out;
+            }
+            a:hover
+            {
+                color:  #276aad;
+            }
+        }
+    }
+    .RightSide {
+        right: 0;
+        width: 60%;
+    }
+}

@@ -15,11 +15,11 @@ const Body_section1 = ()=>{
           <div className="search_Container">
             <div className="inputContainer">
               <i class="fa fa-id-card icon"></i>
-              <input className="searchInput" type="text" placeholder="Nom de la société" />
+              <input className="searchInput" type="text" placeholder="Société/Personne" />
             </div>
             <div className="inputContainer">
               <i class="fa fa-globe icon"></i>
-              <input className="searchInput" type="text" placeholder="Site web" />
+              <input className="searchInput" type="text" placeholder="Domaine " />
             </div>
             <div className="inputContainer">
               <i class="fa fa-map-marker icon"></i>

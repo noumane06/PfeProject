@@ -10,16 +10,20 @@ import BodySection2 from '../components/body_section2';
 import '../styles/index.scss';
 import MiddleLeft from '../components/svg/middle_left';
 import BottomLeft from '../components/svg/Bottom_left';
+import Footer from '../components/footer';
 
 // -----------------------------------------------------
 export default () => (
   <div>
-    <TopRight/>
-    <Head title="Acceuil | Company name"/>
-    <Header/>
-    <Body_section1/>
-    <MiddleLeft/>
-    <BodySection2/>
-    <BottomLeft/>
+    <div className="body">
+      <TopRight />
+      <Head title="Acceuil | 6 solutions" />
+      <Header />
+      <Body_section1 />
+      <MiddleLeft />
+      <BodySection2 />
+      <BottomLeft />
+   </div>
+      <Footer />
   </div>
 );

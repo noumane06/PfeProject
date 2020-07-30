@@ -1,3 +1,7 @@
+@font-face {
+  font-family: 'publica';
+  src: url('/static/Fonts/PublicaPlay.otf');
+}
 body
 {
     overflow-x: hidden;
@@ -27,4 +31,17 @@ body
         margin-left: -150px;
         margin-bottom: -150px;
     }
+
 }
+    footer 
+    {
+        font-family: 'GlacialRegular';
+        font-size: 15px;
+        position: absolute;
+        color: #fafafa;
+        background-color: #0D0C22;
+        margin: 0;
+        text-align: center;
+        padding: 15px;
+        width: 100vw;
+    }
