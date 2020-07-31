@@ -1,3 +1,5 @@
+@import '../../../styles/fonts.scss';
+@import './antd-select.scss';
 body
 {
     font-family: 'GlacialRegular';
@@ -69,22 +71,80 @@ body
         }
         .FormContainer
         {
-            margin-top: 15%;
+            margin-top: 10%;
+            .multipleInput
+            {
+                display: flex;
+                justify-content: space-between;
+                width: 70%;
+                .controlled
+                {
+                    width: 40%;
+                }
+                .user
+                {
+                    width: 30%;
+                }
+                .small
+                {
+                    width: 15%;
+                    font-size: 10px;
+                    text-align: center;
+                    font-family: 'GlacialBold';
+                    background-color: #e9f1fa;
+                    border: 2px solid transparent;
+                    box-shadow: 0px 0px 0px #318ce73f;
+                    border-radius: 10px;
+                    transition: all 200ms ease-in-out;
+                    outline: none;
+                    margin-top: 20px;
+                    padding: 0px 5px;
+                }
+            }
+            .select
+            {
+                    font-family: 'GlacialBold';
+                    margin-top: 20px;
+                    width: 70%;
+                    padding: 10px 15px;
+                    background-color: #e9f1fa;
+                    border: 2px solid transparent;
+                    box-shadow: 0px 0px 0px #318ce73f;
+                    border-radius: 10px;
+                    transition: all 200ms ease-in-out;
+                    outline: none;
+            }
+            .buttonContainer
+            {
+                margin-top: 20px;
+                overflow: auto;
+                width: 70%;
+                .next
+                {
+                    float: right;
+                }
+            }
+            h2 ,h3
+            {
+                font-family: 'HelvaticaNeu';
+                color: #318CE7;
+            }
             h1 
             {
                 font-family: 'HelvaticaNeu';
             }
             form 
             {
-                margin-top: 10%;
+                margin-top: 0%;
                 label 
                 {
                     font-family: 'GlacialBold';
                 }
                 .input
                 {
+                    font-family: 'GlacialBold';
                     margin-top: 20px;
-                    width: 60%;
+                    width: 65%;
                     padding: 10px 15px;
                     background-color: #e9f1fa;
                     border: 2px solid transparent;
@@ -101,6 +161,25 @@ body
                 {
                     border: 2px solid #318CE7;
                 }
+                .Back 
+                {
+                    float: left;
+                    outline: none;
+                    font-family: 'GlacialBold';
+                    font-size: 16px;
+                    border: none;
+                    background-color: #bebebe;
+                    padding: 10px 30px;
+                    color: #fafafa;
+                    cursor: pointer;
+                    border-radius: 10px;
+                    transition: background-color 200ms ease-in-out;
+                    margin-bottom: 30px;
+                }
+                .Back:hover
+                {
+                    background-color: #adadad;
+                }
                 .SignButton
                 {
                     font-family: 'GlacialBold';
@@ -114,6 +193,7 @@ body
                     border-radius: 10px;
                     transition: box-shadow 200ms ease-in-out;
                     margin-bottom: 30px;
+                    outline: none;
                 }
                 .SignButton:hover
                 {

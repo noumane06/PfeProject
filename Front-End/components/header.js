@@ -19,7 +19,7 @@ const Header = ()=>
                 <li className="link"><Link href="/questions">Questions</Link></li>
             </ul>
             <div className="Header_Buttons">
-                <input className="Header_subscribe" type="button" value="S'inscrire" />
+                <input className="Header_subscribe" type="button" value="S'inscrire" onClick={() => window.location.replace("/Auth/SignUp")}/>
                 <input className="Header_signin" type="button" value="Se connecter" onClick={handleClick}/>
             </div>
         </div>

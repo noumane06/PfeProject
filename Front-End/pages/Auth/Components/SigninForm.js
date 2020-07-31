@@ -1,3 +1,4 @@
+import Link from 'next/link'
 const FormComponent = () => {
     return (
       <div className="FormContainer">
@@ -19,7 +20,7 @@ const FormComponent = () => {
         </form>
         <div className="FormFooter">
           <span>Pas encore membre ?</span>
-          <a href="SignUp">Inscrivez-vous</a>
+          <Link href="SignUp">Inscrivez-vous</Link>
         </div>
       </div>
     );

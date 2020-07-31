@@ -1,7 +1,5 @@
-@font-face {
-  font-family: 'publica';
-  src: url('/static/Fonts/PublicaPlay.otf');
-}
+@import './fonts.scss';
+
 body
 {
     overflow-x: hidden;

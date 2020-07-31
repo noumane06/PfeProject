@@ -8,7 +8,7 @@ const Signin = ()=>{
       <div>
         <Head title="Connectez-vous | 6 solutions" />
         <LeftComponent />
-        <RightComponent />
+        <RightComponent title="signin"/>
       </div>
     );
 }

@@ -1,12 +1,4 @@
-@font-face {
-  font-family: 'GlacialRegular';
-  src: url('/static/Fonts/GlacialIndifference-Regular.otf');
-}
-@font-face {
-  font-family: 'GlacialBold';
-  src: url('/static/Fonts/GlacialIndifference-Bold.otf');
-}
-
+@import './fonts.scss';
 
 .body
 {
