@@ -1,5 +1,6 @@
 @import '../../../styles/fonts.scss';
 @import './antd-select.scss';
+@import './ant-picker.scss';
 body
 {
     font-family: 'GlacialRegular';
@@ -71,7 +72,12 @@ body
         }
         .FormContainer
         {
-            margin-top: 10%;
+            margin: 0;
+            position: absolute;
+            top: 50%;
+            width: 80%;
+            -ms-transform: translateY(-50%);
+            transform: translateY(-50%);
             .multipleInput
             {
                 display: flex;
@@ -80,6 +86,62 @@ body
                 .controlled
                 {
                     width: 40%;
+                }
+                .email
+                {
+                    font-family: 'GlacialBold';
+                    margin-top: 20px;
+                    padding: 10px 15px;
+                    background-color: #e9f1fa;
+                    border: 2px solid transparent;
+                    box-shadow: 0px 0px 0px #318ce73f;
+                    border-radius: 10px;
+                    transition: all 200ms ease-in-out;
+                    outline: none;
+                }
+                .email:hover
+                {
+                    border: 2px solid #c5e2ffd8;
+                }
+                .email:focus
+                {
+                    border: 2px solid #318CE7;
+                }
+                .errMsg
+                {
+                    
+                    font-size: 12px;
+                    color: #be0000;
+                    font-family: 'GlacialBold';
+                    transition: all 0.2s ease-in-out;
+                }
+                .hidden 
+                {
+                    display: none;
+                    transition: all 0.2s ease-in-out;
+                }
+                .error
+                {
+                    border: 2px solid #be0000;
+                }
+                .addresse
+                {
+                    width: 60%;
+                }
+                .title
+                {
+                    width: 30%;
+                    font-size: 13px;
+                    text-align: center;
+                    font-family: 'GlacialBold';
+                    background-color: #e9f1fa;
+                    border: 2px solid transparent;
+                    box-shadow: 0px 0px 0px #318ce73f;
+                    border-radius: 10px;
+                    transition: all 200ms ease-in-out;
+                    outline: none;
+                    margin-top: 20px;
+                    padding: 0px 5px;
                 }
                 .user
                 {
@@ -140,18 +202,36 @@ body
                 {
                     font-family: 'GlacialBold';
                 }
+                
                 .input
                 {
                     font-family: 'GlacialBold';
                     margin-top: 20px;
                     width: 65%;
-                    padding: 10px 15px;
+                    padding: 10px 13px;
                     background-color: #e9f1fa;
                     border: 2px solid transparent;
                     box-shadow: 0px 0px 0px #318ce73f;
                     border-radius: 10px;
                     transition: all 200ms ease-in-out;
                     outline: none;
+                }
+                .hidden 
+                {
+                    display: none;
+                    transition: all 0.2s ease-in-out;
+                }
+                .errMsg
+                {
+                    
+                    font-size: 12px;
+                    color: #be0000;
+                    font-family: 'GlacialBold';
+                    transition: all 0.2s ease-in-out;
+                }
+                .error
+                {
+                    border: 2px solid #be0000;
                 }
                 .input:hover
                 {
@@ -198,6 +278,20 @@ body
                 .SignButton:hover
                 {
                     box-shadow: 2px 2px 15px #318ce78c;
+                }
+                .disabeledButton
+                {
+                    float: right;
+                    outline: none;
+                    font-family: 'GlacialBold';
+                    font-size: 16px;
+                    border: none;
+                    background-color: #bebebe;
+                    padding: 10px 30px;
+                    color: #fafafa;
+                    cursor: not-allowed;
+                    border-radius: 10px;
+                    margin-bottom: 30px;
                 }
             }
             a 

@@ -6,7 +6,32 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
 // ******************************
-// user signup controller
+// Checking if email exist controller 
+
+exports.CheckEmail = (req, res , nxt) => {
+    
+        User.find({ email: req.body.email })
+            .exec()
+            .then(result => {
+                if (result.length >=1) {
+                    res.status(409).json({
+                        error: "Email already exist"
+                    }); 
+                }else
+                {
+                    res.status(200).json({
+                        message : "Valid Email",
+                    }); 
+                }
+            })
+            .catch(err =>{
+                res.status(500).json(err);
+            })
+    
+}
+
+// SignUp controller
+
 exports.userComp_signup = (req, res, next) => {
     User.find({ email: req.body.email })
         .exec()
@@ -33,29 +58,40 @@ exports.userComp_signup = (req, res, next) => {
                         } else {
                             img = req.body.Usrimg
                         }
-                        const user = new User({
-                            _id: new mongoose.Types.ObjectId(),
-                            type: 'Company',
-                            email: req.body.email,
-                            password: hash,
-                            nom: req.body.nom,
-                            prenom: req.body.prenom,
-                            companyname: req.body.companyname,
-                            title: req.body.title,
-                            domaine: req.body.domaine,
-                            addresse: req.body.addresse,
-                            city: req.body.city,
-                            mobilephone: req.body.mobilephone,
-                            fixphone: req.body.fixphone,
-                            presentation: req.body.presentation,
-                            diplome: req.body.diplome,
-                            languages: req.body.languages,
-                            Usrimg: req.body.Usrimg,
-                            gender: req.body.gender,
-                            horraire: req.body.horraire,
-                            booked: req.body.booked,
-                            stars: req.body.stars
-                        });
+                            const user = new User();
+                            user._id = new mongoose.Types.ObjectId() ;
+                            user.type = req.body.type ;
+                            user.email = req.body.email ;
+                            user.password = hash ;
+                            user.nom = req.body.nom ;
+                            user.prenom = req.body.prenom ;
+                            user.addresse = req.body.addresse ;
+                            user.city = req.body.city ;
+                            user.mobilephone = req.body.mobilephone ;
+                            user.Usrimg = req.body.Usrimg ;
+                            user.gender = req.body.gender ;
+                            if (req.body.type === "Société") {
+                                // Fields for societe 
+                                req.body.horraire.map(hor =>{
+                                    user.horraire.push(hor);
+                                });
+                                req.body.domaine.map(dom =>{
+                                    user.domaine.push(dom);
+                                });
+                                user.booked = req.body.booked ;
+                                user.stars = 0 ;
+                                user.companyname = req.body.companyname ;
+                                user.title = req.body.title ;
+                                user.fixphone = req.body.fixphone ;
+                                user.presentation = req.body.presentation ;
+                                user.diplome = req.body.diplome ;
+                                user.languages = req.body.languages ; 
+                                // ----------------------------
+                            }
+                            
+                            //
+                            
+
                         user.save()
                             .then(result => {
                                 const token = jwt.sign(
@@ -69,7 +105,8 @@ exports.userComp_signup = (req, res, next) => {
                                 );
                                 res.status(200).json({
                                     message: "User created succefully",
-                                    token: token
+                                    token: token,
+                                    userid : result._id
                                 });
                             })
                             .catch(err => {
@@ -88,76 +125,6 @@ exports.userComp_signup = (req, res, next) => {
 };
 
 
-// Client signup controller
-exports.userClient_signup = (req, res, next) => {
-    User.find({ email: req.body.email })
-        .exec()
-        .then(result => {
-            if (result.length >= 1) {
-                res.status(409).json({
-                    error: "Email already exist"
-                });
-            } else {
-                bcrypt.hash(req.body.password, 10, (err, hash) => {
-                    if (err) {
-                        return res.status(500).json({
-                            error: err
-                        });
-
-                    } else {
-                        var img = "";
-                        if (req.body.Usrimg === "" || req.body.Usrimg === undefined) {
-                            {
-                                req.body.gender === "homme" ? img = "https://firebasestorage.googleapis.com/v0/b/image-upload-test-7d968.appspot.com/o/images%2FDefaults%2Fman.svg?alt=media&token=9cc204e7-e9b3-4a5d-970a-1242a04f90de"
-                                : img = "https://firebasestorage.googleapis.com/v0/b/image-upload-test-7d968.appspot.com/o/images%2FDefaults%2Fwoman.svg?alt=media&token=58d24c71-6b1e-4f61-a25a-fc22d43ec1e3"
-                            }
-                        } else {
-                            img = req.body.Usrimg
-                        }
-                     
-                        const user = new User({
-                            _id: new mongoose.Types.ObjectId(),
-                            type : 'Client',
-                            email: req.body.email,
-                            password: hash,
-                            nom: req.body.nom,
-                            prenom: req.body.prenom,
-                            addresse: req.body.addresse,
-                            pays : req.body.pays,
-                            city : req.body.city,
-                            mobilephone: req.body.mobilephone,
-                            Usrimg: img,
-                            gender: req.body.gender,
-                        });
-                        user.save()
-                            .then(result => {
-                                const token = jwt.sign(
-                                    {
-                                        userId: result._id,
-                                    },
-                                    "secret",
-                                    {
-                                        expiresIn: "1h"
-                                    }
-                                );
-                                res.status(200).json({
-                                    message: "User created succefully",
-                                    token: token
-                                });
-                            })
-                            .catch(err => {
-                                console.log(err);
-                                res.status(400).json({
-                                    error: err
-                                });
-                            });
-                    }
-                });
-            }
-        }).catch(err => {
-            res.status(500).json(err);
-        })
-};
 
 // SignIn controller for client and company 
 
@@ -204,6 +171,63 @@ exports.user_signin = (req, res, next) => {
         })
 };
 
+
+// Getting all profiles 
+
+exports.GetProfiles = (req,res,next)=>{
+    User.find({type : 'Société'})
+    .select('nom prenom companyname city Usrimg stars')
+    .exec()
+    .then(docs =>{
+        const response = {
+            count : docs.length , 
+            profiles : docs
+        }
+        res.status(200).json({
+            response
+        })
+    });
+}
+
+// Profile visits 
+
+exports.VistingProfile = (req,res,next) =>{
+    const id = req.query.userid ;
+    User.find({_id : id })
+    .exec()
+    .then(result =>{
+        res.status(200).json({
+            message : "User Found",
+            profile : result
+        })
+    }).catch(err =>{
+        res.status(404).json({
+            message : "The user is not here :/ , below more infos",
+            error : err
+        })
+    })
+}
+
+// Get profile by userID 
+
+exports.getMyprofile = (req,res,next)=>{
+    const id = req.query.userid ;
+    User.findOne({_id : id})
+    .then(result =>{
+        res.status(200).json({
+            message : "User Found",
+            profile : result
+        })
+    }).catch(err =>{
+        res.status(404).json({
+            message : "The user is not here :/ , below more infos",
+            error : err
+        })
+    })
+}
+
+
+// -----------------------------------------------------
 
 // deleting user with the use of userid
 // Still need auth check (checking usrid in the token is the same).

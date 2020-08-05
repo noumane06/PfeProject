@@ -20,7 +20,7 @@ const FormComponent = () => {
         </form>
         <div className="FormFooter">
           <span>Pas encore membre ?</span>
-          <Link href="SignUp">Inscrivez-vous</Link>
+          <Link href="SignUp"><a>Inscrivez-vous</a></Link>
         </div>
       </div>
     );

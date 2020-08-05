@@ -3,7 +3,7 @@ const HeaderAuth = () => {
     return (
       <div className="HeaderContainer">
         <div className="ButtonContainer" onClick={()=>window.location.replace("/")}>
-          <i class="fa fa-arrow-left icon"></i>
+          <i className="fa fa-arrow-left icon"></i>
           <span className="backButton">Retour</span>
         </div>
         <span className="Help">Help</span>

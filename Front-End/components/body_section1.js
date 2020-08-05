@@ -14,20 +14,20 @@ const Body_section1 = ()=>{
           <h1>Recherchez des entreprises et organisez une réunion</h1>
           <div className="search_Container">
             <div className="inputContainer">
-              <i class="fa fa-id-card icon"></i>
+              <i className="fa fa-id-card icon"></i>
               <input className="searchInput" type="text" placeholder="Société/Personne" />
             </div>
             <div className="inputContainer">
-              <i class="fa fa-globe icon"></i>
+              <i className="fa fa-globe icon"></i>
               <input className="searchInput" type="text" placeholder="Domaine " />
             </div>
             <div className="inputContainer">
-              <i class="fa fa-map-marker icon"></i>
+              <i className="fa fa-map-marker icon"></i>
               <input className="searchInput" type="text" placeholder="Ville" />
             </div>
 
             <button className="searchButton" type="button">
-              <i class="fa fa-search"></i>
+              <i className="fa fa-search"></i>
             </button>
           </div>
         </div>

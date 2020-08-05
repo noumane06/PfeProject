@@ -79,13 +79,9 @@
   // normane select
   .ant-select-single:not(.ant-select-customize-input) .ant-select-selector {
     font-family: 'GlacialBold';
-    margin-top: 20px;
-    width: 65%;
     padding: 10px 10px;
     background-color: #e9f1fa;
-    border: 2px solid transparent;
     box-shadow: 0px 0px 0px #318ce73f;
-    border-radius: 10px;
     outline: none;
     position: relative;
     -webkit-transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
@@ -102,16 +98,14 @@
     cursor: auto;
   }
   .ant-select-focused.ant-select-single:not(.ant-select-customize-input) .ant-select-selector {
-    border-color: #40a9ff;
-    border-right-width: 1px !important;
+    //border: 2px solid #318CE7;
     outline: 0;
-    -webkit-box-shadow: 0 0 0 2px rgba(24, 144, 255, 0.2);
-            box-shadow: 0 0 0 2px rgba(24, 144, 255, 0.2);
+    
   }
   .ant-select-disabled.ant-select-single:not(.ant-select-customize-input) .ant-select-selector {
-    color: rgba(0, 0, 0, 0.25);
+    /*color: rgba(0, 0, 0, 0.25);
     background: #f5f5f5;
-    cursor: not-allowed;
+    cursor: not-allowed;*/
   }
   .ant-select-disabled.ant-select-single:not(.ant-select-customize-input) .ant-select-selector input {
     cursor: not-allowed;
@@ -190,13 +184,10 @@
    */
   .ant-select-multiple .ant-select-selector {
     font-family: 'GlacialBold';
-    margin-top: 20px;
-    width: 100%;
-    //padding: 10px 15px;
+    //margin-top: 20px;
     background-color: #e9f1fa;
-    border: 2px solid transparent;
+    //border: 2px solid transparent;
     box-shadow: 0px 0px 0px #318ce73f;
-    border-radius: 10px;
     outline: none;
     position: relative;
     -webkit-transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
@@ -209,7 +200,7 @@
     -webkit-box-align: center;
         -ms-flex-align: center;
             align-items: center;
-    padding: 4px 18px 4px 9px ;
+
   }
   .ant-select-multiple .ant-select-selector input {
     cursor: pointer;
@@ -221,16 +212,14 @@
     cursor: auto;
   }
   .ant-select-focused.ant-select-multiple .ant-select-selector {
-    border-color: #40a9ff;
-    border-right-width: 1px !important;
+    
     outline: 0;
-    -webkit-box-shadow: 0 0 0 2px rgba(24, 144, 255, 0.2);
-            box-shadow: 0 0 0 2px rgba(24, 144, 255, 0.2);
+   
   }
   .ant-select-disabled.ant-select-multiple .ant-select-selector {
-    color: rgba(0, 0, 0, 0.25);
+    /*color: rgba(0, 0, 0, 0.25);
     background: #f5f5f5;
-    cursor: not-allowed;
+    cursor: not-allowed;*/
   }
   .ant-select-disabled.ant-select-multiple .ant-select-selector input {
     cursor: not-allowed;
@@ -356,7 +345,7 @@
     position: absolute;
     top: 50%;
     right: 11px;
-    left: 15px;
+    left: 9px;
     -webkit-transform: translateY(-50%);
             transform: translateY(-50%);
     -webkit-transition: all 0.3s;
@@ -414,6 +403,10 @@
             box-sizing: border-box;
     margin: 0;
     padding: 0;
+    border: 2px solid transparent;
+    background-color: #e9f1fa;
+    border-radius: 11px;
+    margin-top : 20px ;
     color: rgba(0, 0, 0, 0.65);
     font-size: 14px;
     font-variant: tabular-nums;
@@ -424,10 +417,20 @@
     position: relative;
     display: inline-block;
     cursor: pointer;
+    padding: 4px 18px 4px 9px ;
+  }
+  .ant-select:hover {
+    border: 2px solid #c5e2ffd8;
+  }
+  .ant-select:focus-within {
+    border: 2px solid #318CE7;
+  }
+  .ant-select:disabled{
+    cursor: not-allowed;
+    background-color: #f5f5f5;
   }
   .ant-select:not(.ant-select-disabled):hover .ant-select-selector {
-    border-color: #40a9ff;
-    border-right-width: 1px !important;
+    //border: 2px solid #c5e2ffd8;
   }
   .ant-select-selection-item {
     -webkit-box-flex: 1;

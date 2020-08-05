@@ -12,6 +12,7 @@ const bodyParser = require('body-parser');
 
 const signinRoute = require('./routes/SignIn');
 const signupRoute = require('./routes/SignUp');
+const allProfiles = require('./routes/Profiles');
 // *****************************************
 /* *********** */
 app.use(cors());
@@ -22,7 +23,7 @@ app.use(bodyParser.json());
 // Routes 
 app.use('/signin', signinRoute);
 app.use('/signup',signupRoute);
-
+app.use('/profiles', allProfiles);
 // Error handling 
 
 app.use(( req , res ,next) =>

@@ -14,15 +14,15 @@ const userSchema = mongoose.Schema({
     prenom: { type: String, required: true },
     companyname: { type: String, required: false },
     title: { type: String, required: false },
-    domaine: { type: String, required: false },
+    domaine: [String],
     addresse: { type: String, required: true },
     city: { type: String, required: true },
     mobilephone: {
-        type: Number,
+        type: String,
         required: true
     },
     fixphone: {
-        type: Number,
+        type: String,
         required: false
     },
     presentation: { type: String, required: false },
