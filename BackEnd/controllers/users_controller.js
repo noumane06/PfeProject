@@ -68,7 +68,7 @@ exports.userComp_signup = (req, res, next) => {
                             user.addresse = req.body.addresse ;
                             user.city = req.body.city ;
                             user.mobilephone = req.body.mobilephone ;
-                            user.Usrimg = req.body.Usrimg ;
+                            user.Usrimg = img ;
                             user.gender = req.body.gender ;
                             if (req.body.type === "Société") {
                                 // Fields for societe 
@@ -226,6 +226,33 @@ exports.getMyprofile = (req,res,next)=>{
     })
 }
 
+
+// Update user Data 
+
+exports.UpdataData = (req,res,next) =>{
+    const id = req.query.userid ;
+    User.findOne({_id : id})
+    .then(userdata =>{
+        console.log(req);
+        userdata.presentation = req.body.presentation ;
+        userdata.diplome = req.body.diplome  ;
+        userdata.languages = req.body.languages ;
+        userdata.Usrimg = req.body.Usrimg ;
+        userdata.save();
+        res.status(200).json(
+            {
+                message : "Updated succefully",
+                data : userdata
+            }
+        )
+    })
+    .catch(err =>{
+        res.status(404).json({
+            message : "The user is not here :/ , below more infos",
+            error : err
+        })
+    })
+}
 
 // -----------------------------------------------------
 

@@ -184,6 +184,7 @@ body
                 .next
                 {
                     float: right;
+                    padding: 10px 30px;
                 }
             }
             h2 ,h3
@@ -202,7 +203,10 @@ body
                 {
                     font-family: 'GlacialBold';
                 }
-                
+                .text-center
+                {
+                    margin-top: 15px;
+                }
                 .input
                 {
                     font-family: 'GlacialBold';
