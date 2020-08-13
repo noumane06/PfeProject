@@ -1,0 +1,117 @@
+body
+{
+    .CardContainer
+    {
+        display: flex ;
+        flex-direction: row;
+        flex-wrap: wrap;
+        margin-top: 10%;
+    }
+    .Card1
+            {
+                border-radius: 15px;
+                margin-right: 30px;
+                border: none;
+                box-shadow: 0px 0px 2px  rgba(156, 185, 209, 0.541);
+                transition: box-shadow 0.2s ease-in-out;
+                background-color: #ffffff;
+                margin-top: 5%;
+                box-sizing: border-box;
+                width: 350px;
+                padding: 20px 25px 40px 25px ;
+                position:relative; 
+                .Card_Head
+                {
+                    position: relative;
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    .ProfileImg
+                    {
+                        border-radius: 50%;
+                        margin-right: 15px;
+                        padding: 0;
+                        cursor: pointer;
+                        img 
+                        {
+                            border-radius: 50%;
+                            object-fit: cover;
+                            box-shadow: 0px 0px 15px #979797;
+                            width: 50px;
+                            height: 50px;
+                        }
+                    }
+                    .ProfileInfo
+                    {
+                        flex: 2;
+                        margin-left: 20px;
+                        h3
+                        {
+                            font-family: "GlacialBold";
+                            margin: 0;
+                            font-size: 15px;
+                            color: #2a2a2a;
+                        }
+                        p
+                        {
+                            font-family: "GlacialBold";
+                            color:  #32a852;
+                            margin: 2px 0 2px 0;
+                            font-size: 12px;
+                        }
+                        span 
+                        {
+                            font-family: "GlacialRegular";
+                            font-size: 12px;
+                            color : #ff738a
+                        }
+                    }
+                }
+                .Card_Body
+                {
+                    margin-bottom: 10px;
+                    h3 
+                    {
+                        font-family: "GlacialBold";
+                        font-size: 15px;
+                    }
+                    p {
+                        font-family: "GlacialRegular";
+                        font-size: 13px;
+                    }
+                }
+                .Card_footer
+                {
+                    overflow: auto;
+                    margin-bottom: 0;
+                    position: absolute;
+                    bottom:0;
+                    right: 0;
+                    margin-right: 15px;
+                    margin-bottom: 10px;
+                    button 
+                    {
+                        float: right;
+                        border: none;
+                        font-family: 'GlacialBold';
+                        background-color: #ffffff;
+                        color: #318CE7;
+                        border-radius: 10px;
+                        padding: 10px 15px;
+                        transition: background-color 200ms ease-in-out;
+                        cursor: pointer;
+                        outline: none;
+                    }
+                    button:hover
+                    {
+                        background-color: #ceecff4b;
+                    }
+                }
+                
+            }
+            .Card1:hover
+            {
+                box-shadow: 0px 0px 10px  rgba(156, 185, 209, 0.452);
+                transition: box-shadow 0.2s ease-in-out;
+            }
+}

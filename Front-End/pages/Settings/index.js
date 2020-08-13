@@ -121,7 +121,13 @@ const Settings = ()=>{
         setData({...data ,[name] : value});
     }
     // ------------------------------------------------
-
+    // When click on delete picture 
+    const handleClick = ()=>{
+        URL.revokeObjectURL(file);
+        setFile(data.Usrimg);
+        setchanged(false);
+        
+    }
     // When change of image
     const handleChange = (e)=>{
         setchanged(true);
@@ -190,7 +196,7 @@ const Settings = ()=>{
                      <img src="../static/Icons/LOGO2017.png" height="30" />
                  </div>
                  <div>
-                     <span className="title">Configurez votre profile</span>
+                     {/* <span className="title">Configurez votre profile</span> */}
                  </div>
                     
                  <span>Help</span>
@@ -201,8 +207,8 @@ const Settings = ()=>{
                             <Progress
                             type="circle"
                             strokeColor={{
-                                '0%': '#108ee9',
-                                '100%': '#87d068',
+                                '0%': '#00308F',
+                                '100%': '#7CB9E8',
                             }}
                             percent={percentage}
                             />
@@ -247,7 +253,7 @@ const Settings = ()=>{
                                             <i class="fa fa-upload" aria-hidden="true"></i>   Ajouter photo
                                         </label>
                                         {changed &&(
-                                            <label className="Showmodal" onClick={()=>{setFile(data.Usrimg); setchanged(false)}}>
+                                            <label className="Showmodal" onClick={handleClick}>
                                             <i class="fa fa-user-times" style={{color : '#be0000'}}></i>
                                             </label>
                                         )}

@@ -226,7 +226,43 @@ exports.getMyprofile = (req,res,next)=>{
     })
 }
 
+// Search user 
 
+exports.SearchUser = (req,res,next)=>{
+    const company = req.query.companyname; 
+    const dom = req.query.domaine ; 
+    const city = req.query.city ; 
+    
+
+    User.find({
+                companyname : { $regex : '.*'+company+'.*', $options : 'i'} , 
+                domaine : { $regex : '.*'+dom+'.*', $options : 'i'} ,
+                city : { $regex : '.*'+city+'.*', $options : 'i'} 
+             })
+    .select('type nom prenom companyname domaine city presentation stars title Usrimg')
+    .exec()
+    .then(result=>{
+        if (result.length !== 0) {
+            res.status(200).json({
+                count : result.length ,
+                message : "User Found",
+                profile : result
+            })
+        }else{
+            res.status(204).json({
+                message : "no status"
+            })
+        }
+        
+    })
+    .catch(err =>{
+        console.log(err);
+        res.status(404).json({
+            message : "The user is not here :/ , below more infos",
+            error : err
+        })
+    })
+}
 // Update user Data 
 
 exports.UpdataData = (req,res,next) =>{

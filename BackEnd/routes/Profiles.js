@@ -15,5 +15,5 @@ router.get('/',Usercontroller.GetProfiles);
 router.get('/myprofile/',checkAuth, Usercontroller.getMyprofile);
 router.get('/profile/'/*,check_auth_gen*/, Usercontroller.VistingProfile);
 router.post('/update',Usercontroller.UpdataData);
-
+router.get('/search', Usercontroller.SearchUser);
 module.exports = router;
