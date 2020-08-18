@@ -18,7 +18,7 @@ export default () => (
     <div className="body">
       <TopRight />
       <Head title="Acceuil | 6 solutions" />
-      <Header />
+      <Header active="acceuil"/>
       <Body_section1 />
       <MiddleLeft />
       <BodySection2 />

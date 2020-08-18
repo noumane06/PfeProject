@@ -30,7 +30,9 @@ const DropDown = () =>{
         </div>
     )
 }
-const Header = ()=>
+
+// Componenet  -------------------------------------------------------------
+const Header = ({active})=>
 {
     const [userId , setToken] = useState(null);
     const [loading , setLoading] = useState(true);
@@ -66,11 +68,11 @@ const Header = ()=>
                 <img src="../static/Icons/LOGO2017.png" height="30" />
             </div>
             <ul>
-                <li className="active"><Link href="/">Acceuil</Link></li>
-                <li className="link"><Link href="/propos">A propos</Link></li>
-                <li className="link"><Link href="/temoignages">Temoignages</Link></li>
-                <li className="link"><Link href="/contact">Contact</Link></li>
-                <li className="link"><Link href="/questions">Questions</Link></li>
+                <li className={active=="acceuil"?"active":"link"}><Link href="/">Acceuil</Link></li>
+                <li className={active=="propos"?"active":"link"}><Link href="/propos">A propos</Link></li>
+                <li className={active=="temoignages"?"active":"link"}><Link href="/temoignages">Temoignages</Link></li>
+                <li className={active=="contact"?"active":"link"}><Link href="/contact">Contact</Link></li>
+                <li className={active=="questions"?"active":"link"}><Link href="/questions">Questions</Link></li>
             </ul>
             <div className="Header_Buttons">
                 {!loading && userId === null &&(

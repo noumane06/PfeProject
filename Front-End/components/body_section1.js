@@ -24,9 +24,12 @@ const Body_section1 = ()=>{
     const [City, setCity] = useState([]);
 
 
-    const handleClick = ()=>{
-      const Url = '/Search?companyname='+nameText+'&domaine='+domaineText+'&city='+cityText ;
-      window.location.replace(Url);
+    const checker =  (array)=>{
+        var els = [] ; 
+         array.map(element => element.domaine.map(dom => {
+          els.includes(dom) ? 'null' : els.push(dom)
+        }))
+        return els ;
     }
     const onSearchName = searchText => {
       
@@ -48,7 +51,7 @@ const Body_section1 = ()=>{
           if (data !== undefined) {
               setNames(data.profile);
               if (Names.length !== 0) {
-                setDomaineOptions(!searchText ? [] : Names);
+                setDomaineOptions(!searchText ? [] : checker(Names));
                 console.log(DomaineOptions);
               }
         }
@@ -61,7 +64,7 @@ const Body_section1 = ()=>{
           if (data !== undefined) {
               setNames(data.profile);
               if (Names.length !== 0) {
-                setCityOptions(!searchText ? [] : Names);
+                setCityOptions(!searchText ? [] : Names.filter(em => em.city.includes(searchText.toLowerCase() )));
               }
         }
       }).catch(err => console.log(err));
@@ -100,13 +103,11 @@ const Body_section1 = ()=>{
             <div className="inputContainer">
               <i aria-hidden className="fa fa-globe icon"></i>
               <AutoComplete className="searchInput" onSelect={onSelectDomaine} onSearch={onSearchDomaine} placeholder="Domaine">
-                {DomaineOptions.map(element =>(
-                  element.domaine.map(domaine=>(
+                {DomaineOptions.map(domaine =>(
                     <Option key={domaine} value={domaine}>
                       {domaine}
                     </Option>
-                  )))
-                )}
+                    ))}
               </AutoComplete>
             </div>
             <div className="inputContainer">
