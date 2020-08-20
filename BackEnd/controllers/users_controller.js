@@ -228,40 +228,44 @@ exports.getMyprofile = (req,res,next)=>{
 
 // Search user 
 
-exports.SearchUser = (req,res,next)=>{
+exports.SearchUser = async (req,res,next)=>{
     const company = req.query.companyname; 
     const dom = req.query.domaine ; 
     const city = req.query.city ; 
-    
+    const page = req.query.page !== undefined ? req.query.page  : 1;
+    const resPerPage = 9 ;
 
-    User.find({
+    const foundUsers = await User.find({
                 companyname : { $regex : '.*'+company+'.*', $options : 'i'} , 
                 domaine : { $regex : '.*'+dom+'.*', $options : 'i'} ,
                 city : { $regex : '.*'+city+'.*', $options : 'i'} 
              })
     .select('type nom prenom companyname domaine city presentation stars title Usrimg')
-    .exec()
-    .then(result=>{
-        if (result.length !== 0) {
-            res.status(200).json({
-                count : result.length ,
-                message : "User Found",
-                profile : result
-            })
-        }else{
-            res.status(204).json({
-                message : "no status"
-            })
+    .skip((resPerPage * page) - resPerPage)
+    .limit(resPerPage)
+    
+    const count = await User.countDocuments(
+        {companyname : { $regex : '.*'+company+'.*', $options : 'i'} , 
+         domaine : { $regex : '.*'+dom+'.*', $options : 'i'} ,
+         city : { $regex : '.*'+city+'.*', $options : 'i'} });
+    try {
+    if (foundUsers.length !== 0) {
+        res.status(200).json({
+        count : count ,
+        message : "User Found",
+        profile : foundUsers
+        })}else{
+                res.status(204).json({
+                message : "no status"})
         }
-        
-    })
-    .catch(err =>{
-        console.log(err);
+    } catch (error) {
+    console.log(err);
         res.status(404).json({
             message : "The user is not here :/ , below more infos",
             error : err
         })
-    })
+    }
+         
 }
 // Update user Data 
 

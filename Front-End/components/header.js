@@ -68,11 +68,11 @@ const Header = ({active})=>
                 <img src="../static/Icons/LOGO2017.png" height="30" />
             </div>
             <ul>
-                <li className={active=="acceuil"?"active":"link"}><Link href="/">Acceuil</Link></li>
-                <li className={active=="propos"?"active":"link"}><Link href="/propos">A propos</Link></li>
-                <li className={active=="temoignages"?"active":"link"}><Link href="/temoignages">Temoignages</Link></li>
-                <li className={active=="contact"?"active":"link"}><Link href="/contact">Contact</Link></li>
-                <li className={active=="questions"?"active":"link"}><Link href="/questions">Questions</Link></li>
+                <li className={active=="acceuil"?"active":"link"}><a href="/">Acceuil</a></li>
+                <li className={active=="propos"?"active":"link"}><a href="/propos">A propos</a></li>
+                <li className={active=="temoignages"?"active":"link"}><a href="/temoignages">Temoignages</a></li>
+                <li className={active=="contact"?"active":"link"}><a href="/contact">Contact</a></li>
+                <li className={active=="questions"?"active":"link"}><a href="/questions">Questions</a></li>
             </ul>
             <div className="Header_Buttons">
                 {!loading && userId === null &&(
