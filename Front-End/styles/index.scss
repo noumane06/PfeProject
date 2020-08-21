@@ -3,6 +3,8 @@
 body
 {
     overflow-x: hidden;
+    position: relative;
+    height: 100%;
     .topRight
     {
         position: absolute;
@@ -10,7 +12,7 @@ body
         top: 0;
         right: 0;
         margin-top: -60px;
-        margin-right: -40px;
+        margin-right: -100px;
     }
     .middleLeft
     {
@@ -25,21 +27,17 @@ body
         z-index: -1;
         left: 0;
         bottom: 0;
-        top: 170%;
         margin-left: -150px;
-        margin-bottom: -150px;
     }
-
+    
 }
-    footer 
-    {
-        font-family: 'GlacialRegular';
-        font-size: 15px;
-        position: absolute;
-        color: #fafafa;
-        background-color: #0D0C22;
-        margin: 0;
-        text-align: center;
-        padding: 15px;
-        width: 100vw;
-    }
+.footer {
+    position: absolute;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    padding: 1rem;
+    color: #fafafa;
+    background-color: #0D0C22;
+    text-align: center;
+  }

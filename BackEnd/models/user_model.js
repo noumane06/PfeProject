@@ -26,8 +26,8 @@ const userSchema = mongoose.Schema({
         required: false
     },
     presentation: { type: String, required: false , default : ""},
-    diplome: { type: String, required: false , default : ""},
-    languages: { type: String, required: false , default : ""},
+    diplome: [mongoose.Schema.Types.Mixed],
+    languages: [String] ,
     Usrimg: { type: String, required: false },
     gender: { type: String, required: true },
     horraire: [String],

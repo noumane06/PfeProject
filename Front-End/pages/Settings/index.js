@@ -3,22 +3,21 @@ import axios from 'axios'
 import Lottie from 'react-lottie' ;
 import jwt from 'jsonwebtoken';
 import {useState , useEffect} from 'react';
-import { Modal } from 'antd';
-import { Progress } from 'antd';
+import { Progress , Spin , Select ,Modal } from 'antd';
+
 
 // File import ---------------------------------
 import animationData from './Components/Anim.json';
-import loadingData from './Components/Loading.json';
 import errorData from './Components/Error.json';
+import loadingData from './Components/Loading.json'
 import successData from './Components/Success.json';
 import Head from '../../components/head';
 import { storage } from './Components/firebase-config';
 import '../../styles/ProfileSettings.scss';
-import '../Auth/Sass/antd-select.scss';
-import '../Auth/Sass/ant-picker.scss';
+import '../../styles/AutoComplete.scss';
 //---------------------------------
 const Settings = ()=>{
-
+    const { Option } = Select;
     // States 
     const [percentage , setPrecentage]= useState(0);
     const [usrid , setId] = useState()
@@ -27,9 +26,14 @@ const Settings = ()=>{
     const [file,setFile] = useState(null);
     const [loading , setLoading] = useState(true); 
     const [sendingData , setSend] = useState(false);
-    const [filefirebase,setfire] = useState();
+    const [filefirebase,setfire] = useState(null);
     const [visible,setvisible] = useState(false);
     const [changed,setchanged] = useState(false);
+    const Fields = ["Arabe","Francais","Anglais","Spanish"];
+    const children = [];
+    Fields.map(Field =>{
+        children.push(<Option key={Field}>{Field}</Option>);
+    })
     // ----------------------------------------------
 
     // Modal functions 
@@ -74,16 +78,16 @@ const Settings = ()=>{
                 .then(res =>{
                     setId(decoded.userId);
                     setData(res.data.profile[0]);
-                    setFile(res.data.profile[0].Usrimg)
+                    setFile(res.data.profile[0].Usrimg);
+                    console.log(res.data.profile[0]);
                     setLoading(false);
                 })
                 .catch(err => alert(err));
             }else
             {
-                alert("unauthorized !!") ;
-                setTimeout(() => {
-                    window.location.replace("/");
-                }, 5000);
+                    const location = "/Auth/Signin/?ref=tokenexpired&location="+window.location.href;
+                    window.location.replace(location);
+                
             }
         });
         
@@ -96,7 +100,10 @@ const Settings = ()=>{
         if (filefirebase !== null) {
             const imgData = await firebaseUrl(filefirebase);
             setData(data.Usrimg = imgData[0]);
-        }
+        }else
+        {
+            setState("Loading");
+        };
         const url = "http://localhost:9000/profiles/update?userid=" + usrid ;
         await axios.post(url, data)
         .then(response => {
@@ -145,6 +152,12 @@ const Settings = ()=>{
         
     }
     // -----------------------------
+
+    // Languages handler 
+    const handleLang = (value)=>{
+        const string = value ;
+        setData({...data , languages : string}); 
+    }
     // Lottie options 
     const defaultOptions = {
         loop: true,
@@ -183,7 +196,10 @@ const Settings = ()=>{
         return(
             <>
                 <Head title="Configurez votre profile | 6 Solutions"/>
-                LOADING
+                <div className="spincentered" >
+                    <Spin size="large" />
+                </div>
+                
             </>
         )
     } else {
@@ -191,7 +207,7 @@ const Settings = ()=>{
     return(
         <div className="ConfigureProfile">
              <Head title="Configurez votre profile | 6 Solutions"/>
-             <div className="HeaderContainer">
+             <div className="HeaderContainer" onClick={()=>window.location.assign("/")} style={{cursor : 'pointer'}}>
                  <div className="Header_Logo">
                      <img src="../static/Icons/LOGO2017.png" height="30" />
                  </div>
@@ -200,7 +216,7 @@ const Settings = ()=>{
                  </div>
                     
                  <span>Help</span>
-                </div>
+              </div>
              {sendingData && DataState === null &&(
                  <div className="SendingData">
                             
@@ -214,6 +230,18 @@ const Settings = ()=>{
                             />
                         <h1>Veuillez patienter ... </h1>
                         <p>Nous mettons à jour votre profil</p>
+                 </div>
+             )}
+             {sendingData && DataState === "Loading" &&(
+                 <div className="SendingData">
+                            
+                            <Lottie
+                            options={LoadingOptions}
+                            height={200}
+                            width={200}
+                            />
+                            <h1>Veuillez patienter ... </h1>
+                            <p>Nous mettons à jour votre profil</p>
                  </div>
              )}
              {sendingData && DataState == "error" &&(
@@ -248,9 +276,9 @@ const Settings = ()=>{
                                 <div className="ProfileImg">
                                     <img src={file} onClick={showModal} /><br/>
                                     <div>
-                                        <label class="custom-file-upload">
+                                        <label className="custom-file-upload">
                                             <input type="file" id="img" name="img" placeholder="Choisissez photo" accept="image/*" onChange={handleChange}/>
-                                            <i class="fa fa-upload" aria-hidden="true"></i>   Ajouter photo
+                                            <i className="fa fa-upload" aria-hidden="true"></i>   Ajouter photo
                                         </label>
                                         {changed &&(
                                             <label className="Showmodal" onClick={handleClick}>
@@ -288,8 +316,13 @@ const Settings = ()=>{
                                         <label>Presentation</label><br/>
                                         <textarea className="input" name="presentation" placeholder="Décrivez votre entreprise" rows="4" onChange={handleInputChnage} value={data.presentation}/>
                                         <label>Langues parlés</label>
-                                        <input  className="input" name="languages" placeholder="Ex: Francais , arabe ..." type="text" onChange={handleInputChnage} value={data.languages}/>
+                                        {/* <input  className="input" name="languages" placeholder="Ex: Francais , arabe ..." type="text" onChange={handleInputChnage} value={data.languages}/> */}
+                                        <Select mode="tags" style={{ width: '100%', marginTop : '20px',padding : '7px 4px',borderRadius : '10px',backgroundColor: '#e9f1fa' }} placeholder="Ex: Francais , arabe ..."
+                                        onChange ={handleLang} value={data.languages} maxTagCount={3} >
+                                            {children}
+                                        </Select>
                                         <label>Diplôme et formations</label>
+                                        
                                         <input className="input" type="text" name="diplome" placeholder="Ex: Licence , master , doctoras ..." onChange={handleInputChnage} value={data.diplome}/>
                                         </>
                                     )}

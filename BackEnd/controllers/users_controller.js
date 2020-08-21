@@ -72,20 +72,34 @@ exports.userComp_signup = (req, res, next) => {
                             user.gender = req.body.gender ;
                             if (req.body.type === "Société") {
                                 // Fields for societe 
-                                req.body.horraire.map(hor =>{
+                                if (req.body.horraire !== undefined) {
+                                    req.body.horraire.map(hor =>{
                                     user.horraire.push(hor);
-                                });
-                                req.body.domaine.map(dom =>{
-                                    user.domaine.push(dom);
-                                });
+                                    });
+                                }
+                                if (req.body.domaine !== undefined) {
+                                    req.body.domaine.map(dom =>{
+                                        user.domaine.push(dom);
+                                    });
+                                }
+                                if (req.body.diplome !== undefined) {
+                                    req.body.diplome.map(diploma=>{
+                                        user.diplome.push(diploma)
+                                    });
+                                }
+                                if (req.body.languages !== undefined) {
+                                    req.body.languages.map(language =>{
+                                        user.languages.push(language)
+                                    })
+                                }
+                                
                                 user.booked = req.body.booked ;
                                 user.stars = 0 ;
                                 user.companyname = req.body.companyname ;
                                 user.title = req.body.title ;
                                 user.fixphone = req.body.fixphone ;
                                 user.presentation = req.body.presentation ;
-                                user.diplome = req.body.diplome ;
-                                user.languages = req.body.languages ; 
+                            
                                 // ----------------------------
                             }
                             
@@ -194,7 +208,7 @@ exports.GetProfiles = (req,res,next)=>{
 exports.VistingProfile = (req,res,next) =>{
     const id = req.query.userid ;
     User.find({_id : id })
-    .exec()
+    .select('type nom prenom companyname diplome city presentation languages title Usrimg')
     .then(result =>{
         res.status(200).json({
             message : "User Found",
@@ -213,6 +227,7 @@ exports.VistingProfile = (req,res,next) =>{
 exports.getMyprofile = (req,res,next)=>{
     const id = req.query.userid ;
     User.findOne({_id : id})
+    .select('type nom prenom companyname diplome city presentation languages title Usrimg')
     .then(result =>{
         res.status(200).json({
             message : "User Found",

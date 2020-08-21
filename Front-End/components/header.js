@@ -65,7 +65,7 @@ const Header = ({active})=>
     return(
         <div className="Header_Container">
             <div className="Header_Logo">
-                <img src="../static/Icons/LOGO2017.png" height="30" />
+                <img src="../static/Icons/LOGO2017.png" height="30" onClick={()=>window.location.assign("/")} style={{cursor : 'pointer'}}/>
             </div>
             <ul>
                 <li className={active=="acceuil"?"active":"link"}><a href="/">Acceuil</a></li>

@@ -2,7 +2,7 @@ const BottomLeft = ()=>{
     return (
       <svg
         width="700"
-        height="500"
+        height="400"
         viewBox="0 0 1603.008 883.712"
         className="BottomLeft"
       >

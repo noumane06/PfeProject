@@ -7,10 +7,10 @@ const RightComponent = (props) => {
             <div className="ContentContainer">
                 <HeaderAuth/>
                 {props.title ==="signin" &&(
-                    <SigninFormComponent/>
+                    <SigninFormComponent query={props.query}/>
                 )}
                 {props.title === "signup" && (
-                    <SignupFormComponent />
+                    <SignupFormComponent query={props.query}/>
                 )}
             </div>
             

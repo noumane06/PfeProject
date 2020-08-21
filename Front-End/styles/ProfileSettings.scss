@@ -1,3 +1,11 @@
+.spincentered
+{
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        margin-top: -50px;
+        margin-left: -50px;
+}
 .ConfigureProfile
 {
     margin-left: 5%;
@@ -79,12 +87,9 @@
     .dataContainer
     {
             margin: 0;
-            position: absolute;
             margin-top: 25px;
             top: 50%;
             width: 80%;
-            -ms-transform: translateY(-50%);
-            transform: translateY(-50%);
             
         .formConfig
         {
