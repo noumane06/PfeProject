@@ -19,6 +19,7 @@ import '../../styles/AutoComplete.scss';
 const Settings = (props)=>{
     const { Option } = Select;
     // States 
+    const [DiplomeList , setDiplomeList] = useState([{diplomeName : "",desc : ""}]);
     const [percentage , setPrecentage]= useState(0);
     const [usrid , setId] = useState()
     const [DataState , setState] = useState(null);
@@ -85,6 +86,9 @@ const Settings = (props)=>{
                     setId(decoded.userId);
                     setData(res.data.profile[0]);
                     setFile(res.data.profile[0].Usrimg);
+                    if (res.data.profile[0].diplome.length !== 0) {
+                        setDiplomeList(res.data.profile[0].diplome);
+                    }
                     console.log(res.data.profile[0]);
                     setLoading(false);
                 })
@@ -103,6 +107,7 @@ const Settings = (props)=>{
 
     const Onsubmit = async () =>{
         setSend(true);
+        setData(data.diplome = DiplomeList);
         if (filefirebase !== null) {
             const imgData = await firebaseUrl(filefirebase);
             setData(data.Usrimg = imgData[0]);
@@ -110,6 +115,7 @@ const Settings = (props)=>{
         {
             setState("Loading");
         };
+        console.log(data);
         const url = "http://localhost:9000/profiles/update?userid=" + usrid ;
         await axios.post(url, data)
         .then(response => {
@@ -157,6 +163,22 @@ const Settings = (props)=>{
         
         
     }
+
+    const dipChange = (e,index) =>{
+        const { name, value } = e.target;
+        const list = [...DiplomeList];
+        list[index][name] = value;
+        setDiplomeList(list);
+    }
+    const handleAddClick = () => {
+        setDiplomeList([...DiplomeList, { diplomeName: "", desc: "" }]);
+      };
+      // handle click event of the Remove button
+    const handleRemoveClick = index => {
+        const list = [...DiplomeList];
+        list.splice(index, 1);
+        setDiplomeList(list);
+    };
     // -----------------------------
 
     // Languages handler 
@@ -328,8 +350,25 @@ const Settings = (props)=>{
                                             {children}
                                         </Select>
                                         <label>Diplôme et formations</label>
-                                        
-                                        <input className="input" type="text" name="diplome" placeholder="Ex: Licence , master , doctoras ..." onChange={handleInputChnage} value={data.diplome}/>
+                                        <div className="Diplomes">
+                                            {DiplomeList.map((element, index) =>(
+                                                <div className="container">
+                                                    <input className="input diplome" type="text" name="diplomeName" placeholder="Votre Diplome" value={element.diplomeName}  onChange={e => dipChange(e,index)}/>
+                                                    <input className={index !== 0 ?"input desc2":"input desc"} type="text" name="desc" placeholder="Brève description" value={element.desc} onChange={e => dipChange(e,index)}/>
+                                                    {index !== 0 &&(
+                                                        <label className="delete" onClick={() => handleRemoveClick(index)}>
+                                                            <i class="fa fa-trash" aria-hidden="true" style={{color : '#be0000'}}></i>
+                                                        </label>
+                                                        )}
+                                                </div>
+                                                
+                                            ))}
+                                            
+                                            <div className="container ">
+                                                <button onClick={handleAddClick} className="ajouter">Ajouter</button>
+                                            </div>
+                                            
+                                        </div>
                                         </>
                                     )}
                                     {data.type == "Client" && (
