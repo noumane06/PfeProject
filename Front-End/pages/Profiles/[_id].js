@@ -22,19 +22,20 @@ const Profile = ({data})=>{
             }else
             {
                 console.log(err);
+                const location = "/Auth/Signin/?ref=tokenexpired&location="+window.location.href;
+                window.location.replace(location);
             }
         });
         
     },[])
-    // if (loading) {
+    if (loading) {
         
-    //     return(
-    //     <div className="body">
-    //         loading ...
-    //     </div>
-    //     )
-        
-    // }else{
+        return(
+        <div className="body">
+            loading ...
+        </div>
+        )
+    }else{
         return(
             <div>
                 <h2>
@@ -48,7 +49,7 @@ const Profile = ({data})=>{
                 </h2>
             </div>
         )        
-    // }
+    }
     
 }
 

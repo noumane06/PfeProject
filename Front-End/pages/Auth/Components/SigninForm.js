@@ -99,7 +99,12 @@ const FormComponent = (props) => {
             </form>
             <div className="FormFooter">
               <span>Pas encore membre ?</span>
-              <Link href="SignUp"><a>Inscrivez-vous</a></Link>
+              {props.query.location !== undefined &&(
+                <Link href={`SignUp?location=${location}`}><a>Inscrivez-vous</a></Link>
+              )}
+              {props.query.location === undefined &&(
+                <Link href="SignUp"><a>Inscrivez-vous</a></Link>
+              )}
             </div>
             </>
           )}

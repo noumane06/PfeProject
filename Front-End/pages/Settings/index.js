@@ -16,7 +16,7 @@ import { storage } from './Components/firebase-config';
 import '../../styles/ProfileSettings.scss';
 import '../../styles/AutoComplete.scss';
 //---------------------------------
-const Settings = ()=>{
+const Settings = (props)=>{
     const { Option } = Select;
     // States 
     const [percentage , setPrecentage]= useState(0);
@@ -29,6 +29,7 @@ const Settings = ()=>{
     const [filefirebase,setfire] = useState(null);
     const [visible,setvisible] = useState(false);
     const [changed,setchanged] = useState(false);
+    const [location , setLocation] = useState("/");
     const Fields = ["Arabe","Francais","Anglais","Spanish"];
     const children = [];
     Fields.map(Field =>{
@@ -71,6 +72,11 @@ const Settings = ()=>{
     } 
     // Hook getting called before the render 
     useEffect(()=>{
+        if (props.query !== undefined) {
+            if (props.query.location !== undefined) {
+              setLocation(props.query.location);
+            }
+        }
         const token = window.localStorage.getItem("Tokens");
         jwt.verify(token,"secret",function (err , decoded) {
             if (!err) {
@@ -110,7 +116,7 @@ const Settings = ()=>{
           if (response.status === 200) {
             setState("done");
             setTimeout(() => {
-                window.location.replace("http://localhost:3000/");
+                window.location.assign(location);
             }, 2000);
           } else {
             setState("error");
@@ -342,7 +348,7 @@ const Settings = ()=>{
                             width={500}
                             />
                             <div className="buttonContainer">
-                                <button className="later">later</button>
+                                <a className="later" href="/" style={{textDecoration : 'none'}}>later</a>
                                 <input
                                 className="SignButton next"
                                 type="submit"
@@ -362,5 +368,7 @@ const Settings = ()=>{
      )
     }
 }
-
+Settings.getInitialProps =  ({ query }) => {
+    return {props : [{test : "this is a test"}] , query : query}
+  }
 export default Settings ;

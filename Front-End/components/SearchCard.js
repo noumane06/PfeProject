@@ -22,7 +22,12 @@ const SearchCard = (props)=>{
                 <p>{props.profile.presentation.substr(0, 150)}<span style={{fontStyle : 'italic',color:'#318CE7'}}>{value}</span></p>
             </div>
             <div className="Card_footer">
-                <button>Voir profile</button>
+                {props.profile._id !== undefined &&(
+                    <a className="button" href={`/Profiles/${props.profile._id}`}>Voir profile</a>
+                )}
+                {props.profile._id === undefined &&(
+                    <button className="button">Voir profile</button>
+                )}
             </div>
         </div>
     );

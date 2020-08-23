@@ -2,7 +2,8 @@ import {useEffect , useState} from 'react';
 import Header from '../../components/header';
 import Head from '../../components/head';
 import './Scss/search.scss';
-import { useRouter } from 'next/router'
+import { useRouter } from 'next/router';
+import { Skeleton } from 'antd';
 // ------------------------------------------------
 
 import SearchCard from '../../components/SearchCard';
@@ -11,12 +12,22 @@ import SearchBar from '../../components/SearchBar';
 const Search =({props ,qu})=>{
 
     const [profiles , setProfile] = useState();
+    const [nodata ,setnodata] = useState(false);
+    const [loading ,setLoading] = useState(true);
     const router = useRouter()
     useEffect(()=>{
         setProfile(props.profile);
+        if (props.profile === undefined) {
+            setnodata(true);
+        }
+        setTimeout(() => {
+            setLoading(false);
+        }, 1000);
+        
     })
 
     const handleCLick = ()=>{
+        setLoading(true);
         if (+qu.page < Math.round(props.count /9) && +qu.page !== 0  ) {
             var newPage = +qu.page+1
             router.push('/Search?companyname='+qu.companyname+'&domaine='+qu.domaine+'&city='+qu.city+'&page='+newPage)
@@ -24,6 +35,7 @@ const Search =({props ,qu})=>{
         
     }
     const handleBack = ()=>{
+        setLoading(true);
         var newPage = +qu.page-1
         router.push('/Search?companyname='+qu.companyname+'&domaine='+qu.domaine+'&city='+qu.city+'&page='+newPage)
     }
@@ -37,16 +49,22 @@ const Search =({props ,qu})=>{
              
              <div className="CardContainer">
                     {profiles !== undefined && (
-                        <>
+                        <Skeleton loading={loading} active={true} avatar={true} round>
                         {profiles.map(profile=>(
                                 <>
                                 <SearchCard key={profile._id} className="Card1" profile={profile}/>
                                 </>
                         ))}
-                        </>
+                        </Skeleton>
                     )}
-                    
              </div>
+             {nodata  &&(
+                        <div className="Noresults">
+                                <img src="/static/Assets/No_comments.png" height="300"/>
+                                <h2>Aucun résultat trouvé</h2>
+                                <p>Il semble que nous ne trouvons aucun résultat basé sur la recherche.</p>
+                        </div>
+              )}
 
              <div className="pagination">
                     <button className={qu.page <=1 || props.count === undefined  ? "disabled test" : "backPage test"} onClick={handleBack}>Précédent</button>

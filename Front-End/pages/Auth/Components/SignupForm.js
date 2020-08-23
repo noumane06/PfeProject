@@ -5,11 +5,40 @@ import axios from 'axios';
 import Captcha from './captcha';
 import firebase from '../../Settings/Components/firebase-config';
 import jwt from 'jsonwebtoken';
-
+import '../Sass/antd-select.scss';
+import '../../../styles/AutoComplete.scss';
 const FormComponent = (props) => {
     const { RangePicker } = TimePicker;
     const { Option } = Select;
-    const Fields = ["Electricité","Electronique","artisanat","Commerce","Industrie de process","Mécanique","Hotellerie","Transports"];
+    const Fields = ["Agriculture"
+                    ,"Agroalimentaire"
+                    ,"Alimentation"
+                    ,"Animaux"
+                    ,"Architecture - Aménagement intérieur"
+                    ,"Artisanat - Métiers d'art"
+                    ,"Banque - Finance - Assurance"
+                    ,"Bâtiment - Travaux publics"
+                    ,"Biologie - Chimie"
+                    ,"Commerce - Immobilier"
+                    ,"Communication - Information"
+                    ,"Culture - Spectacle"
+                    ,"Défense - Sécurité - Secours"
+                    ,"Droit"
+                    ,"Edition - Imprimerie - Livre"
+                    ,"Electronique - Informatique"
+                    ,"Enseignement - Formation"
+                    ,"Humanitaire"
+                    ,"Industrie - Matériaux"
+                    ,"Lettres - Sciences humaines"
+                    ,"Mécanique - Maintenance"
+                    ,"Santé"
+                    ,"Sciences - Maths - Physique"
+                    ,"Secrétariat - Accueil"
+                    ,"Social - Services à la personne"
+                    ,"Soins - Esthétique - Coiffure"
+                    ,"Sport - Animation "
+                    ,"Transport - Logistique"
+                  ];
     const children = [];
     Fields.map(Field =>{
         children.push(<Option key={Field}>{Field}</Option>);
@@ -55,8 +84,10 @@ const FormComponent = (props) => {
     const  [codeVerif , setCode] = useState("");
     const  [checkbox,setCheck] = useState(false);
     const  [time , setTime] =useState([]);
+    const [location , setLocation] = useState("/");
     const [Loggedin , setLog] = useState(false);
     useEffect(()=>{
+      console.log(props);
       if (props.query !== undefined) {
         if (props.query.ref === "tokenexpired") {
           message.warning('veuillez d abord vous connecter');
@@ -205,7 +236,7 @@ const FormComponent = (props) => {
           if (response.status === 200) {
              const authToken = response.data.token ; 
              window.localStorage.setItem("Tokens", authToken);
-             window.location.replace("/Settings/");
+             window.location.replace(`/Settings?location=${location}`);
           } else {
             setCurrent(5);
           }
@@ -479,11 +510,6 @@ const FormComponent = (props) => {
                     />
                   </div>
                 </form>
-              </div>
-            )}
-            {current == 4 && (
-              <div className="part 1">
-                <h3>Created succefully</h3>
               </div>
             )}
             {current == 5 && (
