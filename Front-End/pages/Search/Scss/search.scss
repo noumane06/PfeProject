@@ -14,12 +14,20 @@ body
             color : #6e6d7a;
         }
     }
+    .loader
+    {
+        margin-top: 3%;
+        .sk
+        {
+            margin-top: 5%;
+        }
+    }
     .CardContainer
     {
         display: flex ;
         flex-direction: row;
         flex-wrap: wrap;
-        margin-top: 3%;
+        
     }
     .Card1
             {

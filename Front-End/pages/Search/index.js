@@ -4,40 +4,70 @@ import Head from '../../components/head';
 import './Scss/search.scss';
 import { useRouter } from 'next/router';
 import { Skeleton } from 'antd';
+import axios from 'axios'
 // ------------------------------------------------
 
 import SearchCard from '../../components/SearchCard';
 import SearchBar from '../../components/SearchBar';
 //--------------------------------------------------
-const Search =({props ,qu})=>{
+const Search =({qu})=>{
 
     const [profiles , setProfile] = useState();
     const [nodata ,setnodata] = useState(false);
     const [loading ,setLoading] = useState(true);
     const router = useRouter()
     useEffect(()=>{
-        setProfile(props.profile);
-        if (props.profile === undefined) {
-            setnodata(true);
-        }
-        setTimeout(() => {
+        const Url = 'http://localhost:9000/profiles/search?companyname='+qu.companyname+'&domaine='+qu.domaine+'&city='+qu.city+'&page='+qu.page;
+        axios.get(Url)
+        .then(res =>{
+            setProfile(res.data);
+            if (res.data === "") {
+                setnodata(true);
+            }
             setLoading(false);
-        }, 1000);
+        })
+        .catch(err =>{
+            console.log(err)
+        })
         
-    })
+    },[])
 
-    const handleCLick = ()=>{
+    const handleCLick = async ()=>{
         setLoading(true);
-        if (+qu.page < Math.round(props.count /9) && +qu.page !== 0  ) {
+        if (+qu.page < Math.round(profiles.count /9) && +qu.page !== 0  ) {
             var newPage = +qu.page+1
-            router.push('/Search?companyname='+qu.companyname+'&domaine='+qu.domaine+'&city='+qu.city+'&page='+newPage)
+           await router.push('/Search?companyname='+qu.companyname+'&domaine='+qu.domaine+'&city='+qu.city+'&page='+newPage)
         }
+        const Url = 'http://localhost:9000/profiles/search?companyname='+qu.companyname+'&domaine='+qu.domaine+'&city='+qu.city+'&page='+qu.page
+        axios.get(Url)
+        .then(res =>{
+            setProfile(res.data);
+            if (res.data === "") {
+                setnodata(true);
+            }
+            setLoading(false);
+        })
+        .catch(err =>{
+            console.log(err)
+        })
         
     }
     const handleBack = ()=>{
         setLoading(true);
         var newPage = +qu.page-1
-        router.push('/Search?companyname='+qu.companyname+'&domaine='+qu.domaine+'&city='+qu.city+'&page='+newPage)
+        router.push('/Search?companyname='+qu.companyname+'&domaine='+qu.domaine+'&city='+qu.city+'&page='+newPage);
+        const Url = 'http://localhost:9000/profiles/search?companyname='+qu.companyname+'&domaine='+qu.domaine+'&city='+qu.city+'&page='+qu.page
+        axios.get(Url)
+        .then(res =>{
+            setProfile(res.data);
+            if (res.data === "") {
+                setnodata(true);
+            }
+            setLoading(false);
+        })
+        .catch(err =>{
+            console.log(err)
+        })
     }
     return(
         <div className="body">
@@ -46,31 +76,37 @@ const Search =({props ,qu})=>{
              <div className="searchPage">
                 <SearchBar searchItem={qu}/>
              </div>
-             
-             <div className="CardContainer">
-                    {profiles !== undefined && (
-                        <Skeleton loading={loading} active={true} avatar={true} round>
-                        {profiles.map(profile=>(
-                                <>
-                                <SearchCard key={profile._id} className="Card1" profile={profile}/>
-                                </>
-                        ))}
-                        </Skeleton>
-                    )}
-             </div>
-             {nodata  &&(
-                        <div className="Noresults">
-                                <img src="/static/Assets/No_comments.png" height="300"/>
-                                <h2>Aucun résultat trouvé</h2>
-                                <p>Il semble que nous ne trouvons aucun résultat basé sur la recherche.</p>
+             <div className='loader'>
+                 <Skeleton loading={loading} active={true} avatar={true} round  className='sk'>
+                    {profiles !== undefined &&(
+                        <>
+                        {profiles.profile !== undefined  &&(
+                            <div className="CardContainer">
+                                {profiles.profile.map(profile=>(
+                                        <>
+                                        <SearchCard key={profile._id} className="Card1" profile={profile}/>
+                                        </>
+                                ))}
+                            </div>
+                        )}
+                        
+                        {nodata  &&(
+                                    <div className="Noresults">
+                                            <img src="/static/Assets/No_comments.png" height="300"/>
+                                            <h2>Aucun résultat trouvé</h2>
+                                            <p>Il semble que nous ne trouvons aucun résultat basé sur la recherche.</p>
+                                    </div>
+                        )}
+                            
+                        <div className="pagination">
+                                <button className={qu.page <=1 || profiles.count === undefined  ? "disabled test" : "backPage test"} onClick={handleBack}>Précédent</button>
+                                {profiles.count !== undefined &&(<span className="pageNumber test ">{qu.page} sur {Math.round(profiles.count /9) !== 0  ? Math.round(profiles.count /9) : 1 }</span>)}
+                                {profiles.count === undefined &&(<span className="pageNumber test ">-</span>)}
+                                <button className={qu.page >= Math.round(profiles.count / 9) || profiles.count === undefined ? "disabled test " : "nextPage test " } onClick={handleCLick}>Suivant</button>
                         </div>
-              )}
-
-             <div className="pagination">
-                    <button className={qu.page <=1 || props.count === undefined  ? "disabled test" : "backPage test"} onClick={handleBack}>Précédent</button>
-                    {props.count !== undefined &&(<span className="pageNumber test ">{qu.page} sur {Math.round(props.count /9) !== 0  ? Math.round(props.count /9) : 1 }</span>)}
-                    {props.count === undefined &&(<span className="pageNumber test ">-</span>)}
-                    <button className={qu.page >= Math.round(props.count / 9) || props.count === undefined ? "disabled test " : "nextPage test " } onClick={handleCLick}>Suivant</button>
+                        </>
+                    )}
+                </Skeleton>
              </div>
              
         </div>
@@ -79,16 +115,8 @@ const Search =({props ,qu})=>{
 }
 
 Search.getInitialProps = async ({ query }) => {
-    var data = '';
-    const Url = 'http://localhost:9000/profiles/search?companyname='+query.companyname+'&domaine='+query.domaine+'&city='+query.city+'&page='+query.page  ;
-    try {
-      const res = await fetch(Url)  ;
-      data = await res.json();
-    } catch (error) {
-        console.log(error);
-        data = "";
-    }
-     return {props : data , qu : query}
+    
+     return {props : "" , qu : query}
 }
 
 export default Search ;
