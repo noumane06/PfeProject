@@ -1,7 +1,11 @@
+import Profile from './ProfileBody';
+import Head from '../../../components/head';
 const PublicProfile = ({profile})=>{
+    const name = profile.companyname ;
     return(
         <div>
-            This is not my profile , am just visiting . this person {profile.nom} {profile.prenom}
+            <Head title={name+" | 6Solutions"}/>
+            <Profile profile={profile}/>
         </div>
     )
 }

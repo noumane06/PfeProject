@@ -16,4 +16,10 @@ router.get('/myprofile/',checkAuth, Usercontroller.getMyprofile);
 router.get('/profile/'/*,check_auth_gen*/, Usercontroller.VistingProfile);
 router.post('/update',Usercontroller.UpdataData);
 router.get('/search', Usercontroller.SearchUser);
+// -------------------------------------
+
+// IF YOU NEED TO CHANGE DATA
+
+// -------------------------------------
+// router.post('/upall',Usercontroller.ChangeAll);
 module.exports = router;

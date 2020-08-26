@@ -1,0 +1,248 @@
+.body
+{
+    .element
+    {
+        color: #636363;
+        font-family: Arial, Helvetica, sans-serif;
+        font-weight: 400;
+    }
+    .Profile
+    {
+        margin-bottom: 5%;
+        // margin-top: 5%;
+        .ButtonContainer
+            {
+                width: fit-content;
+                margin-bottom: 30px;
+                font-family: 'GlacialBold';
+                background-color: transparent;
+                padding: 10px 15px;
+                cursor: pointer;
+                border-radius: 10px;
+                transition: background-color 200ms ease-in-out;
+                .backButton
+                {
+                    cursor: pointer;
+                }
+                .icon
+                {
+                    padding-top: 2px;
+                    margin-right: 10px;
+                    color:#2a2a2a ;
+                    float : left ;
+                }
+            }
+            .ButtonContainer:hover
+            {
+                background-color: #ceecff4b;
+            }
+        .ProfileHead
+        {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            .ProfileImg
+            {
+                border-radius: 50%;
+                margin-right: 15px;
+                padding: 0;
+                cursor: pointer;
+                img 
+                {
+                    border-radius: 50%;
+                    object-fit: cover;
+                    box-shadow: 0px 0px 15px #979797;
+                    width: 80px;
+                    height: 80px;
+                }
+            }
+            .ProfileInfo
+            {
+                flex: 2;
+                margin-left: 10px;
+                h3
+                {
+                    font-family: "GlacialBold";
+                    margin: 0;
+                    color: #2a2a2a;
+                }
+                p
+                {
+                    font-family: "GlacialBold";
+                    color:  #32a852;
+                    margin: 2px 0 2px 0;
+                    font-size: 13px;
+                }
+                .Likes 
+                {
+                    font-family: "GlacialRegular";
+                    font-size: 12px;
+                    color : #ff738a
+                }
+            }
+            .BookMetting
+            {     
+                overflow: auto;
+                align-items: center;
+                display: flex;
+                border: none;
+                font-family: "GlacialBold";
+                color : #ffffff ;
+                background-color: #E24F54;
+                padding: 5px 20px;
+                border-radius: 15px;
+                font-size: 15px;
+                transition : all 0.2s ease-in-out;
+                cursor: pointer;
+                span 
+                {
+                    padding: 10px;
+                }
+                svg
+                {
+                    padding: 10px;
+                }
+            }
+            .BookMetting:hover
+            {
+                background-color: #2a2a2a;
+                
+            }
+        }
+        .MenuContent
+        {
+            
+            .presentation
+            {
+                h2 
+                {
+                    font-family: 'GlacialBold';
+                    color: #000000cc;
+                }
+                p 
+                {
+                    color: #0000009d;
+                    font-size: 15px;
+                    
+                }
+            }
+            .Horraire
+            {
+                h2 
+                {
+                    font-family: 'GlacialBold';
+                    color: #000000cc;
+                }
+                .TimeTable
+                {
+                    display: flex;
+                    box-shadow: 0px 0px 5px #9797975d;
+                    border-radius: 15px;
+                    width: 50%;
+                    justify-content: space-between;
+                    padding: 20px 40px 20px 40px;
+                    .Block
+                    {
+                        display: flex;
+                        justify-content: space-between;
+                        ul
+                        {
+                            text-decoration: none;
+                            list-style: none;
+                            font-family: 'GlacialRegular';
+                            color: #2a2a2a;
+                            padding: 0;
+                            li
+                            {
+                                padding: 10px;
+                            }
+                            .Today
+                            {
+                                font-family: 'GlacialBold';
+                                color: #318CE7;
+                            }
+                        }
+                        
+                    }
+                }
+            }
+            .InfoSupp
+                {
+
+                    box-shadow: 0px 0px 5px #9797975d;
+                    border-radius: 15px;
+                    width: 50%;
+                    justify-content: space-between;
+                    padding: 20px 40px 20px 40px;
+                    .Block
+                    {
+                        width: 90%;
+                        .title
+                        {
+                            font-family: 'GlacialBold';
+                        }
+                        ul
+                        {
+                            text-decoration: none;
+                            list-style: none;
+                            font-family: 'GlacialRegular';
+                            color: #2a2a2a;
+                            padding: 0;
+                            display: flex;
+                            justify-content: space-between;
+                            li
+                            {
+                                padding: 10px;
+                            }
+                            
+                        }
+                        
+                    }
+                }
+            .MapContainer
+            {
+                box-shadow: 0px 0px 15px #9797975d;
+                width: 57%;
+                margin-top: 20px;
+            }
+        }
+        .MenuFooter
+        {
+            margin-top: 2%;
+            display: flex;
+            width: 20%;
+            justify-content: space-between;
+            align-items: center;
+            .like
+            {
+                display: flex;
+                align-items: center;
+                span 
+                {
+                    font-size: 15px;
+                    cursor: default;
+                }
+                .active
+                {
+                    font-family: 'GlacialBold';
+                    color: rgb(226, 38, 77);
+                }
+            }
+            .share
+            {
+                    border: none;
+                    font-family: 'GlacialRegular';
+                    font-size: 16px;
+                    background-color: transparent;
+                    padding: 5px 15px;
+                    transition: background-color 200ms ease-in-out;
+                    cursor: pointer;
+                    border-radius: 10px;
+            }
+            .share:hover
+            {
+                background-color: #318ce71f;
+            }
+        }
+    }
+}

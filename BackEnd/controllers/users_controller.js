@@ -94,7 +94,7 @@ exports.userComp_signup = (req, res, next) => {
                                 }
                                 
                                 user.booked = req.body.booked ;
-                                user.stars = 0 ;
+                                user.stars = req.body.stars ;
                                 user.companyname = req.body.companyname ;
                                 user.title = req.body.title ;
                                 user.fixphone = req.body.fixphone ;
@@ -208,7 +208,7 @@ exports.GetProfiles = (req,res,next)=>{
 exports.VistingProfile = (req,res,next) =>{
     const id = req.query.userid ;
     User.find({_id : id })
-    .select('type nom prenom companyname diplome city presentation languages title Usrimg')
+    .select('type nom prenom companyname diplome city presentation languages title Usrimg stars fixphone booked domaine horraire gender mobilephone addresse ')
     .then(result =>{
         res.status(200).json({
             message : "User Found",
@@ -308,6 +308,31 @@ exports.UpdataData = (req,res,next) =>{
         })
     })
 }
+
+
+// -------------------------------------
+
+// IF YOU NEED TO CHANGE DATA
+
+// -------------------------------------
+// exports.ChangeAll = (req , res , next)=>{
+//    User.updateMany({type : 'Société'},{stars :[]})
+//    .then(data =>{
+//     res.status(200).json(
+//         {
+//             message : "Updated succefully",
+//             data : data
+//         }
+//     )
+//    })
+//    .catch(err =>{
+//     console.log(err);
+//     res.status(404).json({
+//         message : "The user is not here :/ , below more infos",
+//         error : err
+//     })
+// })
+// }
 
 // -----------------------------------------------------
 

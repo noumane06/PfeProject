@@ -32,7 +32,7 @@ const userSchema = mongoose.Schema({
     gender: { type: String, required: true },
     horraire: [String],
     booked: [String],
-    stars: { type: String, required: false }
+    stars: [String]
 });
 
 module.exports = mongoose.model('Users', userSchema);

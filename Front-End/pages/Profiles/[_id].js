@@ -1,15 +1,14 @@
-import Header from '../../components/header';
 import Head from '../../components/head';
-import { useRouter } from 'next/router';
+import Header from '../../components/header'
 import {useState , useEffect} from 'react';
+import {Spin , Skeleton} from 'antd';
 import jwt from 'jsonwebtoken';
 import MyProfile from './Components/myProfile';
 import PublicProfile from './Components/publicProfile';
 
-const Profile = ({data})=>{
-    const router = useRouter();
-    const profile = data.profile[0];
-    
+const Profile = ({props})=>{
+
+    console.log(props);
     const [userid,setData] = useState();
     const [loading,setLoading] = useState(true);
 
@@ -28,25 +27,32 @@ const Profile = ({data})=>{
         });
         
     },[])
-    if (loading) {
+    if (loading ) {
         
         return(
-        <div className="body">
-            loading ...
-        </div>
+        <>
+                <Head title="Loading"/>
+                <div style={{position : 'fixed',top : '50%',left:'50%',marginTop :'-50px',marginLeft:'-50px'}}>
+                    <Spin size="large" />
+                </div>
+        </>
         )
     }else{
         return(
-            <div>
-                <h2>
-                    Bonjour
-                    {userid === profile._id &&(
-                        <MyProfile profile={profile}/>
-                    )}
-                    {userid !== profile._id &&(
-                        <PublicProfile profile={profile}/>
-                    )}
-                </h2>
+            <div className="body">
+                    <Header/>
+                    {props.data === undefined ? <Head title="Loading"/> :''}
+                    <div style={{marginTop :'8%'}}>
+                       {/* <Skeleton loading={props.data === undefined} active={true} avatar={true} round  > */}
+                        {userid === props.data.profile[0]._id && props.data !== undefined &&  (
+                            <MyProfile profile={props.data.profile[0]}/>
+                        )}
+                        {userid !== props.data.profile[0]._id && props.data !== undefined && (
+                            <PublicProfile profile={props.data.profile[0]}/>
+                        )}  
+                        {/* </Skeleton>  */}
+                    </div>
+                    
             </div>
         )        
     }
@@ -54,24 +60,9 @@ const Profile = ({data})=>{
 }
 
 
-export async function getStaticPaths(){
-    const res = await fetch("http://localhost:9000/profiles/");
-    const data = await res.json();
-    var paths = [];
-    data.response.profiles.map(profile=>{
-        paths.push({params : {
-            _id : profile._id
-        }})
-    })
-    
-    return{
-        paths ,
-        fallback : false
-    }
-}
-export async function getStaticProps({ params }){
+Profile.getInitialProps = async (ctx) => {
 
-    const url = "http://localhost:9000/profiles/profile?userid="+params._id ;
+    const url = "http://localhost:9000/profiles/profile?userid="+ctx.query._id ;
     const res = await fetch(url);
     const data = await res.json();
     return{
@@ -79,7 +70,6 @@ export async function getStaticProps({ params }){
            data
        }
     }
-}
-
+  }
 
 export default Profile ;

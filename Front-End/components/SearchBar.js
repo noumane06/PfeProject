@@ -2,7 +2,7 @@ import { AutoComplete } from 'antd';
 import React, { useState , useEffect } from 'react';
 import axios from 'axios';
 import '../styles/AutoComplete.scss';
-import '../pages/Auth/Sass/ant-picker.scss';
+import '../styles/ant-picker.scss';
 const SearchBar = ({searchItem})=>{
 
     const { Option } = AutoComplete;

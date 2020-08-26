@@ -1,3 +1,4 @@
+const { default: Likebutton } = require("./LikeButton");
 
 
 const SearchCard = (props)=>{
@@ -28,6 +29,7 @@ const SearchCard = (props)=>{
                 {props.profile._id === undefined &&(
                     <button className="button">Voir profile</button>
                 )}
+                {/* <Likebutton/> */}
             </div>
         </div>
     );
