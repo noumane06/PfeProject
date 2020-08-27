@@ -13,7 +13,6 @@ const SearchBar = ({searchItem})=>{
     const [nameText , setNametext]= useState("");
     const [domaineText , setdomainetext]= useState("");
     const [cityText , setcitytext]= useState("");
-    console.log(searchItem);
     const checker =  (array)=>{
         var els = [] ; 
          array.map(element => element.domaine.map(dom => {
@@ -69,7 +68,6 @@ const SearchBar = ({searchItem})=>{
                 setNames(data.profile);
                 if (Names.length !== 0) {
                   setDomaineOptions(!searchText ? [] : checker(Names));
-                  console.log(DomaineOptions);
                 }
           }
         }).catch(err => console.log(err));

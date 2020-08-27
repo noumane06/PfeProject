@@ -6,7 +6,6 @@ import { useRouter } from 'next/router';
 import { Skeleton } from 'antd';
 import axios from 'axios'
 // ------------------------------------------------
-
 import SearchCard from '../../components/SearchCard';
 import SearchBar from '../../components/SearchBar';
 //--------------------------------------------------

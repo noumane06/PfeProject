@@ -1,5 +1,3 @@
-const { default: Likebutton } = require("./LikeButton");
-
 
 const SearchCard = (props)=>{
     let value ="";
@@ -15,7 +13,7 @@ const SearchCard = (props)=>{
                 <div className="ProfileInfo">
                     <h3>{props.profile.companyname}</h3>
                     <p>{props.profile.city}</p>
-                    <span>{props.profile.stars} étoiles</span>
+                    <span>{props.profile.stars.length} J'aime</span>
                 </div>
             </div>
             <div className="Card_Body">

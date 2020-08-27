@@ -2,6 +2,7 @@
 
 import {useState , useEffect} from 'react';
 import { Menu } from 'antd' ;
+import axios from 'axios';
 import '../../../styles/ant-picker.scss';
 
 
@@ -16,12 +17,12 @@ import LikeButton from '../../../components/LikeButton';
 import Map from './map/Map';
 import Geocode from "react-geocode";
 // -------------------------------------
-const ProfileBody = ({profile})=>{
+const ProfileBody = ({profile , userid})=>{
 
     console.log(profile);
     // States ---------------------------------------
     const [current , setCurrent] = useState('Acceuil');
-    const [checkbox,setCheck] = useState(false);
+    const [checkbox,setCheck] = useState(profile.stars.includes(userid));
     const [location , setLocation] = useState({});
     const date = new Date();
 
@@ -30,6 +31,7 @@ const ProfileBody = ({profile})=>{
     const AboutIcon = props => <Icon component={AboutSvg} {...props} />;
     const ClientsIcon = props => <Icon component={ClientSvg} {...props} />;
     useEffect(()=>{
+        
         const adr = profile.addresse + " , "+ profile.city ;
         Geocode.setApiKey("AIzaSyChI3vJkg_P6JFZKVg9at3FtUZjxxI2lP8");
         Geocode.fromAddress(adr).then(
@@ -47,11 +49,19 @@ const ProfileBody = ({profile})=>{
           );
     },[])
     // Handlers -------------------------------------
-    const handleLike = ()=>{
-        setCheck(!checkbox);
-        if (checkbox) {
-            
+    const handleLike = async ()=>{
+        var stars = profile.stars ;
+        if (!checkbox) {
+           await stars.push(userid);
+        }else
+        {
+           await stars.splice(stars.indexOf(userid),1);
         }
+        setCheck(!checkbox);
+        const Url = 'http://localhost:9000/profiles/like?userid='+profile._id;
+        axios.post(Url,{"stars":stars})
+        .then(res=>console.log(res))
+        .catch(err => console.log(err));
     }
     const handleClick = e =>{
         setCurrent(e.key);

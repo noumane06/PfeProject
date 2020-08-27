@@ -8,7 +8,6 @@ import PublicProfile from './Components/publicProfile';
 
 const Profile = ({props})=>{
 
-    console.log(props);
     const [userid,setData] = useState();
     const [loading,setLoading] = useState(true);
 
@@ -45,10 +44,10 @@ const Profile = ({props})=>{
                     <div style={{marginTop :'8%'}}>
                        {/* <Skeleton loading={props.data === undefined} active={true} avatar={true} round  > */}
                         {userid === props.data.profile[0]._id && props.data !== undefined &&  (
-                            <MyProfile profile={props.data.profile[0]}/>
+                            <MyProfile profile={props.data.profile[0]} userid={userid}/>
                         )}
                         {userid !== props.data.profile[0]._id && props.data !== undefined && (
-                            <PublicProfile profile={props.data.profile[0]}/>
+                            <PublicProfile profile={props.data.profile[0]} userid={userid} />
                         )}  
                         {/* </Skeleton>  */}
                     </div>

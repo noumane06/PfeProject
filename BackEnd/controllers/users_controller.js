@@ -302,6 +302,7 @@ exports.UpdataData = (req,res,next) =>{
         )
     })
     .catch(err =>{
+        console.log(err);
         res.status(404).json({
             message : "The user is not here :/ , below more infos",
             error : err
@@ -311,6 +312,30 @@ exports.UpdataData = (req,res,next) =>{
 
 
 // -------------------------------------
+
+
+// Update Like Button 
+
+exports.StarsUpdate  = (req ,res ) =>{
+    const id = req.query.userid ; 
+    User.updateOne({_id : id},{stars : req.body.stars})
+    .then(result=>{
+        res.status(200).json(
+            {
+                message : "Updated succefully",
+                data : result
+            }
+        )
+    })
+    .catch(err =>{
+        console.log(err);
+        res.status(404).json({
+            message : "The user is not here :/ , below more infos",
+            error : err
+        })
+    })
+}
+
 
 // IF YOU NEED TO CHANGE DATA
 

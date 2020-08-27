@@ -1,11 +1,11 @@
 import Profile from './ProfileBody';
 import Head from '../../../components/head';
-const PublicProfile = ({profile})=>{
+const PublicProfile = ({profile ,userid})=>{
     const name = profile.companyname ;
     return(
         <div>
             <Head title={name+" | 6Solutions"}/>
-            <Profile profile={profile}/>
+            <Profile profile={profile} userid={userid} />
         </div>
     )
 }

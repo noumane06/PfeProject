@@ -15,6 +15,7 @@ router.get('/',Usercontroller.GetProfiles);
 router.get('/myprofile/',checkAuth, Usercontroller.getMyprofile);
 router.get('/profile/'/*,check_auth_gen*/, Usercontroller.VistingProfile);
 router.post('/update',Usercontroller.UpdataData);
+router.post('/like' , Usercontroller.StarsUpdate);
 router.get('/search', Usercontroller.SearchUser);
 // -------------------------------------
 
