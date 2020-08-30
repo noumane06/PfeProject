@@ -16,7 +16,7 @@ const DropdownItem = (props)=>{
         </div>
     )
 }
-const DropDown = () =>{
+const DropDown = ({userid}) =>{
 
     const handleLogout = () =>{
         window.localStorage.removeItem("Tokens");
@@ -24,7 +24,7 @@ const DropDown = () =>{
     }
     return(
         <div className="Dropdown">
-            <DropdownItem lefticon={<ProfileIcon/>}>Mon profile</DropdownItem>
+            <DropdownItem lefticon={<ProfileIcon/>}><a href={`/Profiles/`+userid} style={{textDecoration : 'none'}}>Mon profile</a></DropdownItem>
             <DropdownItem lefticon={<SettingsIcon/>}>Paremetres</DropdownItem>
             <DropdownItem lefticon={<LogoutIcon/>} onClick={handleLogout}>Se déconnecter</DropdownItem>
         </div>
@@ -99,7 +99,7 @@ const Header = ({active})=>
                         </div>
                         {opened &&(
                             <>
-                            <DropDown/>
+                            <DropDown userid={userId}/>
                             </>
                         )}
                     </>

@@ -9,7 +9,6 @@
     .Profile
     {
         margin-bottom: 5%;
-        // margin-top: 5%;
         .ButtonContainer
             {
                 width: fit-content;
@@ -107,6 +106,35 @@
             {
                 background-color: #2a2a2a;
                 
+            }
+            .EditProfile
+            {     
+                overflow: auto;
+                align-items: center;
+                display: flex;
+                border: none;
+                font-family: "GlacialBold";
+                border : 2px solid #002D62 ;
+                color : #002D62 ;
+                background-color: #ffffff;
+                padding: 1px 15px;
+                border-radius: 15px;
+                font-size: 15px;
+                transition : all 0.15s ease-in-out;
+                cursor: pointer;
+                span 
+                {
+                    padding: 10px;
+                }
+                svg
+                {
+                    padding: 10px;
+                }
+            }
+            .EditProfile:hover
+            {
+                color : #ffffff ;
+                background-color: #002D62;
             }
         }
         .MenuContent

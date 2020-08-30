@@ -6,8 +6,8 @@ const router = express.Router();
 // *******************************************
 
 // 
-const Usercontroller = require("../controllers/users_controller");
+const AuthController = require("../controllers/Auth_controller");
 
-router.post('/', Usercontroller.userComp_signup);
-router.post('/verifEmail', Usercontroller.CheckEmail);
+router.post('/', AuthController.userComp_signup);
+router.post('/verifEmail', AuthController.CheckEmail);
 module.exports = router;

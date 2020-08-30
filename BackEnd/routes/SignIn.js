@@ -6,8 +6,8 @@ const router = express.Router();
 // *******************************************
 
 // 
-const Usercontroller = require("../controllers/users_controller");
+const AuthController = require("../controllers/Auth_controller");
 
-router.post('/', Usercontroller.user_signin);
+router.post('/', AuthController.user_signin);
 
 module.exports = router;
