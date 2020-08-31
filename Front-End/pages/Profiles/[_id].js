@@ -1,9 +1,8 @@
 import Head from '../../components/head';
 import Header from '../../components/header'
 import {useState , useEffect} from 'react';
-import {Spin , Skeleton} from 'antd';
+import {Spin } from 'antd';
 import jwt from 'jsonwebtoken';
-import MyProfile from './Components/myProfile';
 import PublicProfile from './Components/publicProfile';
 
 const Profile = ({props})=>{
@@ -42,13 +41,10 @@ const Profile = ({props})=>{
                     <Header/>
                     {props.data === undefined ? <Head title="Loading"/> :''}
                     <div style={{marginTop :'8%'}}>
-                       {/* <Skeleton loading={props.data === undefined} active={true} avatar={true} round  > */}
                         { props.data !== undefined && (
                             <PublicProfile profile={props.data.profile[0]} userid={userid} />
                         )}  
-                        {/* </Skeleton>  */}
                     </div>
-                    
             </div>
         )        
     }

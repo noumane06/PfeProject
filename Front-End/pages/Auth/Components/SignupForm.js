@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import {useState , useEffect} from 'react';
-import {Select ,TimePicker , Spin } from 'antd';
+import {message , Select ,TimePicker , Spin } from 'antd';
 import axios from 'axios'; 
 import Captcha from './captcha';
 import firebase from '../../Settings/Components/firebase-config';

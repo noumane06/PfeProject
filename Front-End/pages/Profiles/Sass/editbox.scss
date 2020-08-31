@@ -1,0 +1,252 @@
+.ant-modal
+{
+    .ant-modal-content
+    {
+        border-radius: 15px;
+        .ant-modal-header
+        {
+            font-family: 'GlacialBold';
+            border-radius: 15px 15px 0 0;
+        }
+    }
+}
+
+
+
+.ant-modal-body
+{
+    height: 50vh;
+    overflow-y: scroll;
+    .EditBox 
+    {
+        .multipleInput
+                {
+                    display: flex;
+                    justify-content: space-between;
+                    .controlled
+                    {
+                        width: 40%;
+                    }
+                    .title
+                    {
+                        width: 25%;
+                        font-size: 13px;
+                        text-align: center;
+                        font-family: 'GlacialBold';
+                        background-color: #e9f1fa;
+                        border: 2px solid transparent;
+                        box-shadow: 0px 0px 0px #318ce73f;
+                        border-radius: 10px;
+                        transition: all 200ms ease-in-out;
+                        outline: none;
+                        margin-top: 20px;
+                        padding: 0px 5px;
+                    }
+                    .input
+                    {
+                        font-family: 'GlacialBold';
+                        margin-top: 20px;
+                        width: 65%;
+                        padding: 10px 13px;
+                        background-color: #e9f1fa;
+                        border: 2px solid transparent;
+                        box-shadow: 0px 0px 0px #318ce73f;
+                        border-radius: 10px;
+                        transition: all 200ms ease-in-out;
+                        outline: none;
+                    }
+                    .input:hover
+                    {
+                        border: 2px solid #c5e2ffd8;
+                    }
+                    .input:focus
+                    {
+                        border: 2px solid #318CE7;
+                    }
+                    .user
+                    {
+                        width: 42%;
+                    }
+                    .small
+                    {
+                        width: 15%;
+                        font-size: 10px;
+                        text-align: center;
+                        font-family: 'GlacialBold';
+                        background-color: #e9f1fa;
+                        border: 2px solid transparent;
+                        box-shadow: 0px 0px 0px #318ce73f;
+                        border-radius: 10px;
+                        transition: all 200ms ease-in-out;
+                        outline: none;
+                        margin-top: 20px;
+                        padding: 0px 5px;
+                    }
+                }
+        .ant-select
+        {
+            .ant-select-selector
+            {
+                padding: 6px 13px;
+                border-radius: 10px;
+                
+            }
+        }
+        .ant-picker.ant-picker-borderless
+        {
+            width: 100%;
+        }
+        .textArea
+        {
+            font-family: 'GlacialBold';
+            box-sizing: border-box;
+            resize: none;
+            margin-top: 20px;
+            width: 100%;
+            padding: 10px 13px;
+            background-color: #e9f1fa;
+            border: 2px solid transparent;
+            box-shadow: 0px 0px 0px #318ce73f;
+            border-radius: 10px;
+            transition: all 200ms ease-in-out;
+            outline: none;
+        }
+        .textArea:hover
+        {
+            border: 2px solid #c5e2ffd8;
+        }
+        .textArea:focus
+        {
+            border: 2px solid #318CE7;
+        }
+        .Diplomes
+        {
+            display: flex;
+            flex-direction: column;
+            .container
+            {
+                display: flex;
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: baseline;
+                .diplome
+                {
+                    width: 25%;
+                }
+                .desc
+                {
+                    width: 60%;
+                }
+                .desc2
+                {
+                    width: 50%;
+                }
+                .delete
+                {
+                    padding: 10px 13px;
+                    background-color: #f3f3f3;
+                    border-radius: 10px; 
+                    transition: all 0.2s ease-in-out;
+                    cursor: pointer;
+                }
+                .delete:hover
+                {
+                    background-color: #e2e2e2;
+                }
+                .ajouter
+                {
+                    border-radius: 5px;
+                    border: 1px dashed #318ce7;
+                    padding: 5px 15px;
+                    background-color: #fafafa;
+                    font-family: 'GlacialBold';
+                    color: #318ce7;
+                    margin-top: 5%;
+                    transition: all 0.2s ease-in-out;
+                    cursor: pointer;
+                    outline:none ;
+                }
+                .ajouter:hover
+                {
+                    border-radius: 5px;
+                    border: 1px solid transparent;
+                    background-color: #318ce7;
+                    color: #fafafa;
+                }
+                .input
+                {
+                    font-family: 'GlacialBold';
+                    margin-top: 20px;
+                    padding: 10px 13px;
+                    background-color: #e9f1fa;
+                    border: 2px solid transparent;
+                    box-shadow: 0px 0px 0px #318ce73f;
+                    border-radius: 10px;
+                    transition: all 200ms ease-in-out;
+                    outline: none;
+                }
+                .input:hover
+                {
+                    border: 2px solid #c5e2ffd8;
+                }
+                .input:focus
+                {
+                    border: 2px solid #318CE7;
+                }
+            }
+        }
+        .ProfileImg
+        {
+            border-radius: 50%;
+            padding: 0;
+            input[type="file"] {
+                display: none;
+            }
+            .custom-file-upload {
+                font-family: "GlacialBold";
+                margin-top : 5px ;
+                display: inline-block;
+                padding: 6px 12px;
+                border-radius: 10px;
+                color: #318CE7;
+                margin-right: 5px;
+                background-color: #f8f8f8;
+                cursor: pointer;
+                transition: all 0.2s ease-in-out;
+            }
+            .custom-file-upload:hover
+            {
+                background-color: #f3f3f3;
+            }
+            .Showmodal
+            {
+                border-radius: 5px;
+                background-color: #f8f8f8;
+                margin-right: 5px;
+                padding: 5px;
+                color: #f38484;
+                text-align: center;
+            }
+            .Showmodal:hover
+            {
+                background-color: #f3f3f3;
+                cursor: pointer;
+                transition: all 0.2s ease-in-out;
+            }
+            .img 
+            {
+                border-radius: 50%;
+                object-fit: cover;
+                box-shadow: 0px 0px 15px #979797;
+                cursor: pointer;
+                transition: 0.3s ease;
+                width: 80px;
+                height: 80px;
+            }
+            .img:hover
+            {
+                filter: brightness(0.7);
+            }
+        }
+    }
+}

@@ -108,11 +108,18 @@ exports.UpdataData = (req,res,next) =>{
     const id = req.query.userid ;
     User.findOne({_id : id})
     .then(userdata =>{
-        console.log(req);
         userdata.presentation = req.body.presentation ;
         userdata.diplome = req.body.diplome  ;
         userdata.languages = req.body.languages ;
         userdata.Usrimg = req.body.Usrimg ;
+        userdata.nom = req.body.nom ;
+        userdata.prenom = req.body.prenom;
+        userdata.addresse = req.body.addresse;
+        userdata.city = req.body.city;
+        userdata.companyname = req.body.companyname;
+        userdata.title = req.body.title;
+        userdata.horraire = req.body.horraire ;  
+        userdata.domaine  = req.body.domaine ;
         userdata.save();
         res.status(200).json(
             {

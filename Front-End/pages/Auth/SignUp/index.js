@@ -1,4 +1,4 @@
-import '../Sass/signin.scss'
+import '../Sass/Auth.scss'
 import LeftComponent from '../Components/leftImage'
 import RightComponent from '../Components/RightComponent'
 import Head from '../../../components/head'

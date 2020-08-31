@@ -1,10 +1,10 @@
 // Dependencies ------------------------
 
 import {useState , useEffect} from 'react';
-import { Menu, Button } from 'antd' ;
+import { Menu, Button, message , Progress} from 'antd' ;
 import axios from 'axios';
 import '../../../styles/ant-picker.scss';
-
+import { storage } from './firebase'; 
 
 // Components -------------------------
 import Icon from '@ant-design/icons';
@@ -18,16 +18,34 @@ import Map from './map/Map';
 import Geocode from "react-geocode";
 import EditSvg from './Svg/EditSvg';
 import Modal from 'antd/lib/modal/Modal';
+import EditBox from './EditBox';
 // -------------------------------------
-const ProfileBody = ({profile , userid})=>{
+function isEmpty(obj) {
+    for (const [key, value] of Object.entries(obj)) {
+        if (value == "" || value == []) {
+            if (key !== "booked") {
+                 return true ;
+            }
+        }
+      }
+    return false ;
+}
 
-    console.log(profile);
+// ----------------------------
+const ProfileBody = ({profile , userid})=>{
     // States ---------------------------------------
+    const [imageLoading , setloadimage] = useState(false);
     const [current , setCurrent] = useState('Acceuil');
     const [checkbox,setCheck] = useState(profile.stars.includes(userid));
+    const [data , setData] = useState(profile);
     const [location , setLocation] = useState({});
+    const [filefirebase,setfire] = useState(null);
+    const [percentage , setPrecentage]= useState(0);
     const [visible,setvisible] = useState(false);
     const [loading,setloading] = useState(false);
+    const [DiplomeList , setDiplomeList] = useState(profile.diplome);
+
+
     const date = new Date();
 
     // Icons -----------------------------------------
@@ -52,7 +70,30 @@ const ProfileBody = ({profile , userid})=>{
             }
           );
     },[])
+    // Firebase url upload function 
+    const firebaseUrl = (file) =>{
+        return new Promise((resolve,reject)=>{
+            let currentImageName = "firebase-image-" + Date.now();
+            let uploadImage = storage.ref(`images/${currentImageName}`).put(file);
+
+            uploadImage.on('state_changed',
+                (snapshot) => {
+                    var per = Math.floor((snapshot.bytesTransferred / snapshot.totalBytes) * 100)
+                    setPrecentage(per);
+                },
+                (error) => {
+                    reject(error);
+                },
+                () => {
+                    storage.ref('images').child(currentImageName).getDownloadURL().then(url => {
+                        const imageData = [url, currentImageName]
+                        resolve(imageData);
+                    })
+                })
+        })
+    }
     // Handlers -------------------------------------
+    
     const handleLike = async ()=>{
         var stars = profile.stars ;
         if (!checkbox) {
@@ -67,6 +108,7 @@ const ProfileBody = ({profile , userid})=>{
         .then(res=>console.log(res))
         .catch(err => console.log(err));
     }
+
     const handleClick = e =>{
         setCurrent(e.key);
     }
@@ -77,12 +119,36 @@ const ProfileBody = ({profile , userid})=>{
         setvisible(true);
     }
 
-    const handleSave = () =>{
-            setloading(true)
-        setTimeout(() => {
-            setloading(false);
-            setvisible(false);
-        }, 3000);
+    const handleSave = async () =>{
+            setData({...data , diplome : DiplomeList});
+            if (isEmpty(data)) {
+                message.error("Un ou plusieurs champs sont vides")
+            }else{
+                setloading(true);
+                if (filefirebase !== null) {
+                    setloadimage(true);
+                    const imgData = await firebaseUrl(filefirebase);
+                    setData(data.Usrimg = imgData[0]);
+                }
+                const url = "http://localhost:9000/profiles/update?userid=" + userid ;
+                axios.post(url, data)
+                .then(response => {
+                if (response.status === 200) {
+                    setloading(false);
+                    setvisible(false);
+                    message.success("Mise à jour réussie");
+                    setTimeout(() => {
+                        window.location.reload();
+                    }, 1000);
+                } else {
+                    message.error("Une erreur s'est produite, veuillez réessayer plus tard");
+                }
+                })
+                .catch(err => {
+                    message.error("Une erreur s'est produite, veuillez réessayer plus tard");
+                    console.log(err);
+                }); 
+            }
     }
 
 
@@ -117,14 +183,28 @@ const ProfileBody = ({profile , userid})=>{
                 
             </div>
             <div className="ProfileBody">
-                <Modal title="Image de profile" visible={visible}  onCancel={()=>setvisible(false)} footer={[
+                <Modal title="Editez votre profile" visible={visible} width="50vw" onCancel={()=>setvisible(false)} footer={[
                             <Button disabled={false} key="submit" type="primary" loading={loading} style={{borderRadius :'10px', fontFamily :'GlacialBold'}}  onClick={handleSave}>
                                 Submit
                             </Button>
                             ]}
                 >
-                 <label>Name</label>
-                 <input type="text" placeholder="Votre nom"/>
+                {!imageLoading &&(<EditBox data={data} setData={setData} setDiplomeList={setDiplomeList} DiplomeList={DiplomeList} setfire={setfire}/>)}
+                 {imageLoading &&(
+                    <div style={{marginBottom : '10%', marginTop : '10%',textAlign : 'center'}}>
+                            
+                            <Progress
+                            type="circle"
+                            strokeColor={{
+                                '0%': '#00308F',
+                                '100%': '#7CB9E8',
+                            }}
+                            percent={percentage}
+                            />
+                        <h1>Veuillez patienter ... </h1>
+                        <p>Nous mettons à jour votre profil</p>
+                 </div>
+                 )}
                 </Modal>
                 <Menu onClick={handleClick} selectedKeys={current} mode="horizontal" style={{marginTop :'3%'}}>
                     <Menu.Item key="Acceuil" icon={<HomeIcon />} >
