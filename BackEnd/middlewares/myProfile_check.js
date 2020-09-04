@@ -6,10 +6,14 @@ module.exports = (req,res,next)=>{
         const AuthCookie = cookie.parse(req.headers.cookie)
         const CookieToken = AuthCookie.auth;
         const DecodedToken = jwt.verify(CookieToken , process.env.AUTH_SECRET);
+        
+        req.userData = DecodedToken.userId ;
+        console.log(req.userData);
         next();
     } catch (error) {
+        console.log(error);
         return res.status(401).json({
-            error : "Your not logged in"
+            error : "Auth failed"
         });
     }
 };

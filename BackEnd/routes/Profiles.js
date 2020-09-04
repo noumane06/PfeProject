@@ -9,13 +9,13 @@ const router = express.Router();
 const Usercontroller = require("../controllers/users_controller");
 const checkAuth = require('../middlewares/check-auth');
 const check_auth_gen = require('../middlewares/check_auth_gen');
-const { route } = require('./SignUp');
+const myProfile_check = require('../middlewares/myProfile_check');
 
 router.get('/',Usercontroller.GetProfiles);
-router.get('/myprofile/',checkAuth, Usercontroller.getMyprofile);
-router.get('/profile/'/*,check_auth_gen*/, Usercontroller.VistingProfile);
-router.post('/update',Usercontroller.UpdataData);
-router.post('/like' , Usercontroller.StarsUpdate);
+router.get('/myprofile' ,myProfile_check, Usercontroller.getMyprofile)
+router.get('/profile/',check_auth_gen, Usercontroller.VistingProfile);
+router.post('/update',checkAuth,Usercontroller.UpdataData);
+router.post('/like' ,check_auth_gen, Usercontroller.StarsUpdate);
 router.get('/search', Usercontroller.SearchUser);
 // -------------------------------------
 

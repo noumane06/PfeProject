@@ -1,6 +1,6 @@
 const Profile = ()=>{
     return(
-<svg viewBox="0 0 416 416"  >
+<svg viewBox="0 0 416 416" aria-hidden = "true" >
     <g>
         <g>
             <g>

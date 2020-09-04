@@ -2,7 +2,8 @@ const mongoose = require('mongoose');
 const User = require('../models/user_model');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
-
+const cookie = require('cookie');
+const { strict } = require('assert');
 // ******************************
 // Checking if email exist controller 
 
@@ -157,19 +158,16 @@ User.find({ email: req.body.email })
                     });
                 }
                 if (result) {
-                    const token = jwt.sign(
-                        {
-                            userId: userdata[0]._id,
-                        },
-                        "secret",
-                        {
-                            expiresIn: "1h"
-                        }
-                    );
-                    return res.status(200).json({
-                        message: "Welcome Back " + userdata[0].nom,
-                        token: token
-                    });
+                    const AuthToken = jwt.sign({userId: userdata[0]._id,},process.env.AUTH_SECRET,{expiresIn: "1h"});
+                    res.setHeader('Set-Cookie',cookie.serialize('auth',AuthToken,{
+                        httpOnly: true ,
+                        secure : process.env.NODE_ENV !== 'developement',
+                        sameSite : 'strict',
+                        maxAge : 3600 ,
+                        path : '/'
+                    }))
+                
+                    return res.status(200).json({message : "loggedIn"});
                 }
                 else {
                     return res.status(401).json({
@@ -180,6 +178,28 @@ User.find({ email: req.body.email })
         }
     })
 };
+
+exports.user_signout = (req,res) =>{
+    const id = req.userData ;
+    User.find({_id : id})
+    .then(resp =>{
+        res.setHeader('Set-Cookie',cookie.serialize('auth',"",{
+            httpOnly: true ,
+            secure : process.env.NODE_ENV !== 'developement',
+            sameSite : 'strict',
+            maxAge : 0 ,
+            path : '/'
+        }))
+        return res.status(200).json({message : "You're Logged Out"});
+    })
+    .catch(err =>{
+        console.log(err);
+        res.status(404).json({
+            message : "The user is not here :/ , below more infos",
+            error : err
+        })
+    })
+}
 
 // deleting user with the use of userid
 // Still need auth check (checking usrid in the token is the same).

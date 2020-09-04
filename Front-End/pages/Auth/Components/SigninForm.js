@@ -2,7 +2,6 @@ import Link from 'next/link';
 import axios from 'axios'; 
 import { useEffect,useState} from 'react';
 import { message } from 'antd';
-import jwt from 'jsonwebtoken';
 
 const FormComponent = (props) => {
 
@@ -25,24 +24,21 @@ const FormComponent = (props) => {
       if (props.query.location !== undefined) {
         setLocation(props.query.location);
       }
-      const token = window.localStorage.getItem("Tokens");
-      jwt.verify(token,"secret",function (err , decoded) {
-            if (!err) {
+      axios.get('http://localhost:9000/profiles/myprofile',{withCredentials : true})
+        .then(res =>{      
               setLog(true);
               setTimeout(() => {
                 window.location.replace("/")
               }, 5000);
-            }
-      });
+          })
+        .catch(err => {});
     },[])
     const handleSubmit = (e) =>{
       e.preventDefault() ;
-      axios.post("http://localhost:9000/signin/", userData)
+      axios.post("http://localhost:9000/signin/", userData , {withCredentials : true})
       .then(response => {
         if (response.status === 200) {
-           const authToken = response.data.token ; 
-           window.localStorage.setItem("Tokens", authToken);
-           window.location.replace(location);
+          window.location.replace(location);
         } else {
           setErrEm(true);
           setErrPass(true);

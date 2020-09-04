@@ -19,8 +19,9 @@ const DropdownItem = (props)=>{
 const DropDown = ({userid}) =>{
 
     const handleLogout = () =>{
-        window.localStorage.removeItem("Tokens");
-        window.location.reload();
+        axios.get('http://localhost:9000/signout',{withCredentials : true})
+        .then(res => window.location.reload())
+        .catch(err => console.log(err));
     }
     return(
         <div className="Dropdown">
@@ -40,27 +41,23 @@ const Header = ({active})=>
     const [data , setData] = useState();
     
     useEffect(()=>{
-        const Token = window.localStorage.getItem("Tokens");
-        jwt.verify(Token,"secret",function (err , decoded) {
-            if (!err) {
-                axios.get('http://localhost:9000/profiles/profile?userid='+decoded.userId)
-                .then(res =>{
-                    
-                    setData(res.data.profile[0]);
-                    setLoading(false);
-                    setToken(decoded.userId);
-                })
-                .catch(err => console.error(err));
-            }else
-            {
-                setLoading(false);
-                setToken(null);
-            }
-        })
+        
+        axios.get('http://localhost:9000/profiles/myprofile',{withCredentials : true})
+        .then(res =>{      
+            setData(res.data.profile);
+            setLoading(false);
+            setToken('good');
+         })
+        .catch(err => {
+            setLoading(false);
+            setToken(null);
+            console.error(err)
+        });
     },[]);
     const handleClick = ()=>{
         window.location.replace("/Auth/Signin");
     }
+    
     
     return(
         <div className="Header_Container">

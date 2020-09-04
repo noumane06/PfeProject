@@ -20,19 +20,19 @@ const Head = (props) => (
       rel="icon"
       type="image/png"
       sizes="16x16"
-      href="/static/Icons/fire_logo.png"
+      href="/static/Icons/fire_logo.ico"
     />
     <link
       rel="icon"
       type="image/png"
       sizes="32x32"
-      href="/static/Icons/fire_logo.png"
+      href="/static/Icons/fire_logo.ico"
     />
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
     />
-    <link rel="shortcut icon" href="/static/Icons/fire_logo.png" />
+    <link rel="shortcut icon" href="/static/Icons/fire_logo.ico" />
     <link
       rel="apple-touch-icon"
       sizes="180x180"
@@ -40,7 +40,7 @@ const Head = (props) => (
     />
     <link
       rel="mask-icon"
-      href="/static/Icons/favicon-mask.svg"
+      href="/static/Icons/fire_logo.png"
       color="#000000"
     />
     <meta property="og:url" content={props.url || defaultOGURL} />

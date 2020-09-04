@@ -45,9 +45,9 @@ exports.VistingProfile = (req,res,next) =>{
 // Get profile by userID 
 
 exports.getMyprofile = (req,res,next)=>{
-    const id = req.query.userid ;
+    const id = req.userData ;
     User.findOne({_id : id})
-    .select('type nom prenom companyname diplome city presentation languages title Usrimg')
+    .select('type nom prenom companyname diplome city presentation languages title Usrimg stars fixphone booked domaine horraire gender mobilephone addresse')
     .then(result =>{
         res.status(200).json({
             message : "User Found",

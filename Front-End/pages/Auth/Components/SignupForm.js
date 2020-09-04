@@ -96,16 +96,14 @@ const FormComponent = (props) => {
           setLocation(props.query.location);
         }
       }
-     
-      const token = window.localStorage.getItem("Tokens");
-      jwt.verify(token,"secret",function (err , decoded) {
-            if (!err) {
-              setLog(true);
-              setTimeout(() => {
-                window.location.replace("/")
-              }, 5000);
-            }
-      });
+      axios.get('http://localhost:9000/profiles/myprofile',{withCredentials : true})
+      .then(res =>{      
+            setLog(true);
+            setTimeout(() => {
+              window.location.replace("/")
+            }, 5000);
+        })
+      .catch(err => {});
     },[])
     // ----------------------------------------------
 
