@@ -46,7 +46,7 @@ const Header = ({active})=>
         .then(res =>{      
             setData(res.data.profile);
             setLoading(false);
-            setToken('good');
+            setToken(res.data.profile._id);
          })
         .catch(err => {
             setLoading(false);

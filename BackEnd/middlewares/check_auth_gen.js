@@ -6,6 +6,7 @@ module.exports = (req,res,next)=>{
         const AuthCookie = cookie.parse(req.headers.cookie)
         const CookieToken = AuthCookie.auth;
         const DecodedToken = jwt.verify(CookieToken , process.env.AUTH_SECRET);
+        req.AuthID = DecodedToken ;
         next();
     } catch (error) {
         return res.status(401).json({

@@ -27,12 +27,14 @@ exports.GetProfiles = (req,res,next)=>{
 
 exports.VistingProfile = (req,res,next) =>{
     const id = req.query.userid ;
-    User.find({_id : id })
+    const AuthId = req.AuthID ;
+    User.findOne({_id : id })
     .select('type nom prenom companyname diplome city presentation languages title Usrimg stars fixphone booked domaine horraire gender mobilephone addresse ')
     .then(result =>{
         res.status(200).json({
             message : "User Found",
-            profile : result
+            profile : result,
+            AuthId : AuthId
         })
     }).catch(err =>{
         res.status(404).json({

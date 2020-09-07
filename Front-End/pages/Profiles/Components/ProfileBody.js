@@ -19,6 +19,7 @@ import Geocode from "react-geocode";
 import EditSvg from './Svg/EditSvg';
 import Modal from 'antd/lib/modal/Modal';
 import EditBox from './EditBox';
+import Calendar from './BookMeeting';
 // -------------------------------------
 function isEmpty(obj) {
     for (const [key, value] of Object.entries(obj)) {
@@ -37,6 +38,7 @@ const ProfileBody = ({profile , userid})=>{
     const [imageLoading , setloadimage] = useState(false);
     const [current , setCurrent] = useState('Acceuil');
     const [checkbox,setCheck] = useState(profile.stars.includes(userid));
+    const [bookmetting,setbook] = useState(false);
     const [data , setData] = useState(profile);
     const [location , setLocation] = useState({});
     const [filefirebase,setfire] = useState(null);
@@ -113,7 +115,7 @@ const ProfileBody = ({profile , userid})=>{
         setCurrent(e.key);
     }
     const handleBack = ()=>{
-        window.location.assign("/");
+        window.location.assign(`/Search?companyname=${profile.companyname}&domaine=&city=&page=1`);
     }
     const handleEdit = ()=>{
         setvisible(true);
@@ -169,7 +171,7 @@ const ProfileBody = ({profile , userid})=>{
                     <span className="Likes"><i className="fa fa-heart" aria-hidden="true" style={{marginRight :'5px'}}></i> {profile.stars.length} J'aime</span>
                 </div>
                 {userid !== profile._id &&(
-                    <div className="BookMetting">
+                    <div className="BookMetting" onClick={()=>setbook(true)}>
                     <BookMetting />
                     <span>Réserver une réunion</span>
                     </div>
@@ -183,6 +185,7 @@ const ProfileBody = ({profile , userid})=>{
                 
             </div>
             <div className="ProfileBody">
+                <Modal title="Calendar" visible={bookmetting} width="90%" onCancel={()=>setbook(false)} footer={null}><Calendar/></Modal>
                 <Modal title="Editez votre profile" visible={visible} width="50vw" onCancel={()=>setvisible(false)} footer={[
                             <Button disabled={false} key="submit" type="primary" loading={loading} style={{borderRadius :'10px', fontFamily :'GlacialBold'}}  onClick={handleSave}>
                                 Submit
