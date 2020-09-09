@@ -1,24 +1,58 @@
 .ant-modal-body
 {
+   
     table {
         font-family: arial, sans-serif;
         border-collapse: collapse;
         width: 100%;
       }
-      td{
-          cursor: pointer;
-      }
       td, th {
         border: 1px solid #dddddd;
         text-align: left;
-        padding: 20px;
       }
-      td:hover{
+      th 
+      {
+          padding: 20px;
+      }
+      .textArea
+        {
+            font-family: 'GlacialBold';
+            box-sizing: border-box;
+            resize: none;
+            margin-top: 20px;
+            width: 100%;
+            padding: 10px 13px;
+            background-color: #e9f1fa;
+            border: 2px solid transparent;
+            box-shadow: 0px 0px 0px #318ce73f;
+            border-radius: 10px;
+            transition: all 200ms ease-in-out;
+            outline: none;
+        }
+        .textArea:hover
+        {
+            border: 2px solid #c5e2ffd8;
+        }
+        .textArea:focus
+        {
+            border: 2px solid #318CE7;
+        }
+      .Booked , .Free{
+          padding : 30px;
+          border-radius: 15px;
+          text-align: center;
+          background-color: #ffffff;
+          transition: 0.2s all ease-in-out;
+      }
+      .Booked
+      {
+          background-color: #0064d6;
+          font-family: 'GlacialBold';
+          color: #ffffff;
+      }
+      .Free:hover{
         background-color: #2a2a2a2f;
-      }
-      
-      tr:nth-child(even) {
-        // background-color: #dddddd;
+        cursor: pointer;
       }
 }
 .body

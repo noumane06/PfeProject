@@ -185,7 +185,7 @@ const ProfileBody = ({profile , userid})=>{
                 
             </div>
             <div className="ProfileBody">
-                <Modal title="Calendar" visible={bookmetting} width="90%" onCancel={()=>setbook(false)} footer={null}><Calendar/></Modal>
+                <Modal title="Cliquez sur une case pour réserver une réunion" visible={bookmetting} width="90%" onCancel={()=>setbook(false)} footer={null}><Calendar/></Modal>
                 <Modal title="Editez votre profile" visible={visible} width="50vw" onCancel={()=>setvisible(false)} footer={[
                             <Button disabled={false} key="submit" type="primary" loading={loading} style={{borderRadius :'10px', fontFamily :'GlacialBold'}}  onClick={handleSave}>
                                 Submit

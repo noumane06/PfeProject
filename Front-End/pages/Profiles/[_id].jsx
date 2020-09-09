@@ -16,7 +16,6 @@ const Profile = (props)=>{
             props.statusCode !== 404 ? setData(props.data.AuthId.userId) : "";
             setLoading(false);
         }
-        console.log(props);
     },[])
     if (props.statusCode === 404) {
         return <ErrorPage statusCode={props.statusCode} />
