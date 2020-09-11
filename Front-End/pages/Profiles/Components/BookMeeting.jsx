@@ -2,7 +2,9 @@
 import Modal from 'antd/lib/modal/Modal';
 import {useState} from 'react';
 import moment from 'moment';
-import { Button } from 'antd';
+import { Button, notification } from 'antd';
+import axios from 'axios';
+
 const Scheduler =  (StartHour , endtHour , length )=>{
     const results = [];
      for (let i = 0; i <= parseInt(length) ; i++) {
@@ -29,13 +31,15 @@ const DatePicker = (string) =>
     return DisplayString;
 }
 
-const calendar = ()=>{
+
+const calendar = ({profile})=>{
 
     //Data from database 
-    const date = new Date();
-
+    const Horraire = profile.horraire;
+    var Booked  = profile.booked !== undefined ? profile.booked :{};
     // Horraires ----------------------
-    const Horraire = ['08:00','17:15'];
+    const date = new Date();
+    
     const StartHour = moment(Horraire[0],"HH:mm");
     const endtHour = moment(Horraire[1],"HH:mm");
     const length = (endtHour.format("HH")-StartHour.format("HH"))*60/45;
@@ -44,7 +48,8 @@ const calendar = ()=>{
 
 
     // States -------------------
-    const [Booked , setBooked] = useState({ '2020/09/10' : ['08:00-08:30','11:45-12:15']})
+    
+    const [BookedDisplay , setDisplay] = useState(Booked !== {} ? Booked : {"":""});
     const [visible,setvisible] = useState(false);
     const [title , setTitle] = useState();
     const [message , setMessage] = useState("");
@@ -62,20 +67,46 @@ const calendar = ()=>{
 
     // Handlers ---------------------------------
 
-    const handleSave =  () =>{
+    const handleSave = async  () =>{
+        if (Booked[title.split(" | ")[1]] !== undefined) {
+            Booked[title.split(" | ")[1]].push(title.split(" | ")[0]) ;
+            console.log(Booked); 
+        }else
+        {
+            const key = [title.split(" | ")[1]];
+            const value = title.split(" | ")[0] ; 
+            console.log(Booked); 
+            Booked === {"":""} ? Booked = {[key[0]] : [value]} :Booked= {...Booked , [key[0]] : [value]};
+            console.log(Booked); 
+        }
         setloading(true);
-        {Booked[title.split(" | ")[1]] !== undefined ? 
-        Booked[title.split(" | ")[1]].push(title.split(" | ")[0]) :
-         setBooked({...Booked , [title.split(" | ")[1]] : title.split(" | ")[0]}) }
-         setloading(false);
-         setvisible(false);
+        const Data = {
+            booked : Booked ,
+            Notification : {
+                Message : message,
+                horraire : title.split(" | ")[0]
+            }
+        }
+        axios.post('http://localhost:9000/profiles/bookmeeting?userid='+profile._id,Data,{withCredentials : true})
+        .then(data => 
+            {
+                console.log(data) ;
+                setDisplay(Booked);
+                notification['success']({
+                    message: 'Votre demande a été envoyée avec succès',
+                    description:'Nous vous informerons lorsque nous aurons une réponse'
+                })
+                setloading(false);
+                setvisible(false);
+            })
+        .catch(err => console.log(err))
     }
 
     // -----------------------------------
     return(
         <table id="calendar">
             <Modal title={title} visible={visible} width="50vw" onCancel={()=>setvisible(false)} bodyStyle={{height : '100%'}} 
-                footer={[<Button disabled={false} key="submit" type="primary"  style={{borderRadius :'10px', fontFamily :'GlacialBold'}} onClick={handleSave} >Envoyer</Button>]}>
+                footer={[<Button disabled={false} key="submit" type="primary" loading={loading}  style={{borderRadius :'10px', fontFamily :'GlacialBold'}} onClick={handleSave} >Envoyer</Button>]}>
                 {/* Presentation ------------------------------------------ */}
                 <label style={{color : '#2a2a2a' , fontFamily : 'GlacialBold' , fontSize : '16px'}} >Message</label><br/>
                 <textarea className="textArea"  placeholder="Décrivez votre objectif de la réunion" rows="4" value={message} onChange={(e)=>setMessage(e.target.value)} /><br/><br/>
@@ -93,10 +124,10 @@ const calendar = ()=>{
                         <th>{hour}</th>
                         {dayResult.map(day =>(
                         <td key={day+hour} >
-                            {Booked[day] !== undefined &&(
-                                Booked[day].includes(hour) ? <div className="Booked">Booked</div> : <div onClick={()=>{setTitle(hour+" | "+day); setvisible(true)}} className="Free"></div>
+                            {BookedDisplay[day] !== undefined &&(
+                                BookedDisplay[day].includes(hour) ? <div className="Booked">Booked</div> : <div onClick={()=>{setTitle(hour+" | "+day); setvisible(true)}} className="Free"></div>
                             )}
-                            {Booked[day] === undefined &&(
+                            {BookedDisplay[day] === undefined &&(
                                 <div onClick={()=>{setTitle(hour+" | "+day); setvisible(true)}} className="Free"></div>
                             )}
                         </td>))}

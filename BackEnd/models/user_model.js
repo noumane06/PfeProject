@@ -31,8 +31,9 @@ const userSchema = mongoose.Schema({
     Usrimg: { type: String, required: false },
     gender: { type: String, required: true },
     horraire: [String],
-    booked: [String],
-    stars: [String]
+    booked: mongoose.Schema.Types.Mixed,
+    stars: [String],
+    Notification : [mongoose.Schema.Types.Mixed]
 });
 
 module.exports = mongoose.model('Users', userSchema);

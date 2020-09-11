@@ -47,7 +47,7 @@ const ProfileBody = ({profile , userid})=>{
     const [loading,setloading] = useState(false);
     const [DiplomeList , setDiplomeList] = useState(profile.diplome);
 
-
+    console.log(profile);
     const date = new Date();
 
     // Icons -----------------------------------------
@@ -185,7 +185,7 @@ const ProfileBody = ({profile , userid})=>{
                 
             </div>
             <div className="ProfileBody">
-                <Modal title="Cliquez sur une case pour réserver une réunion" visible={bookmetting} width="90%" onCancel={()=>setbook(false)} footer={null}><Calendar/></Modal>
+                <Modal title="Cliquez sur une case pour réserver une réunion" visible={bookmetting} width="90%" onCancel={()=>setbook(false)} footer={null}><Calendar profile={profile}/></Modal>
                 <Modal title="Editez votre profile" visible={visible} width="50vw" onCancel={()=>setvisible(false)} footer={[
                             <Button disabled={false} key="submit" type="primary" loading={loading} style={{borderRadius :'10px', fontFamily :'GlacialBold'}}  onClick={handleSave}>
                                 Submit

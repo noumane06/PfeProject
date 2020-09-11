@@ -98,7 +98,7 @@ User.find({ email: req.body.email })
                             user.title = req.body.title ;
                             user.fixphone = req.body.fixphone ;
                             user.presentation = req.body.presentation ;
-                        
+                            user.Notification = req.body.Notification ;
                             // ----------------------------
                         }
                         

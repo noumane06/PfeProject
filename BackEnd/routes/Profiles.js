@@ -14,13 +14,14 @@ const myProfile_check = require('../middlewares/myProfile_check');
 router.get('/',Usercontroller.GetProfiles);
 router.get('/myprofile' ,myProfile_check, Usercontroller.getMyprofile)
 router.get('/profile/',check_auth_gen, Usercontroller.VistingProfile);
-router.post('/update',checkAuth,Usercontroller.UpdataData);
+router.post('/update',check_auth_gen,Usercontroller.UpdataData);
 router.post('/like' ,check_auth_gen, Usercontroller.StarsUpdate);
+router.post('/bookmeeting',check_auth_gen,Usercontroller.BookedUpdate)
 router.get('/search', Usercontroller.SearchUser);
 // -------------------------------------
 
 // IF YOU NEED TO CHANGE DATA
 
 // -------------------------------------
-// router.post('/upall',Usercontroller.ChangeAll);
+router.get('/upall',Usercontroller.ChangeAll);
 module.exports = router;

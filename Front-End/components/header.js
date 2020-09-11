@@ -1,11 +1,11 @@
-import Link from 'next/link';
 import '../styles/header.scss';
 import {useState , useEffect} from 'react';
-import jwt from 'jsonwebtoken';
 import axios from 'axios';
 import ProfileIcon from './svg/profile.js' ;
 import SettingsIcon from './svg/settings.js' ;
 import LogoutIcon from './svg/logout.js' ;
+import NotifBell from './svg/NotifBell';
+import { Badge } from 'antd';
 
 
 const DropdownItem = (props)=>{
@@ -16,7 +16,7 @@ const DropdownItem = (props)=>{
         </div>
     )
 }
-const DropDown = ({userid}) =>{
+const DropDown = ({userid , count}) =>{
 
     const handleLogout = () =>{
         axios.get('http://localhost:9000/signout',{withCredentials : true})
@@ -28,6 +28,7 @@ const DropDown = ({userid}) =>{
             <DropdownItem lefticon={<ProfileIcon/>}><a href={`/Profiles/`+userid} style={{textDecoration : 'none'}}>Mon profile</a></DropdownItem>
             <DropdownItem lefticon={<SettingsIcon/>}>Paremetres</DropdownItem>
             <DropdownItem lefticon={<LogoutIcon/>} onClick={handleLogout}>Se déconnecter</DropdownItem>
+            <DropdownItem lefticon={<Badge count={count.length}><NotifBell /></Badge>}><a href={`/Notifications/`} style={{textDecoration : 'none'}}>Notifications</a></DropdownItem>
         </div>
     )
 }
@@ -39,7 +40,8 @@ const Header = ({active})=>
     const [loading , setLoading] = useState(true);
     const [opened , setOpen] = useState(false);
     const [data , setData] = useState();
-    
+    const count = data !== undefined ? data.Notification.filter(element => element.AcceptStatus == null) : '' ;
+    console.log(count);
     useEffect(()=>{
         
         axios.get('http://localhost:9000/profiles/myprofile',{withCredentials : true})
@@ -83,7 +85,10 @@ const Header = ({active})=>
                         
                         <div className="ProfileThumb" onClick={()=>setOpen(!opened)}>
                             <div className="ProfileImg">
-                                <img src={data.Usrimg}/>
+                                <Badge count={count.length}>
+                                    <img src={data.Usrimg}/>
+                                </Badge>
+                                
                             </div>
                                     {data.type == "Société" && (
                                         <span>{data.companyname}</span>
@@ -96,7 +101,7 @@ const Header = ({active})=>
                         </div>
                         {opened &&(
                             <>
-                            <DropDown userid={userId}/>
+                            <DropDown userid={userId} count={count}/>
                             </>
                         )}
                     </>

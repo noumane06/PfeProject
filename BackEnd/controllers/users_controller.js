@@ -10,7 +10,7 @@ const jwt = require('jsonwebtoken');
 
 exports.GetProfiles = (req,res,next)=>{
     User.find({type : 'Société'})
-    .select('nom prenom companyname city Usrimg stars')
+    .select('nom prenom companyname city Usrimg stars Notification')
     .exec()
     .then(docs =>{
         const response = {
@@ -29,7 +29,7 @@ exports.VistingProfile = (req,res,next) =>{
     const id = req.query.userid ;
     const AuthId = req.AuthID ;
     User.findOne({_id : id })
-    .select('type nom prenom companyname diplome city presentation languages title Usrimg stars fixphone booked domaine horraire gender mobilephone addresse ')
+    .select('type nom prenom companyname diplome city presentation languages title Usrimg stars fixphone booked domaine horraire gender mobilephone addresse  Notification')
     .then(result =>{
         res.status(200).json({
             message : "User Found",
@@ -49,16 +49,16 @@ exports.VistingProfile = (req,res,next) =>{
 exports.getMyprofile = (req,res,next)=>{
     const id = req.userData ;
     User.findOne({_id : id})
-    .select('type nom prenom companyname diplome city presentation languages title Usrimg stars fixphone booked domaine horraire gender mobilephone addresse')
+    .select('type nom prenom companyname diplome city presentation languages title Usrimg stars fixphone booked domaine horraire gender mobilephone addresse Notification')
     .then(result =>{
         res.status(200).json({
             message : "User Found",
-            profile : result
-        })
-    }).catch(err =>{
-        res.status(404).json({
-            message : "The user is not here :/ , below more infos",
-            error : err
+                profile : result
+            })
+        }).catch(err =>{
+            res.status(404).json({
+                message : "The user is not here :/ , below more infos",
+                error : err
         })
     })
 }
@@ -165,28 +165,54 @@ exports.StarsUpdate  = (req ,res ) =>{
     })
 }
 
-
+// Book Metting and send notification 
+/* data must be like this => data {booked : [{}],Notification : {}}
+*/
+exports.BookedUpdate = (req,res,next)=>{
+    const id = req.query.userid ; 
+    User.findOne({_id : id})
+    .then(userdata => {
+        userdata.booked = req.body.booked ;
+        userdata.Notification.push({
+            Message : req.body.Notification.Message ,
+            SenderId : req.AuthID.userId ,
+            horraire : req.body.Notification.horraire,
+            AcceptStatus : null 
+        })
+        userdata.save();
+        res.status(200).json({
+            message : "Updated Succesfuly"
+        })
+    })
+    .catch(err =>{
+        console.log(err);
+        res.status(404).json({
+            message : "The user is not here :/ , below more infos",
+            error : err
+        })
+    })
+}
 // IF YOU NEED TO CHANGE DATA
 
 // -------------------------------------
-// exports.ChangeAll = (req , res , next)=>{
-//    User.updateMany({type : 'Société'},{stars :[]})
-//    .then(data =>{
-//     res.status(200).json(
-//         {
-//             message : "Updated succefully",
-//             data : data
-//         }
-//     )
-//    })
-//    .catch(err =>{
-//     console.log(err);
-//     res.status(404).json({
-//         message : "The user is not here :/ , below more infos",
-//         error : err
-//     })
-// })
-// }
+exports.ChangeAll = (req , res , next)=>{
+   User.updateMany({},{booked :{}})
+   .then(data =>{
+    res.status(200).json(
+        {
+            message : "Updated succesfully",
+            data : data
+        }
+    )
+   })
+   .catch(err =>{
+    console.log(err);
+    res.status(404).json({
+        message : "The user is not here :/ , below more infos",
+        error : err
+    })
+})
+}
 
 // -----------------------------------------------------
 
