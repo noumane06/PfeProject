@@ -17,6 +17,7 @@ router.get('/profile/',check_auth_gen, Usercontroller.VistingProfile);
 router.post('/update',check_auth_gen,Usercontroller.UpdataData);
 router.post('/like' ,check_auth_gen, Usercontroller.StarsUpdate);
 router.post('/bookmeeting',check_auth_gen,Usercontroller.BookedUpdate)
+router.post('/updatebook',check_auth_gen,Usercontroller.UpdateOwnBook);
 router.get('/search', Usercontroller.SearchUser);
 // -------------------------------------
 

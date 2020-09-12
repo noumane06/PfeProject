@@ -107,19 +107,17 @@ User.find({ email: req.body.email })
 
                     user.save()
                         .then(result => {
-                            const token = jwt.sign(
-                                {
-                                    userId: result._id,
-                                },
-                                "secret",
-                                {
-                                    expiresIn: "1h"
-                                }
-                            );
-                            res.cookie('token',token,{httpOnly : true});
+                            
+                            const AuthToken = jwt.sign({userId: userdata[0]._id,},process.env.AUTH_SECRET,{expiresIn: "1h"});
+                            res.setHeader('Set-Cookie',cookie.serialize('auth',AuthToken,{
+                                httpOnly: true ,
+                                secure : process.env.NODE_ENV !== 'developement',
+                                sameSite : 'strict',
+                                maxAge : 3600 ,
+                                path : '/'
+                            }))
                             res.status(200).json({
-                                message: "User created succefully",
-                                token: token
+                                message: "User created succefully"
                             });
                         })
                         .catch(err => {

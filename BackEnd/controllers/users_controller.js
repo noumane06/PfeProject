@@ -174,9 +174,11 @@ exports.BookedUpdate = (req,res,next)=>{
     .then(userdata => {
         userdata.booked = req.body.booked ;
         userdata.Notification.push({
+            Type : req.body.Notification.Type ,
             Message : req.body.Notification.Message ,
             SenderId : req.AuthID.userId ,
             horraire : req.body.Notification.horraire,
+            day : req.body.Notification.day,
             AcceptStatus : null 
         })
         userdata.save();
@@ -192,11 +194,35 @@ exports.BookedUpdate = (req,res,next)=>{
         })
     })
 }
+
+// -----------------------------------------------------------------------
+
+exports.UpdateOwnBook = (req,res)=>{
+    const id = req.AuthID.userId ;
+    User.findOne({_id : id})
+    .then(userdata =>{
+        userdata.Notification = req.body ;
+        userdata.save();
+        res.status(200).json({
+            message : "Updated Succesfully"
+        })
+    })
+    .catch(err => {
+        console.log(err);
+        res.status(404).json({
+            message : "The user is not here :/ , below more infos",
+            error : err
+        })
+    })
+}
+
+
+
 // IF YOU NEED TO CHANGE DATA
 
 // -------------------------------------
 exports.ChangeAll = (req , res , next)=>{
-   User.updateMany({},{booked :{}})
+   User.updateMany({},{Notification :[]})
    .then(data =>{
     res.status(200).json(
         {

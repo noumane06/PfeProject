@@ -5,6 +5,7 @@ import {Spin } from 'antd';
 import './Sass/notif.scss';
 import NotifCard from "./Components/NotifCard";
 import NotifBell from "../../components/svg/NotifBell";
+import EmptyInbox from "./Components/EmptyInbox";
 
 const Notification = (props)=>{
     
@@ -15,11 +16,11 @@ const Notification = (props)=>{
             const location = "/Auth/Signin/?ref=tokenexpired&location="+window.location.href;
             window.location.replace(location);
         }else{
-            setLoading(false);
             setData(props.data.profile.Notification);
+            setLoading(false); 
         }
     },[])
-    const Notifications = data;
+    const Notifications = data === undefined ? '' : data.filter(notif => notif.AcceptStatus === null);
     if (loading ) {
         
         return(
@@ -40,11 +41,24 @@ const Notification = (props)=>{
                         <span className="icon-button"><NotifBell/></span>
                         <h1 className="NotifHeader">Notifications</h1>
                     </div>
-                    
-                    <p className="Warning">La réunion sera automatiquement annulée si aucune réponse n’a été donnée ( 1h avant la réunion au plus tard)</p>
+                    {Notifications.length !== 0 &&(
+                        <p className="Warning">
+                        La réunion sera automatiquement annulée si aucune réponse n’a été donnée ( 1h avant la réunion au plus tard)
+                        </p>
+                    )}
                     <div className="NotifContainer">
-                        {Notifications.map(notif => <NotifCard key={notif.SenderId} notif={notif}/>)}    
+                        {Notifications.map(notif => <NotifCard key={notif.SenderId} notif={notif} all={Notifications}/>)}    
                     </div>
+                    {Notifications.length === 0 &&(
+                        <div style={{display : "flex" , alignItems : "center" , flexDirection :"column"}} className="nonot">
+                            <EmptyInbox/>
+                            <div style={{textAlign:"center"}}>
+                                <h2>Pas encore de notifications</h2>
+                                <p style={{color : "#24292E"}}>Allez réserver des réunions.</p>
+                            </div>
+                            
+                        </div>
+                    )}
                 </div>
                 
             </div>

@@ -27,8 +27,8 @@ const DropDown = ({userid , count}) =>{
         <div className="Dropdown">
             <DropdownItem lefticon={<ProfileIcon/>}><a href={`/Profiles/`+userid} style={{textDecoration : 'none'}}>Mon profile</a></DropdownItem>
             <DropdownItem lefticon={<SettingsIcon/>}>Paremetres</DropdownItem>
-            <DropdownItem lefticon={<LogoutIcon/>} onClick={handleLogout}>Se déconnecter</DropdownItem>
             <DropdownItem lefticon={<Badge count={count.length}><NotifBell /></Badge>}><a href={`/Notifications/`} style={{textDecoration : 'none'}}>Notifications</a></DropdownItem>
+            <DropdownItem lefticon={<LogoutIcon/>} onClick={handleLogout}>Se déconnecter</DropdownItem>
         </div>
     )
 }
@@ -47,6 +47,7 @@ const Header = ({active})=>
         axios.get('http://localhost:9000/profiles/myprofile',{withCredentials : true})
         .then(res =>{      
             setData(res.data.profile);
+            console.log(data);
             setLoading(false);
             setToken(res.data.profile._id);
          })

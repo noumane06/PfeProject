@@ -229,11 +229,9 @@ const FormComponent = (props) => {
       setLoading(true);
       var code = codeVerif ; 
       window.confirmationResult.confirm(code).then((result)=>{
-        axios.post("http://localhost:9000/signup/", userData)
+        axios.post("http://localhost:9000/signup/", userData,{withCredentials : true})
         .then(response => {
           if (response.status === 200) {
-             const authToken = response.data.token ; 
-             window.localStorage.setItem("Tokens", authToken);
              window.location.replace(`/Settings?location=${location}`);
           } else {
             setCurrent(5);

@@ -83,8 +83,10 @@ const calendar = ({profile})=>{
         const Data = {
             booked : Booked ,
             Notification : {
+                Type : "Request",
                 Message : message,
-                horraire : title.split(" | ")[0]
+                horraire : title.split(" | ")[0],
+                day : title.split(" | ")[1]
             }
         }
         axios.post('http://localhost:9000/profiles/bookmeeting?userid='+profile._id,Data,{withCredentials : true})
