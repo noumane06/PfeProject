@@ -1,11 +1,13 @@
-
+import {useState } from 'react';
 const SearchCard = (props)=>{
+    const [isFull , setFulltext] = useState(props.profile.presentation.length < 150);
     let value ="";
     if (props.profile.presentation.length > 150) {
         value = "...en voir plus"
     }
     return (
-        <div key={props.profile._id} className={props.className}>
+        <div  className={props.className}>
+           
             <div className="Card_Head">
                 <div className="ProfileImg">
                     <img src={props.profile.Usrimg} />
@@ -18,7 +20,24 @@ const SearchCard = (props)=>{
             </div>
             <div className="Card_Body">
                 <h3>A propos </h3>
-                <p>{props.profile.presentation.substr(0, 150)}<span style={{fontStyle : 'italic',color:'#318CE7'}}>{value}</span></p>
+                <p>
+                    {!isFull ? props.profile.presentation.substr(0, 150) : props.profile.presentation}
+                    {!isFull ? (<span className="more" onClick={()=>setFulltext(true)}>Voir plus</span>):""}
+                </p>
+                <style jsx>
+                    {`
+                        .more
+                        {
+                            font-style: italic;
+                            color: #0C72BF;
+                        }
+                        .more:hover
+                        {
+                            text-decoration: underline;
+                            cursor: pointer;
+                        }
+                    `}
+                </style>
             </div>
             <div className="Card_footer">
                 {props.profile._id !== undefined &&(

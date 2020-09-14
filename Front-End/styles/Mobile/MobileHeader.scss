@@ -1,0 +1,130 @@
+@media only screen and (max-width: 1110px) and (min-width: 935px) {
+    .body
+    {
+        .Header_Container
+        {
+            ul {
+                .link
+                {
+                    padding: 0px 6px;
+                }
+                .active
+                {
+                    padding: 0px 6px;
+                }
+            }
+            .Header_Buttons
+            {
+                margin-left: 25px;
+            }
+            .Header_subscribe
+            {
+                padding: 10px 15px;
+            }
+            .Header_signin
+            {
+                padding: 10px 15px;
+            }
+        }
+    }
+}
+@media only screen and (max-width: 935px) {
+    .body
+    {
+        .Dropdown
+        {
+            top: 400px;
+            transform: translateX(0%);
+        }
+        .topRight , .middleLeft , .BottomLeft
+        {
+            display: none;
+        }
+        @keyframes pulsate {
+            0% {
+              transform: translateY(-10px);
+              opacity: 0;
+            }
+          
+            50% {
+              opacity: 0.5;
+            }
+          
+            100% {
+              transform: translateY(0);
+              opacity: 1;
+            }
+          }
+          @keyframes revpulsate {
+            100% {
+              transform: translateY(-10px);
+              opacity: 0;
+            }
+          
+            50% {
+              opacity: 0.5;
+            }
+          
+            0% {
+              transform: translateY(0);
+              opacity: 1;
+            }
+          } 
+        .Header_Container
+        {
+            .NavSwitch
+            {
+                float: right;
+                label 
+                {
+                    cursor: pointer;
+                }
+            }
+            .GridNav
+            {
+                display: none;
+                justify-content: center;
+                border-radius: 10px;
+                background-color: #ffffffa8;
+                padding: 15px 0px;
+                box-shadow: 2px 2px 15px #8e8e8e8c;
+                position: absolute;
+                width: 90%;
+                z-index: 100;
+                -webkit-backdrop-filter: saturate(180%) blur(20px);
+                backdrop-filter: saturate(180%) blur(20px);
+                margin-top: 15px;
+                ul
+                {
+                    padding: 0;
+                    display: grid;
+                    li
+                    {
+                        padding: 20px 0px;
+                        border-bottom : 1px solid #cecece ;
+                    }
+                }
+                .Header_Buttons
+                {
+                    display: grid;
+                    .Header_subscribe
+                    {
+                        margin : 5px 0px;
+                        padding: 10px 15px;
+                    }
+                    .Header_signin
+                    {
+                        margin : 5px 0px;
+                        padding: 10px 15px;
+                    }
+                }
+            }
+            .visible
+            {
+                display: grid;
+                animation: pulsate 0.2s ease-in-out;
+                
+            }
+        }
+    }
+}

@@ -110,6 +110,7 @@ exports.UpdataData = (req,res,next) =>{
     const id = req.query.userid ;
     User.findOne({_id : id})
     .then(userdata =>{
+        console.log(req.body);
         userdata.presentation = req.body.presentation ;
         userdata.diplome = req.body.diplome  ;
         userdata.languages = req.body.languages ;

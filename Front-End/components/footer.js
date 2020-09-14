@@ -1,7 +1,7 @@
 const Footer = () =>{
     return(
         <div className="footer">
-        © Copyrights belongs to 6 solutions , all rights reserved - 2020.
+        © Copyrights appartient à 6 solutions, tous droits réservés - 2020.
         </div>
     )
 }

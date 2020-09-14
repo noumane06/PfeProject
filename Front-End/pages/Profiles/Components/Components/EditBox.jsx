@@ -1,9 +1,9 @@
-import '../Sass/editbox.scss';
+import '../../Sass/editbox.scss';
 import {useState } from 'react';
 import {Select ,TimePicker  } from 'antd';
 
-import ImagePreview from '../../../components/ImagePreview';
-import '../../../styles/AutoComplete.scss';
+import ImagePreview from '../../../../components/ImagePreview';
+import '../../../../styles/AutoComplete.scss';
 import moment from 'moment';
 //  --------------
 
@@ -133,10 +133,7 @@ const EditBox = ({data , setData , DiplomeList , setDiplomeList , setfire}) =>{
         setData({...data ,[name] : value});
     }
 
-    // if (data === undefined) {
-    //     return(null)
-    // }else
-    // {
+   
         return(
             <div className="EditBox">
                 <div className="ProfileImg">
@@ -161,20 +158,30 @@ const EditBox = ({data , setData , DiplomeList , setDiplomeList , setfire}) =>{
                     <input className="input controlled user" type="text" placeholder="Prenom" name="prenom" value={data.prenom} onChange={handleChange} />
                 </div>
                 {/* --------------------------------------------------- */}
-                <div className="multipleInput" >
-                    {/* Title  ------------------------------------ */}
-                    <select className="title" name="title"  value={data.title} onChange={handleChange} required >
-                        <option defaultValue="" disabled  hidden>Titre de travail</option>
-                        <option value="Directeur" >Directeur</option>
-                        <option value="Cto">CTO</option>
-                    </select>
-                    {/* Nom de societe  ------------------------------------ */}
-                    <input className="input" type="text" placeholder="Nom de société" name="companyname"  value={data.companyname} onChange={handleChange} />
-                </div>
-                {/* Domaine  ------------------------------------ */}
-                <Select mode="tags" style={{ width: '100%' , marginTop : '20px' }} placeholder="Votre domaine " maxTagCount={3} onChange ={handleTag} value={data.domaine} >
-                    {children}
-                </Select>
+                {data.type === "Société" &&(
+                    <>
+                        <div className="multipleInput" >
+                        {/* Title  ------------------------------------ */}
+                        <select className="title" name="title"  value={data.title} onChange={handleChange} required >
+                            <option defaultValue="" disabled  hidden>Titre de travail</option>
+                            <option value="Directeur" >Directeur</option>
+                            <option value="Cto">CTO</option>
+                        </select>
+                        {/* Nom de societe  ------------------------------------ */}
+                        <input className="input" type="text" placeholder="Nom de société" name="companyname"  value={data.companyname} onChange={handleChange} />
+                        </div>
+                         {/* Domaine  ------------------------------------ */}
+                        <Select mode="tags" style={{ width: '100%' , marginTop : '20px' }} placeholder="Votre domaine " maxTagCount={3} onChange ={handleTag} value={data.domaine} >
+                            {children}
+                        </Select>
+                        {/* L'horraire de la société ----------------------------------------------------------------  */}
+                        <label style={{color : '#318CE7' , fontFamily : 'GlacialBold' , fontSize : '16px'}}>L'horraire de votre société : </label>
+                        <RangePicker  bordered={false} format='HH:mm'  minuteStep={30} value={time} onChange={handleTime}/><br/><br/>
+                        {/* ------------------------------------------------------------------------------------------ */}
+                    </>
+                    
+                )}
+               
                 <div className="multipleInput" placeholder="Titre" style={{marginBottom : '10px'}}>
                     {/* City  ------------------------------------ */}
                     <select className="title" name="city"  >
@@ -187,11 +194,6 @@ const EditBox = ({data , setData , DiplomeList , setDiplomeList , setfire}) =>{
                     {/* address ------------------------------------*/}
                     <input className="input" type="text" placeholder="Addresse"  name="addresse" value={data.addresse} onChange={handleChange} />     
                 </div>
-                {/* L'horraire de la société ----------------------------------------------------------------  */}
-                <label style={{color : '#318CE7' , fontFamily : 'GlacialBold' , fontSize : '16px'}}>L'horraire de votre société : </label>
-                <RangePicker  bordered={false} format='HH:mm'  minuteStep={30} value={time} onChange={handleTime}/><br/><br/>
-                {/* ------------------------------------------------------------------------------------------ */}
-                
                 {/* Presentation ------------------------------------------ */}
                 <label style={{color : '#2a2a2a' , fontFamily : 'GlacialBold' , fontSize : '16px'}} >Presentation</label><br/>
                 <textarea className="textArea" name="presentation" placeholder="Décrivez votre entreprise" rows="4" value={data.presentation} onChange={handleChange} /><br/><br/>
@@ -230,7 +232,6 @@ const EditBox = ({data , setData , DiplomeList , setDiplomeList , setfire}) =>{
     
             </div>
         )
-    // }
     
 }
 export default EditBox ;

@@ -56,6 +56,15 @@
             padding: 15px ;
             position:relative;
             width: 350px;
+            .profileLink
+            {
+                text-decoration: none;
+            }
+            .profileLink:hover
+            {
+                text-decoration: underline;
+                cursor: pointer;
+            }
             .Card_Head
             {
                 display: flex;
@@ -86,16 +95,6 @@
                         font-size: 15px;
                         color: #2a2a2a;
                     }
-                    .profileLink
-                    {
-                        text-decoration: none;
-                    }
-                    .profileLink:hover
-                    {
-                        text-decoration: underline;
-                        cursor: pointer;
-                    }
-
                 }
             }
             .Card_Body

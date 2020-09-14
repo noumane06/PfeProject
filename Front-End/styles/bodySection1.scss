@@ -1,4 +1,5 @@
 @import './fonts.scss';
+@import './Mobile/MobileBodySection1.scss';
 body
 {
     margin: 0;
@@ -10,11 +11,26 @@ body
         {
             margin-top: 5%;
             width: 100%;
+            @media all and (min-width: 935px)
+            {
+                h1
+                {
+                    font-size: 40px;
+                }
+            }
+            @media all and (min-width:600px)
+            {
+                .inputContainer
+                {
+                    width: 25%;
+                    padding: 5px 10px;
+                    margin-right: 10px;
+                }
+            }
             h1
             {
                 font-family: 'HelvaticaNeu';
                 font-weight: bolder;
-                font-size: 40px;
             }
             .search_Container
             {
@@ -29,9 +45,6 @@ body
                 .inputContainer
                 {
                     font-family: inherit;
-                    width: 25%;
-                    padding: 5px 10px;
-                    margin-right: 10px;
                     border-radius: 15px;
                     border: 2px solid transparent;
                     box-shadow: 0px 0px 10px #b4b4b4;

@@ -51,62 +51,115 @@ const NotifCard = ({notif , all}) =>{
     if (Loading) {
         return null
     } else {
-        return(
-            <>
-            {notif.Type === "Request"&&(
-                <div className="NotifCard">
-                <p><strong style={{color : '#0C72BF'}}>Ce client</strong> souhaite réserver une réunion Le <strong style={{color : '#0C72BF'}}>{notif.day} </strong>
-                a <strong style={{color : '#0C72BF'}}>{notif.horraire}</strong></p>
+        return (
+          <>
+            {notif.Type === "Request" && (
+              <div className="NotifCard">
+                <p>
+                  <strong style={{ color: "#0C72BF" }}>Ce client</strong>{" "}
+                  souhaite réserver une réunion Le{" "}
+                  <strong style={{ color: "#0C72BF" }}>{notif.day} </strong>a{" "}
+                  <strong style={{ color: "#0C72BF" }}>{notif.horraire}</strong>
+                </p>
                 <div className="Card_Head">
-                    <div className="ProfileImg">
-                        <img src={Data.Usrimg} />
-                    </div>
-                    <div className="ProfileInfo">
-                        <a href={"/Profiles/"+notif.SenderId} className="profileLink"><h3>{Data.companyname}</h3></a>
-                    </div>
+                  <div className="ProfileImg">
+                    <img src={Data.Usrimg} />
+                  </div>
+                  <div className="ProfileInfo">
+                    <a
+                      href={"/Profiles/" + notif.SenderId}
+                      className="profileLink"
+                    >
+                      <h3>{Data.companyname === undefined || Data.companyname === "" ? Data.nom+" "+Data.prenom : Data.companyname}</h3>
+                    </a>
+                  </div>
                 </div>
                 <div className="Card_Body">
-                    <h3>Message</h3>
-                    <p>
+                  <h3>Message</h3>
+                  <p>
                     {!isFull ? notif.Message.substr(0, 150) : notif.Message}
-                    {!isFull ? (<span className="more" onClick={()=>setFulltext(true)}>Voir plus</span>):""}
-                    </p>
+                    {!isFull ? (
+                      <span className="more" onClick={() => setFulltext(true)}>
+                        Voir plus
+                      </span>
+                    ) : (
+                      ""
+                    )}
+                  </p>
                 </div>
                 <div className="Card_footer">
-                    {notif.AcceptStatus === null &&(
-                        <>
-                        <button className="Accepter" onClick={()=>setvisible(true)}>Accepter</button>
-                        <button className="Refuser">Refuser</button>
-                        </>
-                    )}
-                    
+                  {notif.AcceptStatus === null && (
+                    <>
+                      <button
+                        className="Accepter"
+                        onClick={() => setvisible(true)}
+                      >
+                        Accepter
+                      </button>
+                      <button className="Refuser">Refuser</button>
+                    </>
+                  )}
                 </div>
-                <Modal  visible={visible} width="20vw" onCancel={()=>setvisible(false)} footer={[
-                            <Button disabled={false} key="submit" type="primary" loading={buttonLoading} style={{borderRadius :'10px', fontFamily :'GlacialBold'}}  onClick={HandleAccept}>
-                                Je suis sûr
-                            </Button>
-                            ]}>
-                                <h3>Êtes-vous sûr de vouloir accepter cette demande?</h3>
-                            </Modal>
-                </div>
+                <Modal
+                  visible={visible}
+                  width="20vw"
+                  onCancel={() => setvisible(false)}
+                  footer={[
+                    <Button
+                      disabled={false}
+                      key="submit"
+                      type="primary"
+                      loading={buttonLoading}
+                      style={{
+                        borderRadius: "10px",
+                        fontFamily: "GlacialBold",
+                      }}
+                      onClick={HandleAccept}
+                    >
+                      Je suis sûr
+                    </Button>,
+                  ]}
+                >
+                  <h3>Êtes-vous sûr de vouloir accepter cette demande?</h3>
+                </Modal>
+              </div>
             )}
-            {notif.Type === "Response" &&(
-                <div className="NotifCard">
+            {notif.Type === "Response" && (
+              <div className="NotifCard">
                 <div className="Card_Head">
-                    <div className="ProfileImg">
-                        <img src={Data.Usrimg} />
-                    </div>
+                  <div className="ProfileImg">
+                    <img src={Data.Usrimg} />
+                  </div>
                 </div>
-                <p  style={{color : '#02C39A'}}><strong style={{fontFamily:'GlacialBold'}}>{Data.companyname}</strong> a accepté votre demande </p>
+                <p style={{ color: "#02C39A" }}>
+                  <strong style={{ fontFamily: "GlacialBold" }}>
+                    <a
+                      href={"/Profiles/" + notif.SenderId}
+                      className="profileLink"
+                      style={{ color: "#02C39A" }}
+                    >
+                      {Data.companyname}
+                    </a>
+                  </strong>{" "}
+                  a accepté votre demande{" "}
+                </p>
                 <div className="Card_Body">
-                    <p style={{color : '#2a2a2a' , fontSize : '15px'}}>Votre rendez-vous est prévue <strong style={{fontFamily:'GlacialBold'}}>{notif.day}</strong> a <strong style={{fontFamily:'GlacialBold'}}>{notif.horraire}</strong>. Nous avons envoyé un rappel dans votre e-mail.
-                    </p>
+                  <p style={{ color: "#2a2a2a", fontSize: "15px" }}>
+                    Votre rendez-vous est prévue{" "}
+                    <strong style={{ fontFamily: "GlacialBold" }}>
+                      {notif.day}
+                    </strong>{" "}
+                    a{" "}
+                    <strong style={{ fontFamily: "GlacialBold" }}>
+                      {notif.horraire}
+                    </strong>
+                    . Nous avons envoyé un rappel dans votre e-mail.
+                  </p>
                 </div>
-                </div>
+              </div>
             )}
-            </>
-            
-        )
+          </>
+        );
     }
     
 }

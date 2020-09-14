@@ -6,6 +6,7 @@ import SettingsIcon from './svg/settings.js' ;
 import LogoutIcon from './svg/logout.js' ;
 import NotifBell from './svg/NotifBell';
 import { Badge } from 'antd';
+import ToggleIcon from './svg/ToggleIcon';
 
 
 const DropdownItem = (props)=>{
@@ -38,6 +39,7 @@ const Header = ({active})=>
 {
     const [userId , setToken] = useState(null);
     const [loading , setLoading] = useState(true);
+    const [checkStatus,setCheckStatus] = useState(false);
     const [opened , setOpen] = useState(false);
     const [data , setData] = useState();
     const count = data !== undefined ? data.Notification.filter(element => element.AcceptStatus == null) : '' ;
@@ -64,17 +66,22 @@ const Header = ({active})=>
     
     return(
         <div className="Header_Container">
+            <div className="NavSwitch">
+                <label for="toggle" onClick={()=>setCheckStatus(!checkStatus)}> <ToggleIcon/> </label>
+            </div>
             <div className="Header_Logo">
                 <img src="../static/Icons/LOGO2017.png" height="30" onClick={()=>window.location.assign("/")} style={{cursor : 'pointer'}}/>
             </div>
-            <ul>
-                <li className={active=="acceuil"?"active":"link"}><a href="/">Acceuil</a></li>
-                <li className={active=="propos"?"active":"link"}><a href="/propos">A propos</a></li>
-                <li className={active=="temoignages"?"active":"link"}><a href="/temoignages">Temoignages</a></li>
-                <li className={active=="contact"?"active":"link"}><a href="/contact">Contact</a></li>
-                <li className={active=="questions"?"active":"link"}><a href="/questions">Questions</a></li>
-            </ul>
-            <div className="Header_Buttons">
+            
+            <div className={checkStatus ? "GridNav visible" : "GridNav" }>
+                <ul>
+                    <li className={active=="acceuil"?"active":"link"}><a href="/">Acceuil</a></li>
+                    <li className={active=="propos"?"active":"link"}><a href="/propos">A propos</a></li>
+                    <li className={active=="temoignages"?"active":"link"}><a href="/temoignages">Temoignages</a></li>
+                    <li className={active=="contact"?"active":"link"}><a href="/contact">Contact</a></li>
+                    <li className={active=="questions"?"active":"link"}><a href="/questions">Questions</a></li>
+                </ul>
+                <div className="Header_Buttons">
                 {!loading && userId === null &&(
                     <>
                     <input className="Header_subscribe" type="button" value="S'inscrire" onClick={() => window.location.replace("/Auth/SignUp")}/>
@@ -108,7 +115,9 @@ const Header = ({active})=>
                     </>
                 ) }
 
+                </div> 
             </div>
+            
         </div>
     )
 }

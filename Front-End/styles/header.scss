@@ -1,4 +1,5 @@
 @import './fonts.scss';
+@import './Mobile/MobileHeader.scss';
 :root {
     --bg:  #ffffff;
     --bg-accent: #d6d6d6;
@@ -8,28 +9,59 @@
     --border-radius: 15px;
     --speed: 500ms; 
   }
+  
 .body
 {
     font-family: 'GlacialRegular';
     margin-left: 5%;
     margin-right: 5%;
+
     .Header_Container
-    {
-        .Header_Logo
-        {
-            //padding-top: 10px;
-        }
+    {   
         margin-top: 30px;
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-        align-items: center;
+         @media all and (min-width: 935px)
+        {
+           
+            display: flex;
+            flex-wrap: nowrap;
+            flex-direction: row;
+            justify-content: space-evenly;
+            align-items: center;
+            .GridNav
+            {
+                display: flex ;
+                align-items: center;
+            }
+            .NavSwitch{
+                display: none;
+            }
+            .Header_subscribe
+            {
+                margin-right: 5px;
+            }
+        }
+        
+        @media all and (min-width: 1110px)
+        {
+            .link,.active{
+                padding: 0px 16px;
+            }
+            .Header_Buttons
+            {
+                margin-left: 175px;
+            }
+        }
+        #toggle
+        {
+            display: none;
+        }
+       
         ul {
             list-style-type: none;
             overflow: hidden;
             .link
             {
-                padding: 0px 16px;
+                
                 text-decoration: none; 
                 text-align: center;
                 color: #2a2a2a;
@@ -39,7 +71,6 @@
             }
             .active
             {
-                padding: 0px 16px;
                 text-decoration: none; 
                 text-align: center;
                 font-family: 'GlacialBold';
@@ -61,20 +92,28 @@
         }
         .Header_Buttons
         {
-            
+            @media all and (min-width: 1110px)
+            {
+                .Header_subscribe ,.Header_signin {
+                    padding: 10px 30px;
+                }
+                .Header_subscribe
+                {
+                    margin-right: 20px;
+                }
+            }
             .Header_subscribe
             {
                 font-family: 'GlacialBold';
                 font-size: 16px;
                 border: none;
                 background-color: transparent;
-                padding: 10px 30px;
-                margin-right: 20px;
                 color: #2a2a2a;
                 cursor: pointer;
                 border-radius: 10px;
                 transition: background-color 200ms ease-in-out;
                 outline: none;
+                -webkit-appearance: none;
             }
             .Header_subscribe:hover
             {
@@ -86,13 +125,13 @@
                 font-size: 16px;
                 border: none;
                 background-color: #318CE7;
-                padding: 10px 30px;
                 color: #ffffff;
                 box-shadow: 2px 2px 5px #318ce73f;
                 cursor: pointer;
                 border-radius: 10px;
                 transition: box-shadow 200ms ease-in-out;
                 outline: none;
+                -webkit-appearance: none;
                 
             }
             .Header_signin:hover
@@ -136,10 +175,13 @@
         }
             .Dropdown
             {
+                @media all and (min-width: 935px)
+                {
+                   top: 50px;
+                   transform: translateX(-45%);
+                }
                 position: absolute;
-                top: 50px;
                 width: 250px;
-                transform: translateX(-45%);
                 background-color: var(--bg);
                 border: var(--border);
                 border-radius: var(--border-radius);

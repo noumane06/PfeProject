@@ -1,0 +1,60 @@
+@media only screen and (max-width: 600px){
+    .right_segment
+        {
+            display: none;
+        }
+    .Left_segment
+    {
+        h1
+        {
+            font-size: 2em;
+            text-align: center;
+        }
+        .search_Container
+        {
+            flex-direction: column;
+            justify-content: center;
+            .inputContainer
+            {
+                width: 80%;
+                padding: 10px 10px;
+                margin: 15px 10px;
+                align-self: center;
+
+            }
+            .searchButton
+            {
+                width: fit-content ;
+                align-self: center;
+            }
+        }
+    }
+}
+
+
+
+@media only screen and (max-width: 935px) and (min-width: 600px){
+    
+    .Left_segment
+    {
+        h1
+        {
+            font-size: 2em;
+            text-align: center;
+        }
+    }
+    .right_segment
+    {
+        display: none;
+    }
+}
+@media only screen and (max-width: 1175px) and (min-width: 935px) {
+
+    .right_segment
+    {
+        svg
+        {
+            width: 30vw;
+        }
+    }
+}
