@@ -384,12 +384,12 @@ const FormComponent = (props) => {
 
                     {/* Nom de societe  ------------------------------------ */}
 
-                    <input className="input" type="text" placeholder="Nom de société" name="companyname" value={userData.companyname} onChange={handleChange} required/>
+                    <input className="input soc" type="text" placeholder="Nom de société" name="companyname" value={userData.companyname} onChange={handleChange} required/>
                     <div style={{width : '100%' , display : 'flex' , flexDirection : 'column'}}>
 
                     {/* Domaine  ------------------------------------ */}
 
-                    <Select mode="tags" style={{ width: '70%' }} placeholder="Votre domaine " className={domaineErr ? "error" : ""}
+                    <Select mode="tags" style={{ width: '100%' }} placeholder="Votre domaine " className={domaineErr ? "error" : ""}
                       onChange ={handleTag} value={userData.domaine} maxTagCount={3} >
                         {children}
                     </Select>
@@ -414,7 +414,7 @@ const FormComponent = (props) => {
 
                   <label style={{color : '#318CE7'}}>L'horaire de votre société : </label>
                   <div style={{width : '100%' , display : 'flex' , flexDirection : 'column'}}>
-                    <RangePicker className={horraireErr ? "error" : ""} bordered={false} format='HH:mm'  minuteStep={30} 
+                    <RangePicker className={horraireErr ? "error" : ""} style={{width : '100%'}} bordered={false} format='HH:mm'  minuteStep={30} 
                       value={time} onChange={handleTime}/>
                     <label className={horraireErr ? "errMsg" : "hidden"}>Ce champ est obligatoire</label>
                   </div>

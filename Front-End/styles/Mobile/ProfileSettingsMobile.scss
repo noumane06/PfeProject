@@ -1,0 +1,37 @@
+@media only screen and (max-width: 935px) {
+    .dataContainer
+    {
+        display: flex;
+        flex-direction: column;
+        .formConfig
+        {
+            width: 100%;
+            .form_Head
+            {
+                flex-direction: column-reverse;
+                align-items: center;
+            }
+            .diplome
+            {
+                margin-right: 5px;
+            }
+        }
+        .ill
+        {
+            display: none;
+        }
+        .buttonContainer
+            {
+                .SignButton
+                {
+                    font-size: 13px;
+                    padding: 8px 15px;
+                }
+                .later
+                {
+                    font-size: 13px;
+                    padding: 8px 15px;
+                }
+            }
+    }
+}

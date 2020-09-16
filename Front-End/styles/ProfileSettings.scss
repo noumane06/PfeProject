@@ -1,3 +1,6 @@
+@import './Mobile/ProfileSettingsMobile.scss';
+@import '../styles/ant-picker.scss';
+@import '../styles/AutoComplete.scss';
 .spincentered
 {
         position: fixed;
@@ -97,7 +100,11 @@
             flex-direction: column;
             flex-wrap: wrap;
             margin-top: 50px;
-            width: 40%;
+            
+            @media all and (min-width: 935px)
+            {
+                width: 40%;
+            }
             .form_Head
             {
                 display: flex;
@@ -260,15 +267,26 @@
         {
             .buttonContainer
             {
+                @media all and (min-width: 935px)
+                {
+                    margin-right: 20%;
+                    .SignButton
+                    {
+                        font-size: 16px;
+                        padding: 10px 30px;
+                    }
+                    .later
+                    {
+                        font-size: 16px;
+                        padding: 10px 30px;
+                    }
+                }
                 float: right;
-                margin-right: 20%;
                 .SignButton
                 {
                     font-family: 'GlacialBold';
-                    font-size: 16px;
                     border: none;
                     background-color: #318CE7;
-                    padding: 10px 30px;
                     color: #ffffff;
                     box-shadow: 2px 2px 5px #318ce73f;
                     cursor: pointer;
@@ -285,10 +303,8 @@
                 {
                     border: none;
                     font-family: 'GlacialBold';
-                    font-size: 16px;
                     background-color: transparent;
                     margin-right: 20px;
-                    padding: 10px 30px;
                     transition: background-color 200ms ease-in-out;
                     color: #2a2a2a;
                     cursor: pointer;

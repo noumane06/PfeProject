@@ -1,0 +1,29 @@
+@media only screen and (max-width: 935px) {
+    .EditModal
+    {
+        width: 90% !important;
+        height: 80vh !important;
+    }
+    .ProfileHead
+    {
+        flex-direction: column;
+    }
+    .ProfileInfo , .BookMetting , .EditProfile
+    {
+        margin-bottom: 20px;
+    }
+    .Horraire
+    {
+        .TimeTable
+        {
+            width: auto;
+            flex-direction: column;
+        }
+        
+    }
+    .input , .title
+    {
+        margin-right: 5px;
+    }
+    
+}

@@ -1,0 +1,20 @@
+@media only screen and (max-width: 800px){
+        .search_Container
+        {
+            flex-direction: column;
+            justify-content: center;
+            .inputContainer
+            {
+                width: 80%;
+                padding: 10px 10px;
+                margin: 15px 10px;
+                align-self: center;
+
+            }
+            .searchButton
+            {
+                width: fit-content ;
+                align-self: center;
+            }
+        }
+}

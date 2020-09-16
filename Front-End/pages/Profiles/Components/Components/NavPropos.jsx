@@ -10,7 +10,7 @@ const NavPropos = ({profile,location})=>{
                             <>
                             <ul>
                                 <li className="title">Domaine De travail : </li>
-                                <li style={{whiteSpace: 'pre'}}  className="element" >{profile.domaine.map(el =>('∙ '+el+ '\n'))}</li>
+                                <li  className="element" >{profile.domaine.map(el =>('∙ '+el+ '\n'))}</li>
                             </ul>
                             <ul>
                                 <li className="title" >téléphone fixe : </li>

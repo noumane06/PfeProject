@@ -67,7 +67,7 @@ const Header = ({active})=>
     return(
         <div className="Header_Container">
             <div className="NavSwitch">
-                <label for="toggle" onClick={()=>setCheckStatus(!checkStatus)}> <ToggleIcon/> </label>
+                <label htmlFor="toggle" onClick={()=>setCheckStatus(!checkStatus)}> <ToggleIcon/> </label>
             </div>
             <div className="Header_Logo">
                 <img src="../static/Icons/LOGO2017.png" height="30" onClick={()=>window.location.assign("/")} style={{cursor : 'pointer'}}/>

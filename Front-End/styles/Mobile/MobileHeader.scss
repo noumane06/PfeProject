@@ -15,7 +15,7 @@
             }
             .Header_Buttons
             {
-                margin-left: 25px;
+                margin-left: 20px;
             }
             .Header_subscribe
             {
@@ -28,21 +28,37 @@
         }
     }
 }
+
+
+@media only screen and (max-width: 1110px) and (min-width: 935px) {
+    .body
+    {
+        .link,.active{
+            padding: 0px 16px;
+        }
+        .Header_Buttons
+        {
+            margin-left: 0;
+        }
+    }
+}
+
+
 @media only screen and (max-width: 935px) {
     .body
     {
         .Dropdown
         {
             top: 400px;
-            transform: translateX(0%);
+            //transform: translateX(0%);
         }
         .topRight , .middleLeft , .BottomLeft
         {
             display: none;
         }
-        @keyframes pulsate {
+        @keyframes headeranim {
             0% {
-              transform: translateY(-10px);
+              transform: translateY(-40px);
               opacity: 0;
             }
           
@@ -55,21 +71,6 @@
               opacity: 1;
             }
           }
-          @keyframes revpulsate {
-            100% {
-              transform: translateY(-10px);
-              opacity: 0;
-            }
-          
-            50% {
-              opacity: 0.5;
-            }
-          
-            0% {
-              transform: translateY(0);
-              opacity: 1;
-            }
-          } 
         .Header_Container
         {
             .NavSwitch
@@ -122,7 +123,7 @@
             .visible
             {
                 display: grid;
-                animation: pulsate 0.2s ease-in-out;
+                animation: headeranim 0.2s ease-out;
                 
             }
         }

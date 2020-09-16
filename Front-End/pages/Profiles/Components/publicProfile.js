@@ -174,7 +174,7 @@ const ProfileBody = ({profile , userid})=>{
             <ProfileHead profile={profile} handleEdit={handleEdit} setbook={setbook} userid={userid} />
             <div className="ProfileBody">
                 <Modal title="Cliquez sur une case pour réserver une réunion" visible={bookmetting} width="90%" bodyStyle={{height: '50vh' , overflowY : 'scroll'}} onCancel={()=>setbook(false)} footer={null}><Calendar profile={profile}/></Modal>
-                <Modal title="Editez votre profile" visible={visible} width="50vw" bodyStyle={{height: '50vh', overflowY : 'scroll'}} onCancel={()=>setvisible(false)} footer={[
+                <Modal title="Editez votre profile" className="EditModal" visible={visible}  bodyStyle={{height: '50vh', overflowY : 'scroll'}} onCancel={()=>setvisible(false)} footer={[
                             <Button disabled={false} key="submit" type="primary" loading={loading} style={{borderRadius :'10px', fontFamily :'GlacialBold'}}  onClick={handleSave}>
                                 Submit
                             </Button>
@@ -194,11 +194,11 @@ const ProfileBody = ({profile , userid})=>{
                     <Menu.Item key="propos" icon={<AboutIcon />}>
                         A propos
                     </Menu.Item>
-                    {profile.type == "Société" &&(
+                    {/* {profile.type == "Société" &&(
                         <Menu.Item key="clients" icon={<ClientsIcon />}>
                         Clients
                         </Menu.Item>
-                    )}
+                    )} */}
                 </Menu>
                 <div className="MenuContent">
                     {current === "Acceuil" &&(
@@ -215,7 +215,7 @@ const ProfileBody = ({profile , userid})=>{
                 <div className="MenuFooter">
                     {userid !== profile._id && profile.type === "Société" &&(
                         <div className="like">
-                        <LikeButton checkbox={checkbox} handleLike={handleLike} /><span className={checkbox ? "active" : ""}>J'aime</span>
+                        <LikeButton checkbox={checkbox} handleLike={handleLike} /><label htmlFor="checkbox" className={checkbox ? "active" : ""}>J'aime</label>
                         </div>
                     )}
                     

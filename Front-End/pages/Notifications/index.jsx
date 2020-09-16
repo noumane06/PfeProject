@@ -47,7 +47,8 @@ const Notification = (props)=>{
                         </p>
                     )}
                     <div className="NotifContainer">
-                        {Notifications.map(notif => <NotifCard key={notif.SenderId} notif={notif} all={Notifications}/>)}    
+                        {Notifications.map(notif => <NotifCard key={notif.SenderId} notif={notif} all={Notifications}/>)} 
+                           
                     </div>
                     {Notifications.length === 0 &&(
                         <div style={{display : "flex" , alignItems : "center" , flexDirection :"column"}} className="nonot">

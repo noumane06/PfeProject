@@ -1,7 +1,6 @@
 // Dependencies -------------------
 import axios from 'axios'
 import Lottie from 'react-lottie' ;
-import jwt from 'jsonwebtoken';
 import {useState , useEffect} from 'react';
 import { Progress , Spin , Select ,Modal } from 'antd';
 
@@ -14,17 +13,19 @@ import successData from './Components/Success.json';
 import Head from '../../components/head';
 import { storage } from './Components/firebase-config';
 import '../../styles/ProfileSettings.scss';
-import '../../styles/AutoComplete.scss';
+
+
 //---------------------------------
 const Settings = (props)=>{
     const { Option } = Select;
     // States 
-    const [DiplomeList , setDiplomeList] = useState([{diplomeName : "",desc : ""}]);
+    const [data , setData] = useState();
+    const [DiplomeList , setDiplomeList] = useState(props.data.profile.diplome);
     const [percentage , setPrecentage]= useState(0);
     const [usrid , setId] = useState()
     const [DataState , setState] = useState(null);
-    const [data , setData] = useState();
-    const [file,setFile] = useState(null);
+    
+    const [file,setFile] = useState(props.data.profile.Usrimg);
     const [loading , setLoading] = useState(true); 
     const [sendingData , setSend] = useState(false);
     const [filefirebase,setfire] = useState(null);
@@ -73,41 +74,23 @@ const Settings = (props)=>{
     } 
     // Hook getting called before the render 
     useEffect(()=>{
-        if (props.query !== undefined) {
-            if (props.query.location !== undefined) {
-              setLocation(props.query.location);
-            }
+        if (props.statusCode === 401) {
+            const location = "/Auth/Signin/?ref=tokenexpired&location="+window.location.href;
+            window.location.replace(location);
+        }else{
+            setId(props.data.profile._id);
+            setData(props.data.profile);
+            setLoading(false);
         }
-        const token = window.localStorage.getItem("Tokens");
-        jwt.verify(token,"secret",function (err , decoded) {
-            if (!err) {
-                axios.get('http://localhost:9000/profiles/profile?userid='+decoded.userId)
-                .then(res =>{
-                    setId(decoded.userId);
-                    setData(res.data.profile[0]);
-                    setFile(res.data.profile[0].Usrimg);
-                    if (res.data.profile[0].diplome.length !== 0) {
-                        setDiplomeList(res.data.profile[0].diplome);
-                    }
-                    console.log(res.data.profile[0]);
-                    setLoading(false);
-                })
-                .catch(err => alert(err));
-            }else
-            {
-                    const location = "/Auth/Signin/?ref=tokenexpired&location="+window.location.href;
-                    window.location.replace(location);
-                
-            }
-        });
-        
     },[])
 
     // On submit ----------------------------------
 
     const Onsubmit = async () =>{
         setSend(true);
-        setData(data.diplome = DiplomeList);
+        let OldData = data ;
+        OldData["diplome"] = DiplomeList ;
+        setData(OldData);
         if (filefirebase !== null) {
             const imgData = await firebaseUrl(filefirebase);
             setData(data.Usrimg = imgData[0]);
@@ -117,13 +100,13 @@ const Settings = (props)=>{
         };
         console.log(data);
         const url = "http://localhost:9000/profiles/update?userid=" + usrid ;
-        await axios.post(url, data)
+        await axios.post(url, data ,{withCredentials : true})
         .then(response => {
           if (response.status === 200) {
             setState("done");
-            setTimeout(() => {
-                window.location.assign(location);
-            }, 2000);
+            // setTimeout(() => {
+            //     window.location.assign(location);
+            // }, 2000);
           } else {
             setState("error");
           }
@@ -381,11 +364,14 @@ const Settings = (props)=>{
                             </div>
                         </div>
                         <div className="Illustration">
-                            <Lottie
-                            options={defaultOptions}
-                            height={500}
-                            width={500}
-                            />
+                            <div className="ill">
+                                <Lottie
+                                options={defaultOptions}
+                                height={500}
+                                width={500}
+                                />
+                            </div>
+                            
                             <div className="buttonContainer">
                                 <a className="later" href="/" style={{textDecoration : 'none'}}>later</a>
                                 <input
@@ -407,7 +393,26 @@ const Settings = (props)=>{
      )
     }
 }
-Settings.getInitialProps =  ({ query }) => {
-    return {props : [{test : "this is a test"}] , query : query}
-  }
+export const getServerSideProps = async (ctx) => {
+    try {
+        const cookie = ctx.req.headers.cookie ;
+        const url = "http://localhost:9000/profiles/myprofile" ;
+        const res = await fetch( url,{headers : {cookie}}); 
+        const statusCode = res.status;
+        const data = await res.json();
+        
+        if (statusCode !== 200) {
+            throw statusCode 
+        }
+        return  {
+            props : {data }
+        }
+    } 
+    catch (error) {
+        ctx.res.statusCode = error;
+        return {
+               props : {statusCode : error}
+        };
+    }   
+}
 export default Settings ;

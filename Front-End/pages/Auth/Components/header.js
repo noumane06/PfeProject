@@ -6,7 +6,7 @@ const HeaderAuth = () => {
           <i className="fa fa-arrow-left icon"></i>
           <span className="backButton">Retour</span>
         </div>
-        <span className="Help">Help</span>
+        <span className="Help">Aide</span>
       </div>
     );
 }
