@@ -7,24 +7,28 @@ const NotifCard = ({notif , all}) =>{
     const [isFull , setFulltext] = useState(notif.Message.length < 150);
     const [Data , setData] = useState();
     const [Loading, setLoading] = useState(true);
+    const [action , setAction] = useState("");
     const [buttonLoading , setbuttonLoad] = useState(false);
     const [visible , setvisible] = useState(false);
     // Handle data before loading componenent
     useEffect(()=>{
         Axios.get("http://localhost:9000/profiles/profile?userid="+notif.SenderId,{withCredentials : true})
         .then(result =>{
-            console.log(result.data.profile);
             setData(result.data.profile);
             setLoading(false);
         })
-        .catch(err =>console.log(err))
+        .catch(err =>console.log(err));
+        Axios.get("http://localhost:9000/profiles/viewedNot",{withCredentials : true})
+        .then(result=>{
+        })
+        .catch(err => console.log(err)) 
     },[])
     // ----------------------------
 
     // When accept the request handler 
     const HandleAccept= ()=>{
         setbuttonLoad(true);
-        notif.AcceptStatus = true ;
+        action === "accepted" ? notif.AcceptStatus = true : notif.AcceptStatus = false ;
         const Notification = all ; 
         Axios.post("http://localhost:9000/profiles/updatebook",Notification,{withCredentials : true})
         .then(result =>{
@@ -34,9 +38,10 @@ const NotifCard = ({notif , all}) =>{
         const Data = {
             Notification : {
                 Type : "Response",
-                Message : "Request accepted",
+                Message : "Request "+action,
                 horraire : notif.horraire,
-                day : notif.day
+                day : notif.day,
+                AcceptStatus : action === "accepted" ? true : false,
             }
         }
         Axios.post("http://localhost:9000/profiles/bookmeeting?userid="+notif.SenderId,Data,{withCredentials : true})
@@ -44,7 +49,6 @@ const NotifCard = ({notif , all}) =>{
             setbuttonLoad(false);
             setvisible(false);
             message.success("mise à jour effectuée avec succès");
-            console.log(result);
         })
         .catch(err => console.log(err))  
     }
@@ -92,11 +96,22 @@ const NotifCard = ({notif , all}) =>{
                     <>
                       <button
                         className="Accepter"
-                        onClick={() => setvisible(true)}
+                        onClick={() => {setvisible(true),setAction('accepted')}}
                       >
                         Accepter
                       </button>
-                      <button className="Refuser">Refuser</button>
+                      <button className="Refuser"
+                              onClick={() => {setvisible(true),setAction('refused')}}>Refuser</button>
+                    </>
+                  )}
+                  {notif.AcceptStatus === true && (
+                    <>
+                      <label style={{ color: "#02C39A" }} ><i style={{marginRight : '5px'}} class="fa fa-check" aria-hidden="true"></i>Accepté</label>
+                    </>
+                  )}
+                  {notif.AcceptStatus === false && (
+                    <>
+                    <label style={{ color: "#CF0004" }} ><i class="fa fa-times" aria-hidden="true" style={{marginRight : '5px'}}></i>Refusé</label>
                     </>
                   )}
                 </div>
@@ -116,15 +131,15 @@ const NotifCard = ({notif , all}) =>{
                       }}
                       onClick={HandleAccept}
                     >
-                      Je suis sûr
+                      Je suis sûr !
                     </Button>,
                   ]}
                 >
-                  <h3>Êtes-vous sûr de vouloir accepter cette demande?</h3>
+                  <h3>Êtes-vous sûr de vouloir {action ==="accepted"?"accepter" : "refuser"} cette demande?</h3>
                 </Modal>
               </div>
             )}
-            {notif.Type === "Response" && (
+            {notif.Type === "Response" && notif.AcceptStatus && (
               <div className="NotifCard">
                 <div className="Card_Head">
                   <div className="ProfileImg">
@@ -153,7 +168,41 @@ const NotifCard = ({notif , all}) =>{
                     <strong style={{ fontFamily: "GlacialBold" }}>
                       {notif.horraire}
                     </strong>
-                    . Nous avons envoyé un rappel dans votre e-mail.
+                    {/* . Nous avons envoyé un rappel dans votre e-mail. */}
+                  </p>
+                </div>
+              </div>
+            )}
+            {notif.Type === "Response" && !notif.AcceptStatus && (
+              <div className="NotifCard">
+                <div className="Card_Head">
+                  <div className="ProfileImg">
+                    <img src={Data.Usrimg} />
+                  </div>
+                </div>
+                <p style={{ color: "#CF0004" }}>
+                  <strong style={{ fontFamily: "GlacialBold" }}>
+                    <a
+                      href={"/Profiles/" + notif.SenderId}
+                      className="profileLink"
+                      style={{ color: "#CF0004" }}
+                    >
+                      {Data.companyname}
+                    </a>
+                  </strong>{" "}
+                  a refusé votre demande{" "}
+                </p>
+                <div className="Card_Body">
+                  <p style={{ color: "#2a2a2a", fontSize: "15px" }}>
+                    Cette entreprise ne peut pas vous rencontrer Le{" "}
+                    <strong style={{ fontFamily: "GlacialBold" }}>
+                      {notif.day}
+                    </strong>{" "}
+                    a{" "}
+                    <strong style={{ fontFamily: "GlacialBold" }}>
+                      {notif.horraire}
+                    </strong> essayez une autre date .
+                    {/* . Nous avons envoyé un rappel dans votre e-mail. */}
                   </p>
                 </div>
               </div>

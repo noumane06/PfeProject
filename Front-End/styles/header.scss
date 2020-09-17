@@ -18,19 +18,22 @@
 
     .Header_Container
     {   
-        margin-top: 30px;
+        overflow: auto;
+        .Header_Logo
+        {
+            float: left;
+            padding: 20px;
+        }
+        margin-top: 10px;
          @media all and (min-width: 935px)
         {
            
-            display: flex;
-            flex-wrap: nowrap;
-            flex-direction: row;
-            justify-content: space-evenly;
-            align-items: center;
             .GridNav
             {
+                padding: 10px 0px;
                 display: flex ;
                 align-items: center;
+                justify-content: space-evenly;
             }
             .NavSwitch{
                 display: none;
@@ -136,7 +139,7 @@
             }
             .Header_signin:hover
             {
-                box-shadow: 2px 2px 15px #318ce78c;
+                box-shadow: 2px 2px 10px #318ce78c;
             }
             .ProfileThumb
             {

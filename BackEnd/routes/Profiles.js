@@ -18,7 +18,9 @@ router.post('/update',check_auth_gen,Usercontroller.UpdataData);
 router.post('/like' ,check_auth_gen, Usercontroller.StarsUpdate);
 router.post('/bookmeeting',check_auth_gen,Usercontroller.BookedUpdate)
 router.post('/updatebook',check_auth_gen,Usercontroller.UpdateOwnBook);
+router.get('/viewedNot',check_auth_gen,Usercontroller.UpdateViewNot);
 router.get('/search', Usercontroller.SearchUser);
+// router.post('/mailVerification',Usercontroller.verifEmailSendGrid);
 // -------------------------------------
 
 // IF YOU NEED TO CHANGE DATA

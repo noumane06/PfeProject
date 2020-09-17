@@ -5,6 +5,32 @@ import moment from 'moment';
 import { Button, notification } from 'antd';
 import axios from 'axios';
 
+
+const BusyComponent = ({day ,hour , setTitle , setvisible})=>{
+    const DateDivider = (string , hour)=>
+    {
+        const date = new Date(string );
+        const dateNow = new Date(); 
+        const SommeDate = date.getMonth()+date.getDate()+date.getFullYear();
+        const SommeDateNow = dateNow.getMonth()+dateNow.getDate()+dateNow.getFullYear();
+        if (date.getDay()=== 0) {
+            return 1 ;
+        }
+        if (SommeDateNow-SommeDate === 0 ) {
+            const Hourdiff = dateNow.getHours() - parseInt(hour.split(":")[0]) ;
+            return Hourdiff ;
+        }
+
+        return SommeDateNow-SommeDate ;
+    }
+    const res = DateDivider(day,hour);
+    return(
+        
+        <>
+        {res >= 0 ?<div className="Busy" title="Date indisponible"></div> : <div onClick={()=>{setTitle(hour+" | "+day); setvisible(true)}} className="Free"></div>}
+        </>
+    )
+}
 const Scheduler =  (StartHour , endtHour , length )=>{
     const results = [];
      for (let i = 0; i <= parseInt(length) ; i++) {
@@ -35,6 +61,7 @@ const DatePicker = (string) =>
 const calendar = ({profile})=>{
 
     //Data from database 
+    
     const Horraire = profile.horraire;
     var Booked  = profile.booked !== undefined ? profile.booked :{};
     // Horraires ----------------------
@@ -70,14 +97,11 @@ const calendar = ({profile})=>{
     const handleSave = async  () =>{
         if (Booked[title.split(" | ")[1]] !== undefined) {
             Booked[title.split(" | ")[1]].push(title.split(" | ")[0]) ;
-            console.log(Booked); 
         }else
         {
             const key = [title.split(" | ")[1]];
             const value = title.split(" | ")[0] ; 
-            console.log(Booked); 
             Booked === {"":""} ? Booked = {[key[0]] : [value]} :Booked= {...Booked , [key[0]] : [value]};
-            console.log(Booked); 
         }
         setloading(true);
         const Data = {
@@ -89,21 +113,24 @@ const calendar = ({profile})=>{
                 day : title.split(" | ")[1]
             }
         }
+        
         axios.post('http://localhost:9000/profiles/bookmeeting?userid='+profile._id,Data,{withCredentials : true})
         .then(data => 
             {
-                console.log(data) ;
                 setDisplay(Booked);
                 notification['success']({
                     message: 'Votre demande a été envoyée avec succès',
                     description:'Nous vous informerons lorsque nous aurons une réponse'
                 })
-                setloading(false);
-                setvisible(false);
+                setTimeout(() => {
+                    setloading(false);
+                    setvisible(false);
+                    window.location.reload();
+                }, 2000);
+                
             })
         .catch(err => console.log(err))
     }
-
     // -----------------------------------
     return(
         <table id="calendar">
@@ -127,10 +154,10 @@ const calendar = ({profile})=>{
                         {dayResult.map(day =>(
                         <td key={day+hour} >
                             {BookedDisplay[day] !== undefined &&(
-                                BookedDisplay[day].includes(hour) ? <div className="Booked">Booked</div> : <div onClick={()=>{setTitle(hour+" | "+day); setvisible(true)}} className="Free"></div>
+                                BookedDisplay[day].includes(hour) ? <div className="Booked">Booked</div> : <BusyComponent day={day} hour={hour.toString()} setTitle={setTitle} setvisible={setvisible}/>
                             )}
                             {BookedDisplay[day] === undefined &&(
-                                <div onClick={()=>{setTitle(hour+" | "+day); setvisible(true)}} className="Free"></div>
+                                <BusyComponent day={day} hour={hour.toString()} setTitle={setTitle} setvisible={setvisible}/>
                             )}
                         </td>))}
                     </tr>

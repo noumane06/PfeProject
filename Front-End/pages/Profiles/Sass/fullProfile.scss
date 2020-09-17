@@ -46,7 +46,7 @@
         {
             border: 2px solid #318CE7;
         }
-      .Booked , .Free{
+      .Booked , .Free , .Busy{
           padding : 30px;
           border-radius: 15px;
           text-align: center;
@@ -58,6 +58,18 @@
           background-color: #0064d6;
           font-family: 'GlacialBold';
           color: #ffffff;
+      }
+      .Busy
+      {
+        background: repeating-linear-gradient(
+            45deg,
+            #20202010,
+            #20202010 10px,
+            #20202015 15px,
+            #20202015 15px
+          );
+          cursor: not-allowed;
+          border-radius: 0px;
       }
       .Free:hover{
         background-color: #2a2a2a2f;

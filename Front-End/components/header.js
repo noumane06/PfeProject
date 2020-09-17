@@ -27,8 +27,8 @@ const DropDown = ({userid , count}) =>{
     return(
         <div className="Dropdown">
             <DropdownItem lefticon={<ProfileIcon/>}><a href={`/Profiles/`+userid} style={{textDecoration : 'none'}}>Mon profile</a></DropdownItem>
-            <DropdownItem lefticon={<SettingsIcon/>}>Paremetres</DropdownItem>
-            <DropdownItem lefticon={<Badge count={count.length}><NotifBell /></Badge>}><a href={`/Notifications/`} style={{textDecoration : 'none'}}>Notifications</a></DropdownItem>
+            <DropdownItem lefticon={<SettingsIcon/>}><a href={`/accountsett/`} style={{textDecoration : 'none'}}>Paremetres</a></DropdownItem>
+            <DropdownItem lefticon={<Badge count={count}><NotifBell /></Badge>}><a href={`/Notifications/`} style={{textDecoration : 'none'}}>Notifications</a></DropdownItem>
             <DropdownItem lefticon={<LogoutIcon/>} onClick={handleLogout}>Se déconnecter</DropdownItem>
         </div>
     )
@@ -42,14 +42,13 @@ const Header = ({active})=>
     const [checkStatus,setCheckStatus] = useState(false);
     const [opened , setOpen] = useState(false);
     const [data , setData] = useState();
-    const count = data !== undefined ? data.Notification.filter(element => element.AcceptStatus == null) : '' ;
-    console.log(count);
+    const count = data !== undefined ? data.NotifView : '' ;
     useEffect(()=>{
         
         axios.get('http://localhost:9000/profiles/myprofile',{withCredentials : true})
         .then(res =>{      
             setData(res.data.profile);
-            console.log(data);
+            
             setLoading(false);
             setToken(res.data.profile._id);
          })
@@ -93,7 +92,7 @@ const Header = ({active})=>
                         
                         <div className="ProfileThumb" onClick={()=>setOpen(!opened)}>
                             <div className="ProfileImg">
-                                <Badge count={count.length}>
+                                <Badge count={count}>
                                     <img src={data.Usrimg}/>
                                 </Badge>
                                 

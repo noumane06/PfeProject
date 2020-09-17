@@ -33,7 +33,10 @@ const userSchema = mongoose.Schema({
     horraire: [String],
     booked: mongoose.Schema.Types.Mixed,
     stars: [String],
-    Notification : [mongoose.Schema.Types.Mixed]
+    Notification : [mongoose.Schema.Types.Mixed],
+    NotifView : {type : Number , default : 0},
+    verifyEmailString : { type : String , default : "" },
+    EmailVerifed : {type : Boolean , default : false}
 });
 
 module.exports = mongoose.model('Users', userSchema);

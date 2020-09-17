@@ -49,7 +49,7 @@ exports.VistingProfile = (req,res,next) =>{
 exports.getMyprofile = (req,res,next)=>{
     const id = req.userData ;
     User.findOne({_id : id})
-    .select('type nom prenom companyname diplome city presentation languages title Usrimg stars fixphone booked domaine horraire gender mobilephone addresse Notification')
+    .select('type nom prenom companyname diplome NotifView city presentation languages title email Usrimg stars fixphone booked domaine horraire gender mobilephone addresse Notification')
     .then(result =>{
         res.status(200).json({
             message : "User Found",
@@ -77,7 +77,7 @@ exports.SearchUser = async (req,res,next)=>{
                 domaine : { $regex : '.*'+dom+'.*', $options : 'i'} ,
                 city : { $regex : '.*'+city+'.*', $options : 'i'} 
              })
-    .select('type nom prenom companyname domaine city presentation stars title Usrimg')
+    .select('type nom prenom companyname domaine  city presentation stars title Usrimg')
     .skip((resPerPage * page) - resPerPage)
     .limit(resPerPage)
     
@@ -174,13 +174,14 @@ exports.BookedUpdate = (req,res,next)=>{
     User.findOne({_id : id})
     .then(userdata => {
         userdata.booked = req.body.booked ;
+        userdata.NotifView = userdata.NotifView + 1 ;
         userdata.Notification.push({
             Type : req.body.Notification.Type ,
             Message : req.body.Notification.Message ,
             SenderId : req.AuthID.userId ,
             horraire : req.body.Notification.horraire,
             day : req.body.Notification.day,
-            AcceptStatus : null 
+            AcceptStatus : req.body.Notification.AcceptStatus ,
         })
         userdata.save();
         res.status(200).json({
@@ -202,7 +203,7 @@ exports.UpdateOwnBook = (req,res)=>{
     const id = req.AuthID.userId ;
     User.findOne({_id : id})
     .then(userdata =>{
-        userdata.Notification = req.body ;
+        userdata.Notification = req.body;
         userdata.save();
         res.status(200).json({
             message : "Updated Succesfully"
@@ -219,11 +220,12 @@ exports.UpdateOwnBook = (req,res)=>{
 
 
 
-// IF YOU NEED TO CHANGE DATA
+// IF YOU NEED TO CHANGE DATA verifyEmailString EmailVerifed
+
 
 // -------------------------------------
 exports.ChangeAll = (req , res , next)=>{
-   User.updateMany({},{Notification :[]})
+   User.updateMany({},{NotifView :0})
    .then(data =>{
     res.status(200).json(
         {
@@ -238,9 +240,56 @@ exports.ChangeAll = (req , res , next)=>{
         message : "The user is not here :/ , below more infos",
         error : err
     })
-})
+    })
 }
 
+exports.UpdateViewNot = (req, res)=>{
+    const id = req.AuthID.userId ;
+    User.updateOne({_id : id},{NotifView : 0})
+    .then(data =>{
+        res.status(200).json(
+            {
+                message : "Updated succesfully",
+                data : data
+            }
+        )
+       })
+       .catch(err =>{
+        console.log(err);
+        res.status(404).json({
+            message : "The user is not here :/ , below more infos",
+            error : err
+        })
+    })
+}
 // -----------------------------------------------------
+// exports.verifEmailSendGrid = (req,res,next)=>{
+//     // using Twilio SendGrid's v3 Node.js Library
+//     // https://github.com/sendgrid/sendgrid-nodejs
+//         const sgMail = require('@sendgrid/mail');
+//         const code = Math.floor(100000 + Math.random() * 900000) ;
+//         sgMail.setApiKey(process.env.SENDGRID_API_KEY);
+//         console.log(process.env.SENDGRID_API_KEY); 
+//         const msg = {
+//         to: 'Ranyaha.100@gmail.com',
+//         from: 'noumane.06@gmail.com',
+//         templateId: 'd-e9b3b6c397fc43bd8de66f859fb9fe61',
+//         dynamicTemplateData: {
+//             subject: 'Testing Templates',
+//             name: 'Some One',
+//             twilio_code: code,
+//         },
+//         };
+//         sgMail.send(msg).then(resp =>{
+//             res.status(200).json({
+//                 message : "updated succefully",
+//                 resp
+//             })
+//         }).catch(err =>{
+//            res.status(500).json({
+//             message : "errooorrrr"
+//             }) 
+//         });
+    
 
 

@@ -1,0 +1,75 @@
+@import '../../../styles/ant-picker.scss';
+
+.body
+{
+    
+    .parmHeader
+    {
+        margin-top: 5%;
+        color: #0C72BF;
+        font-family: 'HelvaticaNeu';
+    }
+    .MenuContent
+    {
+        margin-top: 20px;
+        @media only all and (min-width: 935px) {
+            width: 60%;
+        }
+       
+        .AccountComp
+        {
+            display: flex;
+            flex-wrap: wrap;
+            flex-direction: column;
+            .Block
+            {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                padding: 15px;
+                label
+                {
+                    font-family: 'GlacialBold';
+                    color: #2a2a2a;
+                }
+                p
+                {
+                    color: #00000060;
+                }
+                span
+                {
+                    font-family: 'GlacialBold';
+                    color: #FF282C;
+                    transition: color 0.2s ease;
+                    cursor: pointer;
+                }
+                span:hover
+                {
+                    color: #e64d50;
+                }
+            }
+        }
+    }
+    .DeleteAccount
+    {
+        margin-top: 10vh;
+        color: #FF282C;
+        border-radius: 10px;
+        padding: 10px 15px;
+        width: fit-content;
+        transition: background-color 200ms ease-in-out;
+        cursor: pointer;
+        svg
+        {
+            margin-right: 5px;
+        }
+        span 
+        {
+            font-family: 'GlacialBold';
+        }
+    }
+    .DeleteAccount:hover
+    {
+        background-color: #e2264d1a;
+    }
+}
