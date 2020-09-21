@@ -3,8 +3,11 @@ import {useState } from 'react';
 import {Select ,TimePicker  } from 'antd';
 
 import ImagePreview from '../../../../components/ImagePreview';
-import '../../../../styles/AutoComplete.scss';
+// import '../../../../styles/AutoComplete.scss';
 import moment from 'moment';
+import Fields from '../../../Auth/Data/Fields';
+import Jobs from '../../../Auth/Data/Jobs';
+import Cities from '../../../Auth/Data/Cities';
 //  --------------
 
 const EditBox = ({data , setData , DiplomeList , setDiplomeList , setfire}) =>{
@@ -18,35 +21,6 @@ const EditBox = ({data , setData , DiplomeList , setDiplomeList , setfire}) =>{
     const { Option } = Select;
     const  [time , setTime] =useState(Moments);
     const Languages = ["Arabe","Francais","Anglais","Spanish"];
-    const Fields = ["Agriculture"
-                    ,"Agroalimentaire"
-                    ,"Alimentation"
-                    ,"Animaux"
-                    ,"Architecture - Aménagement intérieur"
-                    ,"Artisanat - Métiers d'art"
-                    ,"Banque - Finance - Assurance"
-                    ,"Bâtiment - Travaux publics"
-                    ,"Biologie - Chimie"
-                    ,"Commerce - Immobilier"
-                    ,"Communication - Information"
-                    ,"Culture - Spectacle"
-                    ,"Défense - Sécurité - Secours"
-                    ,"Droit"
-                    ,"Edition - Imprimerie - Livre"
-                    ,"Electronique - Informatique"
-                    ,"Enseignement - Formation"
-                    ,"Humanitaire"
-                    ,"Industrie - Matériaux"
-                    ,"Lettres - Sciences humaines"
-                    ,"Mécanique - Maintenance"
-                    ,"Santé"
-                    ,"Sciences - Maths - Physique"
-                    ,"Secrétariat - Accueil"
-                    ,"Social - Services à la personne"
-                    ,"Soins - Esthétique - Coiffure"
-                    ,"Sport - Animation "
-                    ,"Transport - Logistique"
-                  ];
     const lang = [];
     const children = [];
     const [changed,setchanged] = useState(false);
@@ -163,9 +137,9 @@ const EditBox = ({data , setData , DiplomeList , setDiplomeList , setfire}) =>{
                         <div className="multipleInput" >
                         {/* Title  ------------------------------------ */}
                         <select className="title" name="title"  value={data.title} onChange={handleChange} required >
-                            <option defaultValue="" disabled  hidden>Titre de travail</option>
-                            <option value="Directeur" >Directeur</option>
-                            <option value="Cto">CTO</option>
+                                  {Jobs.map(job=>(
+                                    <option value={job} key={job}>{job}</option>
+                                  ))}
                         </select>
                         {/* Nom de societe  ------------------------------------ */}
                         <input className="input" type="text" placeholder="Nom de société" name="companyname"  value={data.companyname} onChange={handleChange} />
@@ -185,11 +159,9 @@ const EditBox = ({data , setData , DiplomeList , setDiplomeList , setfire}) =>{
                 <div className="multipleInput" placeholder="Titre" style={{marginBottom : '10px'}}>
                     {/* City  ------------------------------------ */}
                     <select className="title" name="city"  >
-                        <option defaultValue="" disabled  hidden>Votre ville</option>
-                        <option value="Casa" >Casablanca</option>
-                        <option value="Rabat">Rabat</option>
-                        <option value="Agadir">Agadir</option>
-                        <option value="Meknes">Meknes</option>
+                                {Cities.map(citie =>(
+                                  <option value={citie} key={citie}>{citie}</option>
+                                ))}
                     </select>
                     {/* address ------------------------------------*/}
                     <input className="input" type="text" placeholder="Addresse"  name="addresse" value={data.addresse} onChange={handleChange} />     

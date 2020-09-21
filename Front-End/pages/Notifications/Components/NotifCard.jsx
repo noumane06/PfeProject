@@ -2,7 +2,8 @@ import Modal from 'antd/lib/modal/Modal';
 import {Button, message} from 'antd';
 import Axios from 'axios';
 import {useState , useEffect} from 'react';
-const NotifCard = ({notif , all}) =>{
+import moment from 'moment';
+const NotifCard = ({profile , notif , all }) =>{
     
     const [isFull , setFulltext] = useState(notif.Message.length < 150);
     const [Data , setData] = useState();
@@ -11,6 +12,7 @@ const NotifCard = ({notif , all}) =>{
     const [buttonLoading , setbuttonLoad] = useState(false);
     const [visible , setvisible] = useState(false);
     // Handle data before loading componenent
+    moment.locale('fr');
     useEffect(()=>{
         Axios.get("http://localhost:9000/profiles/profile?userid="+notif.SenderId,{withCredentials : true})
         .then(result =>{
@@ -24,13 +26,17 @@ const NotifCard = ({notif , all}) =>{
         .catch(err => console.log(err)) 
     },[])
     // ----------------------------
-
     // When accept the request handler 
     const HandleAccept= ()=>{
         setbuttonLoad(true);
         action === "accepted" ? notif.AcceptStatus = true : notif.AcceptStatus = false ;
-        const Notification = all ; 
-        Axios.post("http://localhost:9000/profiles/updatebook",Notification,{withCredentials : true})
+        notif.AcceptStatus === false ? all.splice(all.indexOf(notif)) : '';
+        notif.AcceptStatus === false ? profile.booked[notif.day].splice(profile.booked[notif.day].indexOf(notif.horraire),1) : '';
+        const body = {
+          Notification : all ,
+          booked : profile.booked 
+        }
+        Axios.post("http://localhost:9000/profiles/updatebook",body,{withCredentials : true})
         .then(result =>{
             console.log(result);
         })
@@ -106,15 +112,16 @@ const NotifCard = ({notif , all}) =>{
                   )}
                   {notif.AcceptStatus === true && (
                     <>
-                      <label style={{ color: "#02C39A" }} ><i style={{marginRight : '5px'}} class="fa fa-check" aria-hidden="true"></i>Accepté</label>
+                      <label style={{ color: "#02C39A" }} ><i style={{marginRight : '5px'}} className="fa fa-check" aria-hidden="true"></i>Accepté</label>
                     </>
                   )}
                   {notif.AcceptStatus === false && (
                     <>
-                    <label style={{ color: "#CF0004" }} ><i class="fa fa-times" aria-hidden="true" style={{marginRight : '5px'}}></i>Refusé</label>
+                    <label style={{ color: "#CF0004" }} ><i className="fa fa-times" aria-hidden="true" style={{marginRight : '5px'}}></i>Refusé</label>
                     </>
                   )}
                 </div>
+                <span style={{fontFamily : 'GlacialRegular',color : '#006d77' }}>{moment(notif.date).fromNow()}</span>
                 <Modal
                   visible={visible}
                   width="20vw"
@@ -171,6 +178,7 @@ const NotifCard = ({notif , all}) =>{
                     {/* . Nous avons envoyé un rappel dans votre e-mail. */}
                   </p>
                 </div>
+                <span style={{fontFamily : 'GlacialRegular',color : '#006d77' }}>{moment(notif.date).fromNow()}</span>
               </div>
             )}
             {notif.Type === "Response" && !notif.AcceptStatus && (
@@ -205,6 +213,7 @@ const NotifCard = ({notif , all}) =>{
                     {/* . Nous avons envoyé un rappel dans votre e-mail. */}
                   </p>
                 </div>
+                <span style={{fontFamily : 'GlacialRegular',color : '#006d77' }}>{moment(notif.date).fromNow()}</span>
               </div>
             )}
           </>

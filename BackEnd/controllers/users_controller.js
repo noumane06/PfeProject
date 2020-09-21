@@ -23,6 +23,24 @@ exports.GetProfiles = (req,res,next)=>{
     });
 }
 
+exports.GetHotProfiles = (req,res,next)=>
+{
+    User.find({type : 'Société'})
+    .select('type nom prenom companyname domaine  city presentation stars title Usrimg')
+    .sort({stars : 'desc'})
+    .limit(3)
+    .exec()
+    .then(docs =>{
+        const response = {
+            count : docs.length , 
+            profiles : docs
+        }
+        res.status(200).json({
+            response
+        })
+    })
+}
+
 // Profile visits 
 
 exports.VistingProfile = (req,res,next) =>{
@@ -50,6 +68,7 @@ exports.getMyprofile = (req,res,next)=>{
     const id = req.userData ;
     User.findOne({_id : id})
     .select('type nom prenom companyname diplome NotifView city presentation languages title email Usrimg stars fixphone booked domaine horraire gender mobilephone addresse Notification')
+    .sort({'Notification' : 'desc'})
     .then(result =>{
         res.status(200).json({
             message : "User Found",
@@ -182,6 +201,7 @@ exports.BookedUpdate = (req,res,next)=>{
             horraire : req.body.Notification.horraire,
             day : req.body.Notification.day,
             AcceptStatus : req.body.Notification.AcceptStatus ,
+            date : Date.now(),
         })
         userdata.save();
         res.status(200).json({
@@ -203,7 +223,8 @@ exports.UpdateOwnBook = (req,res)=>{
     const id = req.AuthID.userId ;
     User.findOne({_id : id})
     .then(userdata =>{
-        userdata.Notification = req.body;
+        userdata.Notification = req.body.Notification;
+        userdata.booked = req.body.booked ;
         userdata.save();
         res.status(200).json({
             message : "Updated Succesfully"
@@ -225,7 +246,7 @@ exports.UpdateOwnBook = (req,res)=>{
 
 // -------------------------------------
 exports.ChangeAll = (req , res , next)=>{
-   User.updateMany({},{NotifView :0})
+   User.updateMany({},{Notification :[]})
    .then(data =>{
     res.status(200).json(
         {
@@ -242,6 +263,7 @@ exports.ChangeAll = (req , res , next)=>{
     })
     })
 }
+
 
 exports.UpdateViewNot = (req, res)=>{
     const id = req.AuthID.userId ;
@@ -262,6 +284,7 @@ exports.UpdateViewNot = (req, res)=>{
         })
     })
 }
+
 // -----------------------------------------------------
 // exports.verifEmailSendGrid = (req,res,next)=>{
 //     // using Twilio SendGrid's v3 Node.js Library

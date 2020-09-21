@@ -4,6 +4,7 @@ import {useState , useEffect, forwardRef} from 'react';
 import {Spin } from 'antd';
 import PublicProfile from './Components/publicProfile';
 import ErrorPage from 'next/error';
+import Footer from '../../components/footer';
 const Profile = (props)=>{
 
     const [userid,setData] = useState();
@@ -32,15 +33,21 @@ const Profile = (props)=>{
         )
     }else{
         return(
-            <div className="body">
-                    <Header/>
-                    {props.data === undefined ? <Head title="Loading"/> :''}
-                    <div style={{marginTop :'8%'}}>
-                        { props.data !== undefined && (
-                            <PublicProfile profile={props.data.profile} userid={userid} />
-                        )}  
+            <>
+                <div className="body">
+                    <div className="ContentInside">
+                        <Header/>
+                        {props.data === undefined ? <Head title="Loading"/> :''}
+                        <div style={{marginTop :'8%'}}>
+                            { props.data !== undefined && (
+                                <PublicProfile profile={props.data.profile} userid={userid} />
+                            )}  
+                        </div>
                     </div>
-            </div>
+                </div>
+                <Footer />
+            </>
+            
         )        
     }
     

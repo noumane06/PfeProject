@@ -11,12 +11,23 @@ const BusyComponent = ({day ,hour , setTitle , setvisible})=>{
     {
         const date = new Date(string );
         const dateNow = new Date(); 
+
         const SommeDate = date.getMonth()+date.getDate()+date.getFullYear();
         const SommeDateNow = dateNow.getMonth()+dateNow.getDate()+dateNow.getFullYear();
         if (date.getDay()=== 0) {
             return 1 ;
         }
+        if (date.getFullYear() > dateNow.getFullYear()) {
+            return -1 ;
+        }
+        if (date.getFullYear() < dateNow.getFullYear()) {
+            return 1 ;
+        }
+        if (date.getMonth() > dateNow.getMonth()) {
+            return -1 ;
+        }
         if (SommeDateNow-SommeDate === 0 ) {
+            
             const Hourdiff = dateNow.getHours() - parseInt(hour.split(":")[0]) ;
             return Hourdiff ;
         }
@@ -57,6 +68,16 @@ const DatePicker = (string) =>
     return DisplayString;
 }
 
+const Checker = (profile,hour,day) => {
+    const element = profile.Notification.filter(el => el.day == day && el.horraire == hour) ; 
+    if (element[0] !== undefined) {
+        return element[0].AcceptStatus ;
+    }else
+    {
+        return ''
+    }
+    
+}
 
 const calendar = ({profile})=>{
 
@@ -64,9 +85,9 @@ const calendar = ({profile})=>{
     
     const Horraire = profile.horraire;
     var Booked  = profile.booked !== undefined ? profile.booked :{};
+    
     // Horraires ----------------------
     const date = new Date();
-    
     const StartHour = moment(Horraire[0],"HH:mm");
     const endtHour = moment(Horraire[1],"HH:mm");
     const length = (endtHour.format("HH")-StartHour.format("HH"))*60/45;
@@ -76,22 +97,23 @@ const calendar = ({profile})=>{
 
     // States -------------------
     
+    
     const [BookedDisplay , setDisplay] = useState(Booked !== {} ? Booked : {"":""});
     const [visible,setvisible] = useState(false);
     const [title , setTitle] = useState();
     const [message , setMessage] = useState("");
     const [loading,setloading] = useState(false);
+    const [week , setWeek] = useState(0);
     // Days ---------------------------
-
     const datePusher = new Date();
-    const dayResult = [moment(Date.now()).format('YYYY/MM/DD')];
+    const dayResult = [moment(Date.now()).add(7 * week,'days').format('YYYY/MM/DD')];
+    datePusher.setDate(datePusher.getDate()+week * 7);
     for (let i = 0 ; i < 6; i++) {
         datePusher.setDate(datePusher.getDate()+1);
         dayResult.push(moment(datePusher).format('YYYY/MM/DD'));
     }
-
     // -------------------------------------
-
+    
     // Handlers ---------------------------------
 
     const handleSave = async  () =>{
@@ -131,8 +153,25 @@ const calendar = ({profile})=>{
             })
         .catch(err => console.log(err))
     }
+    const activeDay = (day)=>{
+        if (moment(day).diff(moment(Date.now()),'hours') > -24 && moment(day).diff(moment(Date.now()),'hours') <= 0) 
+        {
+            return true ;
+        }else
+        {
+            return false ;
+        }
+    }
     // -----------------------------------
     return(
+        <>
+        <div className="CalendarControllers">
+            <button className="today" onClick={()=>setWeek(0)}>Aujourd'hui</button>
+            <div className="weeks">
+               <button className="nextW"  onClick={()=>setWeek(week - 1)}>Semaine précédente</button>
+               <button  className="prevW"  onClick={()=>setWeek(week + 1)}>Prochaine semaine</button> 
+            </div>
+        </div>
         <table id="calendar">
             <Modal title={title} visible={visible} width="50vw" onCancel={()=>setvisible(false)} bodyStyle={{height : '100%'}} 
                 footer={[<Button disabled={false} key="submit" type="primary" loading={loading}  style={{borderRadius :'10px', fontFamily :'GlacialBold'}} onClick={handleSave} >Envoyer</Button>]}>
@@ -144,7 +183,7 @@ const calendar = ({profile})=>{
             
                 <tr>
                     <th></th>
-                    {dayResult.map(day =>(<th key={day+Date.now()}  style={parseInt(day.split('/')[2]) === date.getDate() ? {color : '#1a73e8' , textAlign : "center"} : {textAlign : "center"}} >{DatePicker(day)[0]} <br/> {DatePicker(day)[1]} {DatePicker(day)[2]} </th>))}
+                    {dayResult.map(day =>(<th key={day+Date.now()}  style={activeDay(day) ? {color : '#1a73e8' , textAlign : "center"} : {textAlign : "center"}} >{DatePicker(day)[0]} <br/> {DatePicker(day)[1]} {DatePicker(day)[2]} </th>))}
                 </tr>
             </thead>
             <tbody>
@@ -154,7 +193,11 @@ const calendar = ({profile})=>{
                         {dayResult.map(day =>(
                         <td key={day+hour} >
                             {BookedDisplay[day] !== undefined &&(
-                                BookedDisplay[day].includes(hour) ? <div className="Booked">Booked</div> : <BusyComponent day={day} hour={hour.toString()} setTitle={setTitle} setvisible={setvisible}/>
+                                BookedDisplay[day].includes(hour) ? 
+                                Checker(profile,hour,day) === true ? 
+                                <div className="Booked">Réservée</div> : Checker(profile,hour,day) === false ?
+                                <BusyComponent day={day} hour={hour.toString()} setTitle={setTitle} setvisible={setvisible}/> : <div className="Pending">En attente</div>
+                                : <BusyComponent day={day} hour={hour.toString()} setTitle={setTitle} setvisible={setvisible}/>
                             )}
                             {BookedDisplay[day] === undefined &&(
                                 <BusyComponent day={day} hour={hour.toString()} setTitle={setTitle} setvisible={setvisible}/>
@@ -165,6 +208,7 @@ const calendar = ({profile})=>{
             </tbody>
             
         </table>
+        </>
     )
 }
 export default calendar ;

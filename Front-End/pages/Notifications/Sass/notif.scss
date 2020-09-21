@@ -4,8 +4,18 @@
         justify-content: center;
     }
 }
+html, body , #__next {
+    height: 100%;
+    margin: 0;
+  }
+.body
+{
+    min-height: 100%;
+    
+}
 .NotifBody
 {
+    padding-bottom: 80px;
     margin-top: 5%;
     .nonot
     {
@@ -130,6 +140,7 @@
             .Card_footer
             {
                 margin-top: 10px;
+                margin-bottom : 10px;
                 button 
                 {
                     border: none;

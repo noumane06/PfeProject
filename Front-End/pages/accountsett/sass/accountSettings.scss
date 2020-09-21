@@ -1,8 +1,16 @@
 @import '../../../styles/ant-picker.scss';
 
+html, body , #__next {
+    height: 100%;
+    margin: 0;
+  }
 .body
 {
-    
+    min-height: 100%;
+    .ContentInside
+    {
+        padding-bottom: 80px;
+    }
     .parmHeader
     {
         margin-top: 5%;

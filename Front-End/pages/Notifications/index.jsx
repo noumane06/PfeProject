@@ -1,11 +1,12 @@
 import Header from "../../components/header";
 import Head from "../../components/head";
+import Footer from "../../components/footer";
 import {useState , useEffect} from 'react';
 import {Spin } from 'antd';
 import './Sass/notif.scss';
 import NotifCard from "./Components/NotifCard";
 import NotifBell from "../../components/svg/NotifBell";
-import EmptyInbox from "./Components/EmptyInbox";
+import moment from 'moment';
 const Notification = (props)=>{
     
     const [loading,setLoading] = useState(true);
@@ -16,11 +17,20 @@ const Notification = (props)=>{
             window.location.replace(location);
         }else{
             console.log(props.data.profile.Notification);
-            setData(props.data.profile.Notification);
+            setData(props.data.profile);
             setLoading(false); 
         }
     },[])
-    const Notifications = data === undefined ? '' : data;
+    const Notifications = data === undefined ? '' : data.Notification;
+    if (Notifications !== '') {
+        Notifications.sort((el1,el2)=>{
+            var a = moment(el1.date);
+            var b = moment(el2.date);
+            console.log(b.diff(a));
+            return b.diff(a);
+        });
+    }
+
     if (loading ) {
         
         return(
@@ -33,6 +43,7 @@ const Notification = (props)=>{
         )
     }else{
         return(
+            <>
             <div className="body">
                 <Header/>
                 <Head title="Notifications | 6Solutions"/>
@@ -43,8 +54,8 @@ const Notification = (props)=>{
                     </div>
                     
                     <div className="NotifContainer">
-                        {Notifications.map(notif => <NotifCard key={notif.SenderId} notif={notif} all={Notifications}/>)} 
-                           
+                        {Notifications.map(notif => <NotifCard profile={data} key={notif.SenderId} notif={notif} all={Notifications}/>)} 
+                        
                     </div>
                     {Notifications.length === 0 &&(
                         <div style={{display : "flex" , alignItems : "center" , flexDirection :"column"}} className="nonot">
@@ -58,8 +69,10 @@ const Notification = (props)=>{
                         </div>
                     )}
                 </div>
-                
             </div>
+            <Footer/>
+            </>
+            
         )
     }
     

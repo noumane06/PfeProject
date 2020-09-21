@@ -4,41 +4,14 @@ import {message , Select ,TimePicker , Spin } from 'antd';
 import axios from 'axios'; 
 import Captcha from './captcha';
 import firebase from '../../Settings/Components/firebase-config';
-import jwt from 'jsonwebtoken';
-import '../Sass/antd-select.scss';
 import '../../../styles/AutoComplete.scss';
+import Cities from '../Data/Cities';
+import Jobs from '../Data/Jobs';
+import Fields from '../Data/Fields';
 const FormComponent = (props) => {
+  console.log(Cities);
     const { RangePicker } = TimePicker;
     const { Option } = Select;
-    const Fields = ["Agriculture"
-                    ,"Agroalimentaire"
-                    ,"Alimentation"
-                    ,"Animaux"
-                    ,"Architecture - Aménagement intérieur"
-                    ,"Artisanat - Métiers d'art"
-                    ,"Banque - Finance - Assurance"
-                    ,"Bâtiment - Travaux publics"
-                    ,"Biologie - Chimie"
-                    ,"Commerce - Immobilier"
-                    ,"Communication - Information"
-                    ,"Culture - Spectacle"
-                    ,"Défense - Sécurité - Secours"
-                    ,"Droit"
-                    ,"Edition - Imprimerie - Livre"
-                    ,"Electronique - Informatique"
-                    ,"Enseignement - Formation"
-                    ,"Humanitaire"
-                    ,"Industrie - Matériaux"
-                    ,"Lettres - Sciences humaines"
-                    ,"Mécanique - Maintenance"
-                    ,"Santé"
-                    ,"Sciences - Maths - Physique"
-                    ,"Secrétariat - Accueil"
-                    ,"Social - Services à la personne"
-                    ,"Soins - Esthétique - Coiffure"
-                    ,"Sport - Animation "
-                    ,"Transport - Logistique"
-                  ];
     const children = [];
     Fields.map(Field =>{
         children.push(<Option key={Field}>{Field}</Option>);
@@ -55,7 +28,7 @@ const FormComponent = (props) => {
       title: "Directeur",
       domaine: [],
       addresse: "",
-      city: "casablanca",
+      city: "Casablanca",
       mobilephone: "",
       fixphone: "",
       gender: "male",
@@ -303,9 +276,9 @@ const FormComponent = (props) => {
 
                               {/* Title  ------------------------------------ */}
                               <select className="title" name="title" value={userData.title} onChange={handleChange} required>
-                                  <option value="" disabled selected hidden>Titre de travail</option>
-                                  <option value="Directeur" >Directeur</option>
-                                  <option value="Cto">CTO</option>
+                                  {Jobs.map(job=>(
+                                    <option value={job} key={job}>{job}</option>
+                                  ))}
                               </select>
                               {/* Email   ------------------------------------ */}
                               <div style={{width : '68%' , display : 'flex' , flexDirection : 'column'}}>
@@ -330,11 +303,9 @@ const FormComponent = (props) => {
 
                             {/* City  ------------------------------------ */}
                             <select className="title" name="city" value={userData.city} onChange={handleChange} >
-                                <option value="" disabled selected hidden>Votre ville</option>
-                                <option value="Casa" >Casablanca</option>
-                                <option value="Rabat">Rabat</option>
-                                <option value="Agadir">Agadir</option>
-                                <option value="Meknes">Meknes</option>
+                                {Cities.map(citie =>(
+                                  <option value={citie} key={citie}>{citie}</option>
+                                ))}
                             </select>
                             {/* address ------------------------------------*/}
                             <input className="input addresse" type="text" placeholder="Addresse"  name="addresse" onChange={handleChange} value={userData.addresse} required/>

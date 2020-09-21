@@ -13,6 +13,7 @@ import successData from './Components/Success.json';
 import Head from '../../components/head';
 import { storage } from './Components/firebase-config';
 import '../../styles/ProfileSettings.scss';
+import Footer from '../../components/footer';
 
 
 //---------------------------------
@@ -20,12 +21,12 @@ const Settings = (props)=>{
     const { Option } = Select;
     // States 
     const [data , setData] = useState();
-    const [DiplomeList , setDiplomeList] = useState(props.data.profile.diplome);
+    const [DiplomeList , setDiplomeList] = useState();
     const [percentage , setPrecentage]= useState(0);
     const [usrid , setId] = useState()
     const [DataState , setState] = useState(null);
     
-    const [file,setFile] = useState(props.data.profile.Usrimg);
+    const [file,setFile] = useState();
     const [loading , setLoading] = useState(true); 
     const [sendingData , setSend] = useState(false);
     const [filefirebase,setfire] = useState(null);
@@ -79,6 +80,8 @@ const Settings = (props)=>{
             window.location.replace(location);
         }else{
             setId(props.data.profile._id);
+            setDiplomeList(props.data.profile.diplome);
+            setFile(props.data.profile.Usrimg);
             setData(props.data.profile);
             setLoading(false);
         }
@@ -216,8 +219,11 @@ const Settings = (props)=>{
     } else {
         
     return(
+        <>
         <div className="ConfigureProfile">
              <Head title="Configurez votre profile | 6 Solutions"/>
+             <div className="ContentInside">
+             
              <div className="HeaderContainer" onClick={()=>window.location.assign("/")} style={{cursor : 'pointer'}}>
                  <div className="Header_Logo">
                      <img src="../static/Icons/LOGO2017.png" height="30" />
@@ -387,9 +393,10 @@ const Settings = (props)=>{
                 </div>
                 </>
              )}
-             
-             
+             </div>
          </div>
+         <Footer/>
+        </>
      )
     }
 }

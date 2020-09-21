@@ -1,6 +1,7 @@
 import {useEffect , useState} from 'react';
 import Header from '../../components/header';
 import Head from '../../components/head';
+import Footer from '../../components/footer';
 import './Scss/search.scss';
 import { useRouter } from 'next/router';
 import { Skeleton } from 'antd';
@@ -69,7 +70,9 @@ const Search =({qu})=>{
         })
     }
     return(
+        <>
         <div className="body">
+            <div className="ContentInside">
              <Head title="Resulat de recherche | 6 solutions" />
              <Header />
              <div className="searchPage">
@@ -107,8 +110,10 @@ const Search =({qu})=>{
                     )}
                 </Skeleton>
              </div>
-             
+            </div>
         </div>
+        {!loading && (<Footer />)}
+        </>
     )
 
 }

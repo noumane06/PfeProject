@@ -1,7 +1,8 @@
+import '../styles/footer.scss';
 const Footer = () =>{
     return(
         <div className="footer">
-        © Copyrights appartient à 6 solutions, tous droits réservés - 2020.
+        © 2020 6Solutions. Tous les droits sont réservés.
         </div>
     )
 }

@@ -17,6 +17,7 @@ import Footer from '../components/footer';
 const Home = () => {
   
   return(
+    <>
       <div className="body">
         <div className="Container">
           <TopRight />
@@ -25,10 +26,11 @@ const Home = () => {
           <Body_section1 />
           <MiddleLeft />
           <BodySection2 />
-          <BottomLeft />
         </div>
-        <Footer />
       </div>
+      <Footer />
+    </>
+      
     )
   };
 export default Home ;

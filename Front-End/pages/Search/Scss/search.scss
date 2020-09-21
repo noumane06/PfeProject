@@ -1,6 +1,19 @@
 @import './Mobile/searchMobile.scss';
+html, body , #__next {
+    height: 100%;
+    margin: 0;
+  }
 body
 {
+
+    .body
+    {
+        min-height: 100%;
+        .ContentInside
+        {
+            padding-bottom: 80px;
+        }
+    }
     .Noresults
     {
         text-align: center;

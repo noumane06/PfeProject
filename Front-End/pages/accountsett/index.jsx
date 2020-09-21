@@ -6,6 +6,7 @@ import {useState , useEffect} from 'react';
 import './sass/accountSettings.scss'
 import AccountComp from "./Components/AccountComp";
 import Trash from "./Components/trashSvg";
+import Footer from "../../components/footer";
 const accountSett = (props)=>{
 
     const [current , setCurrent] = useState('Account');
@@ -38,37 +39,43 @@ const accountSett = (props)=>{
     }else{
 
         return(
+            <>
             <div className="body">
-                <Header/>
-                <Head title="Paramètres | 6Solutions"/>
-                <div className="parmHeader">
-                    <h1 className="title">Paramètres</h1>
-                </div>
-                <div className="parmBody">
-                    <Menu onClick={handleClick} selectedKeys={current} mode="horizontal" style={{marginTop :'3%'}}>
-                        <Menu.Item key="Account" style={{fontWeight : 'bolder'}} >
-                            Compte
-                        </Menu.Item>
-                        <Menu.Item key="Privacy" style={{fontWeight : 'bolder'}} >
-                        Confidentialité et conditions de service
-                        </Menu.Item>
-                    </Menu>
-                </div>
-                <div className="MenuContent">
-                        {current === "Account" &&(
-                            <>
-                            <AccountComp profile={data}/>
-                            </>
-                        )}
-                        {current === "Privacy" &&(
-                            <>
-                            </>
-                        )}
-                </div>
-                <div className="DeleteAccount">
-                    <div><Trash/><span>Supprimez votre compte</span></div>
+                <div className="ContentInside">
+                    <Header/>
+                    <Head title="Paramètres | 6Solutions"/>
+                    <div className="parmHeader">
+                        <h1 className="title">Paramètres</h1>
+                    </div>
+                    <div className="parmBody">
+                        <Menu onClick={handleClick} selectedKeys={current} mode="horizontal" style={{marginTop :'3%'}}>
+                            <Menu.Item key="Account" style={{fontWeight : 'bolder'}} >
+                                Compte
+                            </Menu.Item>
+                            <Menu.Item key="Privacy" style={{fontWeight : 'bolder'}} >
+                            Confidentialité et conditions de service
+                            </Menu.Item>
+                        </Menu>
+                    </div>
+                    <div className="MenuContent">
+                            {current === "Account" &&(
+                                <>
+                                <AccountComp profile={data}/>
+                                </>
+                            )}
+                            {current === "Privacy" &&(
+                                <>
+                                </>
+                            )}
+                    </div>
+                    <div className="DeleteAccount">
+                        <div><Trash/><span>Supprimez votre compte</span></div>
+                    </div>
                 </div>
             </div>
+            <Footer/>
+            </>
+            
         )
     }
 }
