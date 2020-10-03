@@ -1,0 +1,134 @@
+@import '../../../styles/ant-picker.scss';
+@media only screen and (max-width: 935px) {
+    .title
+        {
+            font-size: 45px;
+        }
+        .shape
+        {
+            width: 23.72881%;
+        }
+}
+html, body , #__next {
+    height: 100%;
+    margin: 0;
+  }
+  .ant-modal-body
+  {
+    .input
+      {
+          font-family: 'GlacialBold';
+          margin-top: 20px;
+          width: 65%;
+          padding: 10px 13px;
+          background-color: #e9f1fa;
+          border: 2px solid transparent;
+          box-shadow: 0px 0px 0px #318ce73f;
+          border-radius: 10px;
+          transition: all 200ms ease-in-out;
+          outline: none;
+      }  
+      .input:hover
+      {
+          border: 2px solid #c5e2ffd8;
+      }
+      .input:focus
+      {
+          border: 2px solid #318CE7;
+      }
+      .errMsg
+      {
+          
+          font-size: 12px;
+          color: #be0000;
+          font-family: 'GlacialBold';
+          transition: all 0.2s ease-in-out;
+      }
+    .error
+      {
+          border: 2px solid #be0000;
+      }
+      .hidden 
+      {
+          display: none;
+          transition: all 0.2s ease-in-out;
+      }
+  }
+.body
+{
+    min-height: 100%;
+    .loader
+    {
+        margin-top: 3%;
+        .sk
+        {
+            margin-top: 5%;
+        }
+    }
+    .ContentInside
+    {
+        padding-bottom: 80px;
+    }
+    .proposBody
+    {
+        margin-top: 5%;
+        
+        .title
+        {
+            font-family: 'HelvaticaNeu';
+            background-image: url("/static/Assets/titleBack.png");
+            background-size: cover;
+            background-position: center;
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            @media all and (min-width: 935px)
+            {
+                font-size: 5vw ;
+                width: 50%;
+            }
+            
+        }
+        .tems
+        {
+            display: block;
+            height: 1rem;
+            margin-bottom: 1.5rem;
+            background-color: #2a9d8f;
+            @media all and (min-width: 935px)
+            {
+                width: 8%;
+            }
+            
+        }
+        
+        
+        .TemButton
+        {
+            font-family: 'GlacialBold';
+            font-size: 16px;
+            border: none;
+            background-color: #2a9d8f;
+            color: #ffffff;
+            box-shadow: 2px 2px 5px #2a9d8f3f;
+            cursor: pointer;
+            border-radius: 10px;
+            transition: box-shadow 200ms ease-in-out;
+            outline: none;
+            -webkit-appearance: none;
+            padding: 10px 30px;
+        }
+        .TemButton:hover
+        {
+            box-shadow: 2px 2px 10px #2a9d8f8c;
+        }
+        .TemCards
+        {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+      
+    }
+}

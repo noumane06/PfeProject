@@ -13,6 +13,7 @@ const bodyParser = require('body-parser');
 const signinRoute = require('./routes/SignIn');
 const signupRoute = require('./routes/SignUp');
 const allProfiles = require('./routes/Profiles');
+const temoignagesRoute = require('./routes/Temoignages');
 const signoutRoute = require('./routes/SignOut');
 // *****************************************
 /* *********** */
@@ -34,6 +35,7 @@ app.use('/signin', signinRoute);
 app.use('/signup',signupRoute);
 app.use('/signout',signoutRoute);
 app.use('/profiles', allProfiles);
+app.use('/temoin',temoignagesRoute);
 // Error handling 
 
 app.use(( req , res ,next) =>

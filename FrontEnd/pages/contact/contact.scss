@@ -1,0 +1,57 @@
+@media only screen and (max-width: 935px) {
+    .title
+        {
+            font-size: 45px;
+        }
+        .shape
+        {
+            width: 23.72881%;
+        }
+}
+html, body , #__next {
+    height: 100%;
+    margin: 0;
+  }
+
+.body
+{
+    min-height: 100%;
+    .ContentInside
+    {
+        padding-bottom: 80px;
+    }
+    .proposBody
+    {
+        margin-top: 5%;
+        
+        .title
+        {
+            font-family: 'HelvaticaNeu';
+            background-image: url("/static/Assets/titleBack.png");
+            background-size: cover;
+            background-position: center;
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            @media all and (min-width: 935px)
+            {
+                font-size: 5vw ;
+                width: 50%;
+            }
+            
+        }
+        .cntc
+        {
+            display: block;
+            height: 1rem;
+            margin-bottom: 1.5rem;
+            background-color: #7b2cbf;
+            @media all and (min-width: 935px)
+            {
+                width: 8%;
+            }
+            
+        }
+      
+    }
+}
