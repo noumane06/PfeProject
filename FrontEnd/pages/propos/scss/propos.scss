@@ -26,13 +26,8 @@ html, body , #__next {
         
         .title
         {
-            font-family: 'HelvaticaNeu';
-            background-image: url("/static/Assets/titleBack.png");
-            background-size: cover;
-            background-position: center;
-            background-clip: text;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            font-family: 'InterBold';
+            color : #181818 ;
             @media all and (min-width: 935px)
             {
                 font-size: 5vw ;

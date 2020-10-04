@@ -7,7 +7,7 @@ const BodySection2 = (props)=>{
   const [profile , setData] = useState([]);
   const [loading , setLoading] = useState(true); 
     useEffect(()=>{
-        axios.get("http://localhost:9000/profiles/hotprofiles")
+        axios.get("http://15.237.56.214:9000/profiles/hotprofiles")
         .then(({data}) =>{
           setData(data.response.profiles);
           setLoading(false);
@@ -24,12 +24,8 @@ const BodySection2 = (props)=>{
           </div>
           <div className="CardsContainer">
             <SearchCard className="Card1" profile={loading || profile[0] === undefined ? '' : profile[0]} loading={loading}/>
-            <div className="row2">
-              <SearchCard className="Card1 second" profile={loading || profile[1]=== undefined  ? '' :profile[1]} loading={loading}/>
-            </div>
-            <div className="row2">
-              <SearchCard className="Card1 third" profile={loading  || profile[2]=== undefined  ? '' :profile[2]} loading={loading}/>
-            </div>
+            <SearchCard className="Card1 second" profile={loading || profile[1]=== undefined  ? '' :profile[1]} loading={loading}/>
+            <SearchCard className="Card1 third" profile={loading  || profile[2]=== undefined  ? '' :profile[2]} loading={loading}/>
           </div>
         </div>
         </>

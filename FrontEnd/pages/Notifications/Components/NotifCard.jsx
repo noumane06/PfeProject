@@ -16,14 +16,14 @@ const NotifCard = ({profile , notif , all }) =>{
     // Handle data before loading componenent
     moment.locale('fr');
     useEffect(()=>{
-        Axios.get("http://localhost:9000/profiles/profile?userid="+notif.SenderId,{withCredentials : true})
+        Axios.get("http://15.237.56.214:9000/profiles/profile?userid="+notif.SenderId,{withCredentials : true})
         .then(result =>{
             setData(result.data.profile);
             setLoading(false);
 
         })
         .catch(err =>console.log(err));
-        Axios.get("http://localhost:9000/profiles/viewedNot",{withCredentials : true})
+        Axios.get("http://15.237.56.214:9000/profiles/viewedNot",{withCredentials : true})
         .then(result=>{
         })
         .catch(err => console.log(err)) 
@@ -41,7 +41,7 @@ const NotifCard = ({profile , notif , all }) =>{
           Notification : all ,
           booked : profile.booked 
         }
-        Axios.post("http://localhost:9000/profiles/updatebook",body,{withCredentials : true})
+        Axios.post("http://15.237.56.214:9000/profiles/updatebook",body,{withCredentials : true})
         .then(result =>{
             console.log(result);
         })
@@ -55,7 +55,7 @@ const NotifCard = ({profile , notif , all }) =>{
                 AcceptStatus : action === "accepted" ? true : false,
             }
         }
-        Axios.post("http://localhost:9000/profiles/bookmeeting?userid="+notif.SenderId,Data,{withCredentials : true})
+        Axios.post("http://15.237.56.214:9000/profiles/bookmeeting?userid="+notif.SenderId,Data,{withCredentials : true})
         .then(result=>{
             setbuttonLoad(false);
             setvisible(false);

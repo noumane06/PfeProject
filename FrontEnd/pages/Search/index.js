@@ -17,7 +17,7 @@ const Search =({qu})=>{
     const [loading ,setLoading] = useState(true);
     const router = useRouter()
     useEffect(()=>{
-        const Url = 'http://localhost:9000/profiles/search?companyname='+qu.companyname+'&domaine='+qu.domaine+'&city='+qu.city+'&page='+qu.page;
+        const Url = 'http://15.237.56.214:9000/profiles/search?companyname='+qu.companyname+'&domaine='+qu.domaine+'&city='+qu.city+'&page='+qu.page;
         axios.get(Url)
         .then(res =>{
             console.log(res);
@@ -39,7 +39,7 @@ const Search =({qu})=>{
             var newPage = +qu.page+1
            await router.push('/Search?companyname='+qu.companyname+'&domaine='+qu.domaine+'&city='+qu.city+'&page='+newPage)
         }
-        const Url = 'http://localhost:9000/profiles/search?companyname='+qu.companyname+'&domaine='+qu.domaine+'&city='+qu.city+'&page='+qu.page
+        const Url = 'http://15.237.56.214:9000/profiles/search?companyname='+qu.companyname+'&domaine='+qu.domaine+'&city='+qu.city+'&page='+qu.page
         axios.get(Url)
         .then(res =>{
             setProfile(res.data);
@@ -57,7 +57,7 @@ const Search =({qu})=>{
         setLoading(true);
         var newPage = +qu.page-1
         router.push('/Search?companyname='+qu.companyname+'&domaine='+qu.domaine+'&city='+qu.city+'&page='+newPage);
-        const Url = 'http://localhost:9000/profiles/search?companyname='+qu.companyname+'&domaine='+qu.domaine+'&city='+qu.city+'&page='+qu.page
+        const Url = 'http://15.237.56.214:9000/profiles/search?companyname='+qu.companyname+'&domaine='+qu.domaine+'&city='+qu.city+'&page='+qu.page
         axios.get(Url)
         .then(res =>{
             setProfile(res.data);
@@ -87,7 +87,7 @@ const Search =({qu})=>{
                             <div className="CardContainer">
                                 {profiles.profile.map(profile=>(
                                         <>
-                                        <SearchCard key={profile._id} className="Card1" profile={profile}/>
+                                        <SearchCard key={profile._id} className="SearchCard1" profile={profile}/>
                                         </>
                                 ))}
                             </div>

@@ -1,5 +1,5 @@
 import React from 'react';
-import firebase from '../../Settings/Components/firebase-config'
+import firebase from '../../../components/firebase-config'
 require('firebase/auth')
 class Captcha extends React.Component {
     constructor(props) {

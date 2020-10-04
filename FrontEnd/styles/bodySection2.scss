@@ -4,7 +4,7 @@ body
 {
     .bodySection2
     {
-        padding-bottom: 50px;
+        padding-bottom: 80px;
         .titleContainer
         {
             margin-top: 50px;
@@ -29,19 +29,13 @@ body
         {
             @media all and (min-width: 935px)
             {
-                .row2
+                .second
                 {
-                    margin-top: 20px;
-                    padding: 20px;
-                    overflow: auto;
-                    .second
-                    {
-                        float: right;
-                    }
-                    .third
-                    {
-                        margin-left: 20%;
-                    }
+                   margin-left: 20%;
+                }
+                .third
+                {
+                    margin-left: 50%;
                 }
                 .Card1
                 {

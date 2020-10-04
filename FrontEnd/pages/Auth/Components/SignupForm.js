@@ -3,11 +3,11 @@ import {useState , useEffect} from 'react';
 import {message , Select ,TimePicker , Spin, notification } from 'antd';
 import axios from 'axios'; 
 import Captcha from './captcha';
-import firebase from '../../Settings/Components/firebase-config';
+import firebase from '../../../components/firebase-config';
 import '../../../styles/AutoComplete.scss';
-import Cities from '../Data/Cities';
-import Jobs from '../Data/Jobs';
-import Fields from '../Data/Fields';
+import Cities from '../../../components/Data/Cities';
+import Jobs from '../../../components/Data/Jobs';
+import Fields from '../../../components/Data/Fields';
 const FormComponent = (props) => {
     const { RangePicker } = TimePicker;
     const { Option } = Select;
@@ -68,7 +68,7 @@ const FormComponent = (props) => {
           setLocation(props.query.location);
         }
       }
-      axios.get('http://localhost:9000/profiles/myprofile',{withCredentials : true})
+      axios.get('http://15.237.56.214:9000/profiles/myprofile',{withCredentials : true})
       .then(res =>{      
             setLog(true);
             setTimeout(() => {
@@ -124,7 +124,7 @@ const FormComponent = (props) => {
       e.preventDefault();
       var i = 0 ;
       const body = {email : userData.email};
-      await axios.post("http://localhost:9000/signup/verifEmail", body)
+      await axios.post("http://15.237.56.214:9000/signup/verifEmail", body)
       .then(response => {
         if (response.status === 200) {
           setLoading(false);
@@ -213,7 +213,7 @@ const FormComponent = (props) => {
       setLoading(true);
       var code = codeVerif ; 
       window.confirmationResult.confirm(code).then((result)=>{
-        axios.post("http://localhost:9000/signup/", userData,{withCredentials : true})
+        axios.post("http://15.237.56.214:9000/signup/", userData,{withCredentials : true})
         .then(response => {
           if (response.status === 200) {
              window.location.replace(`/Settings?location=${location}`);

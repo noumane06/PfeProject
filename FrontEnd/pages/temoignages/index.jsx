@@ -43,7 +43,7 @@ const Temoignages = (props)=>{
             setLinkErr(true);
             setbuttonLoading(false);
         }else{
-            Axios.post("http://localhost:9000/temoin/",{link : link},{withCredentials : true})
+            Axios.post("http://15.237.56.214:9000/temoin/",{link : link},{withCredentials : true})
             .then(res =>{
                 notification['success']({
                     message: 'Succès',
@@ -150,7 +150,7 @@ const Temoignages = (props)=>{
 }
 export const getServerSideProps = async (ctx) => {
     try {
-        const url = "http://localhost:9000/temoin/" ;
+        const url = "http://15.237.56.214:9000/temoin/" ;
         const res = await fetch(url); 
         const statusCode = res.status;
         const data = await res.json();

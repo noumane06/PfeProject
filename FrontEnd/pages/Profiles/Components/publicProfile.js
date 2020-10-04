@@ -112,7 +112,7 @@ const ProfileBody = ({profile , userid})=>{
            await stars.splice(stars.indexOf(userid),1);
         }
         setCheck(!checkbox);
-        const Url = 'http://localhost:9000/profiles/like?userid='+profile._id;
+        const Url = 'http://15.237.56.214:9000/profiles/like?userid='+profile._id;
         axios.post(Url,{"stars":stars},{withCredentials : true})
         .then(res=>console.log(res))
         .catch(err => console.log(err));
@@ -141,7 +141,7 @@ const ProfileBody = ({profile , userid})=>{
                     const imgData = await firebaseUrl(filefirebase);
                     setData(data.Usrimg = imgData[0]);
                 }
-                const url = "http://localhost:9000/profiles/update?userid=" + userid ;
+                const url = "http://15.237.56.214:9000/profiles/update?userid=" + userid ;
                 axios.post(url, data,{withCredentials : true})
                 .then(response => {
                 if (response.status === 200) {
