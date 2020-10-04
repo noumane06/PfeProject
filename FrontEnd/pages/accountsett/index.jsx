@@ -4,8 +4,8 @@ import { Menu , Spin } from "antd";
 import {useState , useEffect} from 'react';
 
 import './sass/accountSettings.scss'
-import AccountComp from "./Components/AccountComp";
-import Trash from "./Components/trashSvg";
+import AccountComp from "../../components/account_Components/AccountComp";
+import Trash from "../../components/account_Components/trashSvg";
 import Footer from "../../components/footer";
 const accountSett = (props)=>{
 

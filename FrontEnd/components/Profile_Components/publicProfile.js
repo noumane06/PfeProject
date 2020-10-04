@@ -1,19 +1,19 @@
 // Dependencies ------------------------
 
 import {useState , useEffect} from 'react';
-import { Menu, Button, message } from 'antd' ;
+import { Menu, Button, message } from 'antd';
 import axios from 'axios';
-import '../../../styles/ant-picker.scss';
-import { storage } from './firebase'; 
+import '../../styles/ant-picker.scss';
+import { storage } from '../firebase'; 
 
 // Components -------------------------
-import Head from '../../../components/head';
+import Head from '../head';
 import Icon from '@ant-design/icons';
 import HomeSvg from './Svg/HomeSvg';
 import AboutSvg from './Svg/AboutSvg';
 import CalendarSvg from './Svg/CalendarSvg';
-import '../Sass/fullProfile.scss';
-import LikeButton from '../../../components/LikeButton';
+import '../../pages/Profiles/Sass/fullProfile.scss';
+import LikeButton from '../LikeButton';
 import Geocode from "react-geocode";
 import Modal from 'antd/lib/modal/Modal';
 import EditBox from './Components/EditBox';

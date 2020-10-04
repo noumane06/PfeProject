@@ -6,12 +6,12 @@ import { Progress , Spin , Select ,Modal } from 'antd';
 
 
 // File import ---------------------------------
-import animationData from './Components/Anim.json';
-import errorData from './Components/Error.json';
-import loadingData from './Components/Loading.json'
-import successData from './Components/Success.json';
+import animationData from '../../components/Settings_Components/Anim.json';
+import errorData from '../../components/Settings_Components/Error.json';
+import loadingData from '../../components/Settings_Components/Loading.json'
+import successData from '../../components/Settings_Components/Success.json';
 import Head from '../../components/head';
-import { storage } from './Components/firebase-config';
+import { storage } from '../../components/firebase-config';
 import '../../styles/ProfileSettings.scss';
 import Footer from '../../components/footer';
 

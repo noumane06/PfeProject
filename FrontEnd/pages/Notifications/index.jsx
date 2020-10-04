@@ -4,7 +4,7 @@ import Footer from "../../components/footer";
 import {useState , useEffect} from 'react';
 import {Spin } from 'antd';
 import './Sass/notif.scss';
-import NotifCard from "./Components/NotifCard";
+import NotifCard from "../../components/Notifications_Components/NotifCard";
 import NotifBell from "../../components/svg/NotifBell";
 import moment from 'moment';
 const Notification = (props)=>{

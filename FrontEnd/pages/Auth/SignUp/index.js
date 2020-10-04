@@ -1,6 +1,6 @@
 import '../Sass/Auth.scss'
-import LeftComponent from '../Components/leftImage'
-import RightComponent from '../Components/RightComponent'
+import LeftComponent from '../../../components/Auth_Components/leftImage'
+import RightComponent from '../../../components/Auth_Components/RightComponent'
 import Head from '../../../components/head'
 const Signin = ({ query }) => {
 

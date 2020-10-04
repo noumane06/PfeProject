@@ -4,7 +4,7 @@ import {useState} from 'react';
 import moment from 'moment';
 import { Button, notification } from 'antd';
 import axios from 'axios';
-import '../../Sass/calendar.scss';
+import '../../../pages/Profiles/Sass/calendar.scss';
 
 
 const BusyComponent = ({day ,hour , setTitle , setvisible})=>{

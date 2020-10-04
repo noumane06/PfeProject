@@ -1,4 +1,4 @@
-import '../scss/TemCard.scss';
+import '../../pages/temoignages/scss/TemCard.scss';
 import YoutubeComponent from 'react-youtube';
 const TemCard = ({props})=>{
     const opts = {

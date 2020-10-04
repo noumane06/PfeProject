@@ -2,7 +2,7 @@ import Head from '../../components/head';
 import Header from '../../components/header'
 import {useState , useEffect, forwardRef} from 'react';
 import {Spin } from 'antd';
-import PublicProfile from './Components/publicProfile';
+import PublicProfile from '../../components/Profile_Components/publicProfile';
 import ErrorPage from 'next/error';
 import Footer from '../../components/footer';
 const Profile = (props)=>{

@@ -1,13 +1,13 @@
-import '../../Sass/editbox.scss';
+import '../../../pages/Profiles/Sass/editbox.scss';
 import {useState } from 'react';
 import {Select ,TimePicker  } from 'antd';
 
-import ImagePreview from '../../../../components/ImagePreview';
+import ImagePreview from '../../ImagePreview';
 // import '../../../../styles/AutoComplete.scss';
 import moment from 'moment';
-import Fields from '../../../Auth/Data/Fields';
-import Jobs from '../../../Auth/Data/Jobs';
-import Cities from '../../../Auth/Data/Cities';
+import Fields from '../../Data/Fields';
+import Jobs from '../../Data/Jobs';
+import Cities from '../../Data/Cities';
 //  --------------
 
 const EditBox = ({data , setData , DiplomeList , setDiplomeList , setfire}) =>{

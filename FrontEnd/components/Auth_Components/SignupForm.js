@@ -3,11 +3,11 @@ import {useState , useEffect} from 'react';
 import {message , Select ,TimePicker , Spin, notification } from 'antd';
 import axios from 'axios'; 
 import Captcha from './captcha';
-import firebase from '../../../components/firebase-config';
-import '../../../styles/AutoComplete.scss';
-import Cities from '../../../components/Data/Cities';
-import Jobs from '../../../components/Data/Jobs';
-import Fields from '../../../components/Data/Fields';
+import firebase from '../firebase-config';
+import '../../styles/AutoComplete.scss';
+import Cities from '../Data/Cities';
+import Jobs from '../Data/Jobs';
+import Fields from '../Data/Fields';
 const FormComponent = (props) => {
     const { RangePicker } = TimePicker;
     const { Option } = Select;

@@ -2,7 +2,7 @@ import Header from '../../components/header';
 import Head from '../../components/head';
 import Footer from '../../components/footer';
 import './scss/tem.scss';
-import TemCard from './Components/TemCard';
+import TemCard from '../../components/Temoignages_Components/TemCard';
 import {useEffect , useState} from 'react';
 import { Skeleton , Modal , Button, notification } from 'antd';
 import Axios from 'axios';

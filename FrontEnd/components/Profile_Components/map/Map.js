@@ -3,7 +3,7 @@ import React from 'react'
 import GoogleMapReact from 'google-map-react'
 
 
-import '../../Sass/map.scss';
+import '../../../pages/Profiles/Sass/map.scss';
 
 const Marker = (props) => {
     const { color, name, id } = props;
