@@ -3,7 +3,7 @@ const User = require('../models/user_model');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const cookie = require('cookie');
-const { strict } = require('assert');
+
 // ******************************
 
 // SignUp controller
@@ -87,13 +87,13 @@ User.find({ email: req.body.email })
                     user.save()
                         .then(userdata => {
                             const AuthToken = jwt.sign({userId: userdata._id,},process.env.AUTH_SECRET,{expiresIn: "7d"});
-                            res.setHeader('Set-Cookie',cookie.serialize('auth',AuthToken,{
+                            res.cookie('auth',AuthToken,{
                                 httpOnly: true ,
                                 secure : process.env.NODE_ENV !== 'developement',
                                 sameSite : 'strict',
-                                maxAge : 604800 ,
+                                maxAge : 1000*60*60*24*7 ,
                                 path : '/'
-                            }))
+                            })
                             res.status(200).json({
                                 message: "User created succefully"
                             });
@@ -136,13 +136,15 @@ User.find({ email: req.body.email })
                 }
                 if (result) {
                     const AuthToken = jwt.sign({userId: userdata[0]._id,},process.env.AUTH_SECRET,{expiresIn: "7d"});
-                    res.setHeader('Set-Cookie',cookie.serialize('auth',AuthToken,{
+                    
+                    res.cookie('auth',AuthToken,{
                         httpOnly: true ,
                         secure : process.env.NODE_ENV !== 'developement',
                         sameSite : 'strict',
-                        maxAge : 604800 ,
+                        maxAge : 1000*60*60*24*7 ,
                         path : '/'
-                    }))
+                    })
+                    
                 
                     return res.status(200).json({message : "loggedIn"});
                 }
@@ -163,13 +165,13 @@ exports.user_signout = (req,res) =>{
     const id = req.userData ;
     User.find({_id : id})
     .then(resp =>{
-        res.setHeader('Set-Cookie',cookie.serialize('auth',"",{
+        res.cookie('auth',"",{
             httpOnly: true ,
             secure : process.env.NODE_ENV !== 'developement',
             sameSite : 'strict',
             maxAge : 0 ,
             path : '/'
-        }))
+        })
         return res.status(200).json({message : "You're Logged Out"});
     })
     .catch(err =>{

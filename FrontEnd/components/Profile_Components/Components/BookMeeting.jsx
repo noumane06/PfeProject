@@ -130,7 +130,7 @@ const calendar = ({profile , loc})=>{
             }
         }
         
-        axios.post('http://15.237.56.214:9000/profiles/bookmeeting?userid='+profile._id,Data,{withCredentials : true})
+        axios.post('/api/profiles/bookmeeting?userid='+profile._id,Data,{withCredentials : true})
         .then(data => 
             {
                 setDisplay(Booked);

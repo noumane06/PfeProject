@@ -24,7 +24,7 @@ const FormComponent = (props) => {
       if (props.query.location !== undefined) {
         setLocation(props.query.location);
       }
-      axios.get('http://15.237.56.214:9000/profiles/myprofile',{withCredentials : true})
+      axios.get('/api/profiles/myprofile',{withCredentials : true})
         .then(res =>{      
               setLog(true);
               setTimeout(() => {
@@ -35,7 +35,7 @@ const FormComponent = (props) => {
     },[])
     const handleSubmit = (e) =>{
       e.preventDefault() ;
-      axios.post("http://15.237.56.214:9000/signin/", userData , {withCredentials : true})
+      axios.post("/api/signin/", userData)
       .then(response => {
         if (response.status === 200) {
           window.location.replace(location);

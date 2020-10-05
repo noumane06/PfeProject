@@ -22,7 +22,6 @@ const Temoignages = (props)=>{
     const [linkErr,setLinkErr]=useState(false);
     const [link , setLink] = useState('');
     useEffect(()=>{
-            console.log(props);
             setData(props.data.data);
             setLoading(false);
     },[]);
@@ -37,13 +36,12 @@ const Temoignages = (props)=>{
     function checkThumbnail(width) {
         //HACK a mq thumbnail has width of 320.
         //if the video does not exist(therefore thumbnail don't exist), a default thumbnail of 120 width is returned.
-        console.log(width)
         if (width === 120) {
             
             setLinkErr(true);
             setbuttonLoading(false);
         }else{
-            Axios.post("http://15.237.56.214:9000/temoin/",{link : link},{withCredentials : true})
+            Axios.post("/api/temoin/",{link : link},{withCredentials : true})
             .then(res =>{
                 notification['success']({
                     message: 'Succès',
@@ -150,7 +148,8 @@ const Temoignages = (props)=>{
 }
 export const getServerSideProps = async (ctx) => {
     try {
-        const url = "http://15.237.56.214:9000/temoin/" ;
+        const baseUrl = ctx.req ? `${ctx.req.protocol}://${ctx.req.get('Host')}` : '';
+        const url = baseUrl+"/api/temoin/" ;
         const res = await fetch(url); 
         const statusCode = res.status;
         const data = await res.json();

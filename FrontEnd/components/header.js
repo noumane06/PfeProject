@@ -20,7 +20,7 @@ const DropdownItem = (props)=>{
 const DropDown = ({userid , count}) =>{
 
     const handleLogout = () =>{
-        axios.get('http://15.237.56.214/:9000/signout',{withCredentials : true})
+        axios.get('/api/signout',{withCredentials : true})
         .then(res => window.location.reload())
         .catch(err => console.log(err));
     }
@@ -45,7 +45,7 @@ const Header = ({active , setUserID})=>
     const count = data !== undefined ? data.NotifView : '' ;
     useEffect(()=>{
         
-        axios.get('http://15.237.56.214:9000/profiles/myprofile',{withCredentials : true})
+        axios.get('/api/profiles/myprofile',{withCredentials : true})
         .then(res =>{      
             setData(res.data.profile);
             setLoading(false);

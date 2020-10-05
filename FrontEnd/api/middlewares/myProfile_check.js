@@ -8,7 +8,6 @@ module.exports = (req,res,next)=>{
         const DecodedToken = jwt.verify(CookieToken , process.env.AUTH_SECRET);
         
         req.userData = DecodedToken.userId ;
-        console.log(req.userData);
         next();
     } catch (error) {
         console.log(error);

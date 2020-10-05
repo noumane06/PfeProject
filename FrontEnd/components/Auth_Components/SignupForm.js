@@ -59,7 +59,6 @@ const FormComponent = (props) => {
     const [location , setLocation] = useState("/");
     const [Loggedin , setLog] = useState(false);
     useEffect(()=>{
-      console.log(props);
       if (props.query !== undefined) {
         if (props.query.ref === "tokenexpired") {
           message.warning('veuillez d abord vous connecter');
@@ -68,7 +67,7 @@ const FormComponent = (props) => {
           setLocation(props.query.location);
         }
       }
-      axios.get('http://15.237.56.214:9000/profiles/myprofile',{withCredentials : true})
+      axios.get('/api/profiles/myprofile',{withCredentials : true})
       .then(res =>{      
             setLog(true);
             setTimeout(() => {
@@ -124,7 +123,7 @@ const FormComponent = (props) => {
       e.preventDefault();
       var i = 0 ;
       const body = {email : userData.email};
-      await axios.post("http://15.237.56.214:9000/signup/verifEmail", body)
+      await axios.post("/api/signup/verifEmail", body)
       .then(response => {
         if (response.status === 200) {
           setLoading(false);
@@ -160,7 +159,6 @@ const FormComponent = (props) => {
         const newphone = userData.mobilephone.replace(0,"+212");
         setLoading(true);
         var hold = false ;
-        console.log(newphone);
         if (userData.domaine.length === 0) {
           setErrdom(true);
           hold = true ;
@@ -213,7 +211,7 @@ const FormComponent = (props) => {
       setLoading(true);
       var code = codeVerif ; 
       window.confirmationResult.confirm(code).then((result)=>{
-        axios.post("http://15.237.56.214:9000/signup/", userData,{withCredentials : true})
+        axios.post("/api/signup/", userData,{withCredentials : true})
         .then(response => {
           if (response.status === 200) {
              window.location.replace(`/Settings?location=${location}`);

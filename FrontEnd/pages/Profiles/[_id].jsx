@@ -57,11 +57,10 @@ const Profile = (props)=>{
 export const getServerSideProps = async (ctx) => {
     try {
         const cookie = ctx.req.headers.cookie ;
-        const url = "http://15.237.56.214:9000/profiles/profile?userid="+ctx.query._id ;
+        const url = "http://localhost:3000/api/profiles/profile?userid="+ctx.query._id ;
         const res = await fetch( url,{headers : {cookie}}); 
         const statusCode = res.status;
         const data = await res.json();
-        
         if (statusCode !== 200) {
             throw statusCode 
         }
@@ -70,6 +69,7 @@ export const getServerSideProps = async (ctx) => {
         }
     } 
     catch (error) {
+        console.log(error);
         ctx.res.statusCode = error;
         return {
                props : {statusCode : error}

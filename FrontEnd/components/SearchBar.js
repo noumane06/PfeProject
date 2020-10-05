@@ -24,7 +24,7 @@ const SearchBar = ({searchItem})=>{
     const onSearchName = searchText => {
       
         setNametext(searchText);
-        const Url = 'http://15.237.56.214:9000/profiles/search?companyname='+nameText+'&domaine='+domaineText+'&city='+cityText+'&page=1' ;
+        const Url = '/api/profiles/search?companyname='+nameText+'&domaine='+domaineText+'&city='+cityText+'&page=1' ;
         axios.get(Url).then(({data}) =>{
             if (data !== undefined) {
                 setNames(data.profile);
@@ -37,7 +37,7 @@ const SearchBar = ({searchItem})=>{
 
     const onSearchCities = searchText => {
         setcitytext(searchText)
-        const Url = 'http://15.237.56.214:9000/profiles/search?companyname='+nameText+'&domaine='+domaineText+'&city='+cityText+'&page=1' ;
+        const Url = '/api/profiles/search?companyname='+nameText+'&domaine='+domaineText+'&city='+cityText+'&page=1' ;
         axios.get(Url).then(({data}) =>{
             if (data !== undefined) {
                 setNames(data.profile);
@@ -62,7 +62,7 @@ const SearchBar = ({searchItem})=>{
 
     const onSearchDomaine = searchText => {
         setdomainetext(searchText)
-        const Url = 'http://15.237.56.214:9000/profiles/search?companyname='+nameText+'&domaine='+domaineText+'&city='+cityText+'&page=1' ;
+        const Url = '/api/profiles/search?companyname='+nameText+'&domaine='+domaineText+'&city='+cityText+'&page=1' ;
         axios.get(Url).then(({data}) =>{
             if (data !== undefined) {
                 setNames(data.profile);

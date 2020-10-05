@@ -101,8 +101,7 @@ const Settings = (props)=>{
         {
             setState("Loading");
         };
-        console.log(data);
-        const url = "http://15.237.56.214:9000/profiles/update?userid=" + usrid ;
+        const url = "/api/profiles/update?userid=" + usrid ;
         await axios.post(url, data ,{withCredentials : true})
         .then(response => {
           if (response.status === 200) {
@@ -395,7 +394,8 @@ const Settings = (props)=>{
 export const getServerSideProps = async (ctx) => {
     try {
         const cookie = ctx.req.headers.cookie ;
-        const url = "http://15.237.56.214:9000/profiles/myprofile" ;
+        const baseUrl = ctx.req ? `${ctx.req.protocol}://${ctx.req.get('Host')}` : '';
+        const url = baseUrl+"/api/profiles/myprofile" ;
         const res = await fetch( url,{headers : {cookie}}); 
         const statusCode = res.status;
         const data = await res.json();

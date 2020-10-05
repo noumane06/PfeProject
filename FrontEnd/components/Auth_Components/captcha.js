@@ -22,7 +22,6 @@ class Captcha extends React.Component {
             'size': 'normal',
             'callback': function (response) {
                 comp.props.handler(true);
-                console.log(response);
             },
             'expired-callback': function () {
                 comp.props.handler(false);

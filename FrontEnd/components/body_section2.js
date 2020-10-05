@@ -7,7 +7,7 @@ const BodySection2 = (props)=>{
   const [profile , setData] = useState([]);
   const [loading , setLoading] = useState(true); 
     useEffect(()=>{
-        axios.get("http://15.237.56.214:9000/profiles/hotprofiles")
+        axios.get("/api/profiles/hotprofiles")
         .then(({data}) =>{
           setData(data.response.profiles);
           setLoading(false);
