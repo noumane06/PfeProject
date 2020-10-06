@@ -1,0 +1,18 @@
+{
+  "/Auth/SignUp": "pages/Auth/SignUp.js",
+  "/Auth/Signin": "pages/Auth/Signin.js",
+  "/Notifications": "pages/Notifications.js",
+  "/Profiles/[_id]": "pages/Profiles/[_id].js",
+  "/Search": "pages/Search.js",
+  "/Settings": "pages/Settings.js",
+  "/accountsett": "pages/accountsett.js",
+  "/contact": "pages/contact.html",
+  "/": "pages/index.html",
+  "/propos": "pages/propos.html",
+  "/questions": "pages/questions.html",
+  "/temoignages": "pages/temoignages.js",
+  "/_app": "pages/_app.js",
+  "/_error": "pages/_error.js",
+  "/_document": "pages/_document.js",
+  "/404": "pages/404.html"
+}
