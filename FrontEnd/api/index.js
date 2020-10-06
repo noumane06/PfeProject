@@ -1,10 +1,11 @@
 const express = require('express');
-const env = require('dotenv').config();
+const port = parseInt(process.env.PORT, 10) || 3000
+const dev = process.env.NODE_ENV !== 'production'
+require('dotenv').config();
 const next = require('next');
 const bodyParser = require('body-parser');
 
-const port = parseInt(process.env.PORT, 10) || 3000
-const dev = process.env.NODE_ENV !== 'production'
+
 const nextApp = next({ dev })
 const handle = nextApp.getRequestHandler();
 // mongodb Config

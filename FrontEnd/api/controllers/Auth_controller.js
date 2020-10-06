@@ -87,9 +87,10 @@ User.find({ email: req.body.email })
                     user.save()
                         .then(userdata => {
                             const AuthToken = jwt.sign({userId: userdata._id,},process.env.AUTH_SECRET,{expiresIn: "7d"});
+                            console.log(process.env.COOKIES_SECURE);
                             res.cookie('auth',AuthToken,{
                                 httpOnly: true ,
-                                secure : process.env.NODE_ENV !== 'developement',
+                                secure : process.env.COOKIES_SECURE !== 'false',
                                 sameSite : 'strict',
                                 maxAge : 1000*60*60*24*7 ,
                                 path : '/'
@@ -136,10 +137,10 @@ User.find({ email: req.body.email })
                 }
                 if (result) {
                     const AuthToken = jwt.sign({userId: userdata[0]._id,},process.env.AUTH_SECRET,{expiresIn: "7d"});
-                    
+                    console.log(process.env.COOKIES_SECURE);
                     res.cookie('auth',AuthToken,{
                         httpOnly: true ,
-                        secure : process.env.NODE_ENV !== 'developement',
+                        secure : process.env.COOKIES_SECURE !== 'false',
                         sameSite : 'strict',
                         maxAge : 1000*60*60*24*7 ,
                         path : '/'
@@ -167,7 +168,7 @@ exports.user_signout = (req,res) =>{
     .then(resp =>{
         res.cookie('auth',"",{
             httpOnly: true ,
-            secure : process.env.NODE_ENV !== 'developement',
+            secure : process.env.COOKIES_SECURE !== 'false',
             sameSite : 'strict',
             maxAge : 0 ,
             path : '/'
