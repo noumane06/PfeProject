@@ -92,6 +92,9 @@ const NotifCard = ({profile , notif , all }) =>{
                 <div className="Card_Body">
                   <h3>Message</h3>
                   <p>
+                    {notif.Message === "" &&(
+                      "Cet utilisateur n'a fourni aucun message"
+                    )}
                     {!isFull ? notif.Message.substr(0, 150) : notif.Message}
                     {!isFull ? (
                       <span className="more" onClick={() => setFulltext(true)}>

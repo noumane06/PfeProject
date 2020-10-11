@@ -49,7 +49,7 @@ const NavPropos = ({profile,location})=>{
             <div>
                 <h2>Localisation</h2>
                 <div className="MapContainer">
-                    <Map location={location} zoomLevel={17}/>
+                    <Map location={location}  zoomLevel={17}/>
                 </div>
             </div>
         </>

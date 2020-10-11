@@ -1,5 +1,5 @@
 const User = require('../models/user_model');
-const MailComposer = require('nodemailer/lib/mail-composer');
+const nodemailer = require("nodemailer");
 
 // Checking if email exist controller 
 
@@ -27,22 +27,3 @@ exports.CheckEmail = (req, res , nxt) => {
 
 // Email verification 
 
-exports.VerifEmail = (req, res , nxt) => {
-    
-    const mailOptions = {
-        from: 'noumane_tro97@hotmail.com',
-        to: 'noumane.06@gmail.com',
-        text: 'Test message'
-    };
-    new MailComposer(mailOptions).compile().build().then(result =>{
-        res.status(200).json({
-            message : "email sent succesfully",
-            result
-        }); 
-    })
-    .catch(err =>{
-        console.log(err);
-        res.status(500).json(err);
-    })
-
-}

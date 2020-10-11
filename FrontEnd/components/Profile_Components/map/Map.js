@@ -5,6 +5,9 @@ import GoogleMapReact from 'google-map-react'
 
 import '../../../pages/Profiles/Sass/map.scss';
 
+
+
+
 const Marker = (props) => {
     const { color, name, id } = props;
     return (
@@ -18,11 +21,13 @@ const Marker = (props) => {
       </div>
     );
 };
+
+
 const Map = ({ location, zoomLevel }) => (
     <div className="map">
       <div className="google-map">
         <GoogleMapReact
-          bootstrapURLKeys={{ key: 'AIzaSyChI3vJkg_P6JFZKVg9at3FtUZjxxI2lP8' }}
+          bootstrapURLKeys={{ key: 'AIzaSyAjWexTkBOKquA-gxnB_TtqCO1mkX8i97c' }}
           defaultCenter={location}
           defaultZoom={zoomLevel}
         >

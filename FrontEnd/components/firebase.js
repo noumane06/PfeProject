@@ -2,14 +2,14 @@ import firebase from "firebase/app";
 import "firebase/storage";
 
 var config = {
-  apiKey: "AIzaSyDRsykbHnmyzkwgrG_Wle1c8q09tU8qPkk",
-  authDomain: "image-upload-test-7d968.firebaseapp.com",
-  databaseURL: "https://image-upload-test-7d968.firebaseio.com",
-  projectId: "image-upload-test-7d968",
-  storageBucket: "image-upload-test-7d968.appspot.com",
-  messagingSenderId: "1014331131186",
-  appId: "1:1014331131186:web:02e1c6b89fe05b729bc32b",
-  measurementId: "G-Y47FCGE0W5",
+  apiKey: "AIzaSyA1dd_WkmGmn0fWh4Kq8F_gKar84u5Jfsk",
+  authDomain: "solutions-eaa28.firebaseapp.com",
+  databaseURL: "https://solutions-eaa28.firebaseio.com",
+  projectId: "solutions-eaa28",
+  storageBucket: "solutions-eaa28.appspot.com",
+  messagingSenderId: "481100749596",
+  appId: "1:481100749596:web:d0bd4a96f04cae23cbb8d9",
+  measurementId: "G-0EBZH85FED"
 };
 if (!firebase.apps.length) {
   firebase.initializeApp(config);
@@ -17,3 +17,5 @@ if (!firebase.apps.length) {
 
 var storage = firebase.storage();
 export { storage, firebase as default };
+
+

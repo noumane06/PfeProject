@@ -30,8 +30,8 @@ User.find({ email: req.body.email })
                     var img = "";
                     if (req.body.Usrimg === "" || req.body.Usrimg === undefined) {
                         {
-                            req.body.gender === "male" ? img = "https://firebasestorage.googleapis.com/v0/b/image-upload-test-7d968.appspot.com/o/images%2FDefaults%2Fman.svg?alt=media&token=9cc204e7-e9b3-4a5d-970a-1242a04f90de"
-                                : img = "https://firebasestorage.googleapis.com/v0/b/image-upload-test-7d968.appspot.com/o/images%2FDefaults%2Fwoman.svg?alt=media&token=58d24c71-6b1e-4f61-a25a-fc22d43ec1e3"
+                            req.body.gender === "male" ? img = "https://firebasestorage.googleapis.com/v0/b/solutions-eaa28.appspot.com/o/images%2FDefaults%2Fman.svg?alt=media&token=ac235aee-f629-4824-9ea4-c38398528b24"
+                                : img = "https://firebasestorage.googleapis.com/v0/b/solutions-eaa28.appspot.com/o/images%2FDefaults%2Fwoman.svg?alt=media&token=6cad4395-ffbe-444b-9db1-73133944b937"
                         }
                     } else {
                         img = req.body.Usrimg

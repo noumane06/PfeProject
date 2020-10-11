@@ -4,24 +4,6 @@ const User = require('../models/user_model');
   
 
 
-// Getting all profiles 
-// route ===>> /Profiles/
-
-exports.GetProfiles = (req,res)=>{
-    User.find({type : 'Société'})
-    .select('nom prenom companyname city Usrimg stars Notification')
-    .exec()
-    .then(docs =>{
-        const response = {
-            count : docs.length , 
-            profiles : docs
-        }
-        res.status(200).json({
-            response
-        })
-    });
-}
-
 // route ===>> /Profiles/hotprofiles
 
 exports.GetHotProfiles = (req,res)=>

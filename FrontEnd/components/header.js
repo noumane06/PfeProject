@@ -28,7 +28,7 @@ const DropDown = ({userid , count}) =>{
         <div className="Dropdown">
             <DropdownItem lefticon={<ProfileIcon/>}><a href={`/Profiles/`+userid} style={{textDecoration : 'none'}}>Mon profile</a></DropdownItem>
             <DropdownItem lefticon={<Badge count={count}><NotifBell /></Badge>}><a href={`/Notifications/`} style={{textDecoration : 'none'}}>Notifications</a></DropdownItem>
-            <DropdownItem lefticon={<SettingsIcon/>}><a href={`/accountsett/`} style={{textDecoration : 'none'}}>Paremetres</a></DropdownItem>
+            {/* <DropdownItem lefticon={<SettingsIcon/>}><a href={`/accountsett/`} style={{textDecoration : 'none'}}>Paremetres</a></DropdownItem> */}
             <DropdownItem lefticon={<LogoutIcon/>} onClick={handleLogout}>Se déconnecter</DropdownItem>
         </div>
     )

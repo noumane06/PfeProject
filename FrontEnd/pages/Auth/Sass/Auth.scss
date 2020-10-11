@@ -3,6 +3,35 @@
 @import '../../../styles/ant-picker.scss';
 @import './Mobile/AuthMobile.scss';
 
+
+.terms
+{
+    h1
+    {
+        font-family: 'GlacialBold';
+        color : #2a2a2a !important
+        
+    }
+    p
+    {
+        font-family: 'GlacialRegular';
+    }
+}
+.privacy
+{
+    h1
+    {
+        font-family: 'GlacialBold';
+        color : #2a2a2a !important
+        
+    }
+    p
+    {
+        font-family: 'GlacialRegular';
+    }
+}
+
+
 body
 {
     font-family: 'GlacialRegular';
@@ -346,6 +375,7 @@ body
                 font-family: 'GlacialBold';
                 margin-left: 5px;
                 transition: color 200ms ease-in-out;
+                cursor: pointer;
             }
             a:hover
             {

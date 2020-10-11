@@ -8,6 +8,9 @@ import '../../styles/AutoComplete.scss';
 import Cities from '../Data/Cities';
 import Jobs from '../Data/Jobs';
 import Fields from '../Data/Fields';
+import Modal from 'antd/lib/modal/Modal';
+import Terms from './terms';
+import Privacy from './privacy';
 const FormComponent = (props) => {
     const { RangePicker } = TimePicker;
     const { Option } = Select;
@@ -40,7 +43,8 @@ const FormComponent = (props) => {
     const  [captchaState , setCaptcha] = useState(false);
     const  [current,setCurrent] = useState(0);
     const  [userData , setData] = useState(data);
-
+    const  [privacy,setPrivacy] = useState(false);
+    const  [terms,setTerms] = useState(false);
     // errors ---------------------------------------
     
     const  [emailErr , setErrEm] = useState(false)
@@ -184,6 +188,7 @@ const FormComponent = (props) => {
 
               if (error.code !== "auth/too-many-requests") {
                 setPhoneErr(true);
+                console.log(error);
               }
               setLoading(false);
               setCaptcha(false);
@@ -460,10 +465,13 @@ const FormComponent = (props) => {
                   {/* CheckBox input ------------------------------- */}
                   <div className="multipleInput two" style={{marginTop : '25px'}}>
                     <input className="" type="checkbox" required  checked={checkbox} onChange={(e)=> {setCheck(e.target.checked)}}/>
-                    <label style={{marginLeft : '25px'}}>La création d'un compte signifie que vous étes d'accord avec nos <a href="google.com" target="_blank">Conditions d'utiliation</a>
-                    , notre <a href="facebook.com" target="_black">politique de confidentialité</a> et nos paramètres de notification par defaut
+                    <label style={{marginLeft : '25px'}}>La création d'un compte signifie que vous étes d'accord avec nos <a onClick={()=>setTerms(true)} target="_blank">Conditions d'utilisation</a>
+                    , notre <a onClick={()=>setPrivacy(true)} target="_black">politique de confidentialité</a> et nos paramètres de notification par defaut
                     </label>
                   </div> 
+                  {/* Privacy */}
+                  <Modal  title="" visible={terms} width="90%" bodyStyle={{height: '70vh' , overflowY : 'scroll'}} onCancel={()=>setTerms(false)} footer={null}><Terms/></Modal>
+                  <Modal  title="" visible={privacy} width="90%" bodyStyle={{height: '70vh' , overflowY : 'scroll'}} onCancel={()=>setPrivacy(false)} footer={null}><Privacy/></Modal>
 
 
                   {/* ---------------------------------------------------- */}        
