@@ -1,0 +1,1 @@
+{"ast":null,"code":"import React from \"react\";\nvar __jsx = React.createElement;\nimport '../styles/footer.scss';\n\nvar Footer = function Footer() {\n  return __jsx(\"div\", {\n    className: \"footer\"\n  }, \"\\xA9 2020 6Solutions. Tous les droits sont r\\xE9serv\\xE9s.\");\n};\n\nexport default Footer;","map":null,"metadata":{},"sourceType":"module"}
