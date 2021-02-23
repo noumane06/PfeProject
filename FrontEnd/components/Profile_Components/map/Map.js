@@ -41,4 +41,4 @@ const Map = ({ location, zoomLevel }) => (
       </div>
     </div>
 )
-  export default Map
+export default Map

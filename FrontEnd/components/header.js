@@ -42,7 +42,7 @@ const Header = ({active , setUserID})=>
     const [checkStatus,setCheckStatus] = useState(false);
     const [opened , setOpen] = useState(false);
     const [data , setData] = useState();
-    const count = data !== undefined ? data.NotifView : '' ;
+    const count = data !== undefined && data!== null ? data.NotifView : '' ;
     useEffect(()=>{
         
         axios.get('/api/profiles/myprofile',{withCredentials : true})
