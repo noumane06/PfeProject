@@ -7,10 +7,16 @@
   }
 };*/
 // next.config.js
+if (process.env.NODE_ENV === 'development') {
+  require('dotenv').config()
+}
 const withSass = require('@zeit/next-sass')
 module.exports = withSass({
   devIndicators: {
     autoPrerender: false,
+  },
+  env: {
+    REACT_APP_MAP_KEY :  process.env.REACT_APP_MAP_KEY
   },
   webpack(config, options) {
     config.module.rules.push({
