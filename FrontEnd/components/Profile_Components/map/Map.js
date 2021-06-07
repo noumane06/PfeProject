@@ -28,12 +28,12 @@ const Map = ({ location, zoomLevel }) => {
   useEffect(()=>{
       console.log(process.env.MAP_KEY);
   },[]);
-    
+
   return(
     <div className="map">
       <div className="google-map">
         <GoogleMapReact
-          bootstrapURLKeys={{ key: `${process.env.MAP_KEY}` }}
+          bootstrapURLKeys={{ key: `${process.env.REACT_APP_}` }}
           defaultCenter={location}
           defaultZoom={zoomLevel}
         >
