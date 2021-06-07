@@ -26,15 +26,14 @@ const Marker = (props) => {
 const Map = ({ location, zoomLevel }) => {
 
   useEffect(()=>{
-      console.log(process.env.REACT_APP_MAP_KEY);
+      // console.log(process.env.REACT_APP_MAP_KEY);
   },[]);
-  const apiKey = ''+process.env.REACT_APP_MAP_KEY;
   
   return(
     <div className="map">
       <div className="google-map">
         <GoogleMapReact
-          bootstrapURLKeys={{ key: apiKey }}
+          bootstrapURLKeys={{ key: process.env.REACT_APP_MAP_KEY }}
           defaultCenter={location}
           defaultZoom={zoomLevel}
         >

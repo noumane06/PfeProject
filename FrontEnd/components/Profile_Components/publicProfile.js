@@ -64,7 +64,7 @@ const ProfileBody = ({profile , userid})=>{
     useEffect(()=>{
         
         const adr = profile.addresse + " , "+ profile.city ;
-        Geocode.setApiKey("AIzaSyChI3vJkg_P6JFZKVg9at3FtUZjxxI2lP8");
+        Geocode.setApiKey(process.env.REACT_APP_MAP_KEY);
         Geocode.fromAddress(adr).then(
             response => {
               const { lat, lng } = response.results[0].geometry.location;
