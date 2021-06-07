@@ -21,6 +21,8 @@ Our web application will have the following features:
 
 ## Technologies
 I developed this project using nextJs , with the integration of expressJs in the backend . And mongodb as a database .
+
+**Styling** : i used sass as css compiler , all styling was created from scratch by me with the help of https://ant.design/ . 
 ## Preview of some routes
 ### Home  
 ![alt text](https://github.com/noumane06/PfeProject/blob/master/home.png?raw=true)
