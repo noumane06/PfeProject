@@ -57,7 +57,8 @@ const Profile = (props)=>{
 export const getServerSideProps = async (ctx) => {
     try {
         const cookie = ctx.req.headers.cookie ;
-        const url = "/api/profiles/profile?userid="+ctx.query._id ;
+        const baseUrl = ctx.req ? `${ctx.req.protocol}://${ctx.req.get('Host')}` : '';
+        const url = baseUrl+"/api/profiles/profile?userid="+ctx.query._id ;
         const res = await fetch( url,{headers : {cookie}}); 
         const statusCode = res.status;
         const data = await res.json();
