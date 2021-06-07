@@ -1,5 +1,5 @@
   
-import React from 'react'
+import React, { useEffect } from 'react'
 import GoogleMapReact from 'google-map-react'
 
 
@@ -23,11 +23,17 @@ const Marker = (props) => {
 };
 
 
-const Map = ({ location, zoomLevel }) => (
+const Map = ({ location, zoomLevel }) => {
+
+  useEffect(()=>{
+      console.log(process.env.MAP_KEY);
+  },[]);
+    
+  return(
     <div className="map">
       <div className="google-map">
         <GoogleMapReact
-          bootstrapURLKeys={{ key: process.env.MAP_KEY }}
+          bootstrapURLKeys={{ key: `${process.env.MAP_KEY}` }}
           defaultCenter={location}
           defaultZoom={zoomLevel}
         >
@@ -40,5 +46,7 @@ const Map = ({ location, zoomLevel }) => (
         </GoogleMapReact>
       </div>
     </div>
-)
+  )
+    
+}
 export default Map
