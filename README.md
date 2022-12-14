@@ -1,5 +1,4 @@
 # Management of meetings between client and company
-## Live demo : https://nextjsapp-pfe.herokuapp.com/
 ## Description
 **platform that connects customers needing a service with the companies that provide it and set up an appointment depending on availability.**
 ## Features
